@@ -1,69 +1,72 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import primerange
+from mpmath import zetazero
+import math
 
-# Define arrays
-prime_numbers = np.zeros(1000)  # Prime numbers
-shifted_prime_numbers = np.zeros((1000,500))  # Shifted prime numbers
+# We'll start by defining some arrays. We're going to need prime numbers - that's what our electrons will be bouncing off.
+prime_numbers = np.array(list(primerange(1, 800000)))  # Generate the first 800000 prime numbers
 
-# Generate prime numbers
-prime_numbers[:61] = list(primerange(1, 300))[:61]  # Getting the first 61 primes less than 300
+# Now, we'll shift the prime numbers, by the prime density function, pi(x) ~ ln(x).
+# Physically, this makes the density of scatterers constant, over a long enough length.
+# The shifted scattering centers form a quasicrystal, being a sum of point-like dirac delta distributions, separated by a finite distance, > O(1/ln(x))   
+# and a constant density.
 
-# Constants
-pi = 3.14159
+#prime_numbers = np.array([x/math.log(x) for x in _prime_numbers])
+prime_lattice = np.array([math.log(x) for x in prime_numbers])
+# And we need some constants, like pi.
+pi = 3.141592653589793 
 two_pi = 2 * pi
+_dk = 0.01 # grid resolution in k-space
 
-sum_id = 0
-limit_prime = 61
-limit_array = 53
-sum_id = np.sum(prime_numbers[:limit_prime])
-shift_number = sum_id / limit_prime
-
-# Scattering amplitude data for plot
+# We'll be plotting the scattering amplitude, so we need arrays to store that data.
 scattering_amplitude = []
 momentum = []
 
-for move_count in range(1, 4):
-    move_number = prime_numbers[move_count] if move_count != 0 else 0
-    shift_total = shift_number + move_number
+# Now here's where the magic happens. We're going to calculate the zeros of the Riemann Zeta Function.
+zeta_zeros = []
+for n in range(1, int(9001*_dk)):
+    zeta_zeros.append(zetazero(n).imag)
+    # We'll print a progress update every ~15 steps so you know the script hasn't fallen asleep on you.
+    if n % 15 == 0:
+        print(f"Calculating Riemann Zeta Function zeros: {n}/300...")
 
-    # Shift the prime numbers
-    shifted_prime_numbers[:limit_array, move_count] = prime_numbers[:limit_array] - shift_number
-    prime_numbers[:limit_array] = shifted_prime_numbers[:limit_array, move_count]
+# Now we get to the scattering process. This is where we calculate how much each electron scatters off the lattic of prime numbers.
+for wave_number in range(1, 3001):
+    wave_vector = two_pi * wave_number * _dk  # Wave vector (k) in units of 2*pi/a
+    sum_cosine = 0  # Sum of cosines
+    sum_sine = 0  # Sum of sines
+    sum_magnitude = 0  # Sum of magnitudes
+    if wave_number % 3 == 0:
+        print(f"Calculating scattering amplitude: {i}/{len(prime_lattice)}...")
 
-    # Scattering process
-    for wave_number in range(1, 21):
-        wave_vector = two_pi * wave_number * 0.1  # Wave vector (k) in units of 2*pi/a
-        sum_cosine = 0  # Sum of cosines
-        sum_sine = 0  # Sum of sines
-        sum_magnitude = 0  # Sum of magnitudes
+    for i, prime in enumerate(prime_lattice):
+        phase = wave_vector * prime  # Phase = k * prime number
+        sum_cosine += np.cos(phase)  # Summing cosines
+        sum_sine += np.sin(phase)  # Summing sines
 
-        for prime_index in range(1, limit_array + 1):
-            prime = prime_numbers[prime_index]
-            phase = wave_vector * prime  # Phase = k * prime number
-            sum_cosine += np.cos(phase)  # Summing cosines
-            sum_sine += np.sin(phase)  # Summing sines
+        # Here's where we calculate the magnitude of the scattering amplitude. We're squaring the sums, adding them together, and taking the square root.
+        sum_cosine_squared = sum_cosine ** 2
+        sum_sine_squared = sum_sine ** 2
+        sum_cosine_sine = sum_cosine_squared + sum_sine_squared
+        sum_magnitude += np.sqrt(sum_cosine_sine)  # Magnitude of the scattering amplitude
 
-            sum_cosine_squared = sum_cosine ** 2
-            sum_sine_squared = sum_sine ** 2
-            sum_cosine_sine = sum_cosine_squared + sum_sine_squared
-            sum_magnitude += np.sqrt(sum_cosine_sine)  # Magnitude of the scattering amplitude
+    # Append computed data for plotting
+    scattering_amplitude.append(sum_magnitude)
+    momentum.append(wave_vector)
 
-        # Append computed data for plotting
-        scattering_amplitude.append(sum_magnitude)
-        momentum.append(wave_vector)
+# Plot time! We're going to make a scatter plot of the scattering amplitude.
+plt.scatter(momentum, scattering_amplitude, s=1)
+#plt.plot(momentum, scattering_amplitude)
 
-# Split the data into segments, each of length 20 (corresponding to the 20 iterations of wave_number in the inner loop)
-segments = [range(i, i + 20) for i in range(0, len(momentum), 20)]
-
-# Plot each segment individually
-for segment in segments:
-    plt.plot([momentum[i] for i in segment], [scattering_amplitude[i] for i in segment])
-
+# And here we add the zeros of the Riemann Zeta Function to the plot. These are really important - they tell us where we expect the scattering amplitude to peak.
+for zero in zeta_zeros:
+    plt.scatter(zero, 0, color='r', marker='x')  # 'x' marker for zeta zero
+    plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)  # Vertical line through zeta zero
 plt.xlabel('Momentum (k in units of 2*pi/a)')
 plt.ylabel('Scattering Amplitude')
 plt.title('Scattering Amplitude vs Momentum')
 plt.grid(True)
-plt.legend(['Scattering Amplitude'])
+plt.legend(['Scattering Amplitude', 'Zeta Zeros'])
+plt.xlim(0, 200)  # Set the limits of the x-axisplt.show()
 plt.show()
-
