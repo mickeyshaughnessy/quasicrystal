@@ -4,16 +4,21 @@ from sympy import primerange
 from mpmath import zetazero, li
 import math
 
-# Parameters
-num_primes = 80000
-num_zeros = 100
-dk = 0.01  # Grid resolution in k-space
-k_min = 0
-k_max = 100 
+# Parameterization
+num_primes_1d = 800000
+num_zeros = 300
+dk_1d = 0.01  # Grid resolution in k-space for 1D plot
+dk_2d = 0.01  # Grid resolution in k-space for 2D plot
+k_min_1d = 0
+k_max_1d = 200
+k_min_2d = 0
+k_max_2d = 10
+wave_number_max = 2000
 
-# Generating and shifting prime numbers
-prime_numbers = np.array(list(primerange(1, num_primes + 1)))
-prime_lattice = np.log(prime_numbers)
+# 1D Calculation and Plotting
+# Let's first explore the 1D world of prime lattice scattering.
+prime_numbers = np.array(list(primerange(1, num_primes_1d + 1)))
+prime_lattice = np.array([math.log(x) for x in prime_numbers])
 
 # Compute the density of the shifted lattice
 density_prime_lattice = np.arange(len(prime_lattice)) / prime_lattice
@@ -43,70 +48,90 @@ ax1.grid(True)
 
 plt.show()
 
-# Constants
-pi = 3.141592653589793
-two_pi = 2 * pi
+scattering_amplitude_1d = []
+momentum_1d = []
 
-# Arrays for plotting
-scattering_amplitude = []
-momentum = []
-
-# Calculating the zeros of the Riemann Zeta Function
 zeta_zeros = []
 for n in range(1, num_zeros + 1):
     zeta_zeros.append(zetazero(n).imag)
     if n % 15 == 0:
         print(f"Calculating Riemann Zeta Function zeros: {n}/{num_zeros}...")
 
-# Scattering process in 2D
-for wave_number_x in range(1, 6001):
-    for wave_number_y in range(1, 6001):
-        wave_vector_x = two_pi * wave_number_x * dk
-        wave_vector_y = two_pi * wave_number_y * dk
+for wave_number in range(1, wave_number_max+1):
+    wave_vector = 2 * np.pi * wave_number * dk_1d
+    sum_cosine = 0
+    sum_sine = 0
+    sum_magnitude = 0
+
+    if wave_number % 3 == 0:
+        print(f"Calculating scattering amplitude (1D): {wave_number}/{wave_number_max}...")
+
+    for i, prime in enumerate(prime_lattice):
+        phase = wave_vector * prime
+        sum_cosine += np.cos(phase)
+        sum_sine += np.sin(phase)
+        sum_cosine_squared = sum_cosine ** 2
+        sum_sine_squared = sum_sine ** 2
+        sum_cosine_sine = sum_cosine_squared + sum_sine_squared
+        sum_magnitude += np.sqrt(sum_cosine_sine)
+
+    scattering_amplitude_1d.append(sum_magnitude)
+    momentum_1d.append(wave_vector)
+
+plt.scatter(momentum_1d, scattering_amplitude_1d, s=1)
+for zero in zeta_zeros:
+    plt.scatter(zero, 0, color='r', marker='x')
+    plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
+plt.xlabel('Momentum (k in units of 2*pi/a)')
+plt.ylabel('Scattering Amplitude')
+plt.title('Scattering Amplitude vs Momentum (1D)')
+plt.grid(True)
+plt.xlim(k_min_1d, k_max_1d)
+plt.ylim(0, np.max(scattering_amplitude_1d))
+plt.show()
+
+# 2D Calculation and Plotting
+# Now, let's venture into the intriguing 2D realm of prime lattice scattering.
+num_primes_2d = 1000
+num_wave_numbers = 200
+
+prime_numbers_2d = np.array(list(primerange(1, num_primes_2d + 1)))
+prime_lattice_2d = np.array([math.log(x) for x in prime_numbers_2d])
+
+scattering_amplitude_2d = []
+momentum_2d = []
+
+for wave_number_x in range(1, num_wave_numbers + 1):
+    for wave_number_y in range(1, num_wave_numbers + 1):
+        wave_vector_x = 2 * np.pi * wave_number_x * dk_2d
+        wave_vector_y = 2 * np.pi * wave_number_y * dk_2d
         sum_cosine = 0
         sum_sine = 0
         sum_magnitude = 0
 
         if wave_number_x % 3 == 0 and wave_number_y % 3 == 0:
-            print(f"Calculating scattering amplitude: {wave_number_x}/{6000} (x) | {wave_number_y}/{6000} (y)...")
+            print(f"Calculating scattering amplitude (2D): {wave_number_x}/{num_wave_numbers} (x) | {wave_number_y}/{num_wave_numbers} (y)...")
 
-        for i, prime in enumerate(prime_lattice):
+        for i, prime in enumerate(prime_lattice_2d):
             phase = wave_vector_x * prime + wave_vector_y * prime
             sum_cosine += np.cos(phase)
             sum_sine += np.sin(phase)
-
             sum_cosine_squared = sum_cosine ** 2
             sum_sine_squared = sum_sine ** 2
             sum_cosine_sine = sum_cosine_squared + sum_sine_squared
             sum_magnitude += np.sqrt(sum_cosine_sine)
 
-        scattering_amplitude.append(sum_magnitude)
-        momentum.append((wave_vector_x, wave_vector_y))
+        scattering_amplitude_2d.append(sum_magnitude)
+        momentum_2d.append((wave_vector_x, wave_vector_y))
 
-# Scatter plot of the scattering amplitude in 2D
-plt.scatter([k[0] for k in momentum], [k[1] for k in momentum], c=scattering_amplitude, s=1, cmap='viridis')
+plt.scatter([k[0] for k in momentum_2d], [k[1] for k in momentum_2d], c=scattering_amplitude_2d, s=1, cmap='viridis')
 cbar = plt.colorbar()
 cbar.set_label('Scattering Amplitude')
 plt.xlabel('Momentum (k_x in units of 2*pi/a)')
 plt.ylabel('Momentum (k_y in units of 2*pi/a)')
 plt.title('Scattering Amplitude vs Momentum (2D)')
 plt.grid(True)
-plt.legend(['Scattering Amplitude'])
-plt.xlim(k_min, k_max)
-plt.ylim(k_min, k_max)
+plt.xlim(k_min_2d, k_max_2d)
+plt.ylim(k_min_2d, k_max_2d)
 plt.show()
 
-# Scatter plot with zeros of the Riemann Zeta Function
-plt.scatter([k[0] for k in momentum], [k[1] for k in momentum], c=scattering_amplitude, s=1, cmap='viridis')
-for zero in zeta_zeros:
-    plt.scatter(zero, 0, color='r', marker='x')
-    plt.axvline(x=zero, color='r', linestyle='--',linewidth=0.5)
-plt.xlabel('Momentum (k_x in units of 2pi/a)')
-plt.ylabel('Momentum (k_y in units of 2pi/a)')
-plt.title('Scattering Amplitude vs Momentum (2D) with Zeta Zeros')
-plt.grid(True)
-cbar = plt.colorbar()
-cbar.set_label('Scattering Amplitude')
-plt.xlim(k_min, k_max)
-plt.ylim(k_min, k_max)
-plt.show()
