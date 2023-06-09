@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import primerange
-from mpmath import zetazero, li
+from mpmath import zetazero
 import math
 
 # Parameterization
@@ -16,7 +16,7 @@ k_max_2d = 10
 wave_number_max = 2000
 
 # 1D Calculation and Plotting
-# Let's first explore the 1D world of prime lattice scattering.
+# Atle Selberg: Let's first explore the 1D world of prime lattice scattering.
 prime_numbers = np.array(list(primerange(1, num_primes_1d + 1)))
 prime_lattice = np.array([math.log(x) for x in prime_numbers])
 
@@ -91,12 +91,21 @@ plt.ylim(0, np.max(scattering_amplitude_1d))
 plt.show()
 
 # 2D Calculation and Plotting
-# Now, let's venture into the intriguing 2D realm of prime lattice scattering.
+# Freeman Dyson: Now, let's venture into the intriguing 2D realm of prime lattice scattering.
 num_primes_2d = 1000
 num_wave_numbers = 200
 
 prime_numbers_2d = np.array(list(primerange(1, num_primes_2d + 1)))
-prime_lattice_2d = np.array([math.log(x) for x in prime_numbers_2d])
+
+# Generate the prime spiral
+prime_spiral = []
+angle = 0
+radius = 0
+for prime in prime_numbers_2d:
+    x = radius * np.cos(angle)
+    y = radius * np.sin(angle)
+    prime_spiral.append((x, y))
+    radius += 0.2 * math.log(prime)  # Adjust the radius based on the logarithm of prime
 
 scattering_amplitude_2d = []
 momentum_2d = []
@@ -112,8 +121,8 @@ for wave_number_x in range(1, num_wave_numbers + 1):
         if wave_number_x % 3 == 0 and wave_number_y % 3 == 0:
             print(f"Calculating scattering amplitude (2D): {wave_number_x}/{num_wave_numbers} (x) | {wave_number_y}/{num_wave_numbers} (y)...")
 
-        for i, prime in enumerate(prime_lattice_2d):
-            phase = wave_vector_x * prime + wave_vector_y * prime
+        for i, (x, y) in enumerate(prime_spiral):
+            phase = wave_vector_x * x + wave_vector_y * y
             sum_cosine += np.cos(phase)
             sum_sine += np.sin(phase)
             sum_cosine_squared = sum_cosine ** 2
@@ -124,6 +133,15 @@ for wave_number_x in range(1, num_wave_numbers + 1):
         scattering_amplitude_2d.append(sum_magnitude)
         momentum_2d.append((wave_vector_x, wave_vector_y))
 
+# Plot the prime spiral
+plt.scatter([p[0] for p in prime_spiral], [p[1] for p in prime_spiral], s=1)
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Scattering Atom Locations (2D)')
+plt.grid(True)
+plt.show()
+
+# Plot the 2D scattering amplitude
 plt.scatter([k[0] for k in momentum_2d], [k[1] for k in momentum_2d], c=scattering_amplitude_2d, s=1, cmap='viridis')
 cbar = plt.colorbar()
 cbar.set_label('Scattering Amplitude')
