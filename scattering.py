@@ -20,9 +20,13 @@ wave_number_max = 2000
 prime_numbers = np.array(list(primerange(1, num_primes_1d + 1)))
 prime_lattice = np.array([math.log(x) for x in prime_numbers])
 
-# Compute the density of the shifted lattice
-density_prime_lattice = np.arange(len(prime_lattice)) / prime_lattice
-density_prime_numbers = np.arange(len(prime_numbers)) / prime_numbers
+# Compute the density of the original and shifted lattices
+# density = v/i for (i,v) in enumerate(prime_numbers) 
+density_prime_numbers = np.array([v/(i+1) for i,v in enumerate(prime_numbers)])
+density_prime_lattice = np.array([v/(i+1) for i,v in enumerate(prime_lattice)])
+
+input()
+print(density_prime_numbers)
 
 # Plot the density
 fig, ax1 = plt.subplots()
