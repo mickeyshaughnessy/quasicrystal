@@ -25,7 +25,6 @@ prime_lattice = np.array([math.log(x) for x in prime_numbers])
 density_prime_numbers = np.array([v/(i+1) for i,v in enumerate(prime_numbers)])
 density_prime_lattice = np.array([v/(i+1) for i,v in enumerate(prime_lattice)])
 
-input()
 print(density_prime_numbers)
 
 # Plot the density
