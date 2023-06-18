@@ -9,8 +9,6 @@ num_primes_1da = 80000
 num_primes_1db = 800000
 num_zeros = 300
 dk_1d = 0.01  # Grid resolution in k-space for 1D plot
-k_min_1d = 0
-k_max_1d = 500
 wave_number_max = 1000
 
 # 1D Calculation and Plotting
@@ -60,6 +58,10 @@ for wave_number in range(1, wave_number_max+1):
 
     scattering_amplitude_1d_b.append(sum_magnitude_b)
 
+k_min_1d = 0
+k_max_1d = max(momentum_1d) 
+
+plt.figure(figsize=(10, 8))  # Set figure size
 plt.scatter(momentum_1d, scattering_amplitude_1d_a, s=1, c='b', label='Scattering amplitude a')
 plt.scatter(momentum_1d, scattering_amplitude_1d_b, s=1, c='g', label='Scattering amplitude b')
 for i, zero in enumerate(zeta_zeros):
@@ -69,11 +71,12 @@ for i, zero in enumerate(zeta_zeros):
     else:
         plt.scatter(zero, 0, color='r', marker='x')
         plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
-plt.xlabel('Momentum (k in units of 2*pi/a)')
-plt.ylabel('Scattering Amplitude')
-plt.title('Scattering Amplitude vs Momentum (1D)')
-plt.grid(True)
+plt.xlabel('Momentum (k in units of 2*pi/a)', fontsize=14)  # Larger font size
+plt.ylabel('Scattering Amplitude', fontsize=14)  # Larger font size
+plt.title('Scattering Amplitude vs Momentum (1D)', fontsize=16)  # Larger font size
+plt.grid(False)  # Turned off the grid
 plt.xlim(k_min_1d, k_max_1d)
 plt.ylim(0, np.max(scattering_amplitude_1d_b))
-plt.legend()  #
+legend = plt.legend(fontsize=12, loc='upper right')  # Larger font size and custom location
+plt.show()
 
