@@ -5,8 +5,8 @@ from mpmath import zetazero
 import math
 
 # Parameterization
-num_primes_1da = 800000
-num_primes_1db = 8000000
+num_primes_1da = 80000
+num_primes_1db = 800000
 num_zeros = 300
 dk_1d = 0.01  # Grid resolution in k-space for 1D plot
 k_min_1d = 0
@@ -60,16 +60,20 @@ for wave_number in range(1, wave_number_max+1):
 
     scattering_amplitude_1d_b.append(sum_magnitude_b)
 
-
-plt.scatter(momentum_1d, scattering_amplitude_1d_a, s=1, c='b')
-plt.scatter(momentum_1d, scattering_amplitude_1d_b, s=1, c='g')
-for zero in zeta_zeros:
-    plt.scatter(zero, 0, color='r', marker='x')
-    plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
+plt.scatter(momentum_1d, scattering_amplitude_1d_a, s=1, c='b', label='Scattering amplitude a')
+plt.scatter(momentum_1d, scattering_amplitude_1d_b, s=1, c='g', label='Scattering amplitude b')
+for i, zero in enumerate(zeta_zeros):
+    if i == 0:
+        plt.scatter(zero, 0, color='r', marker='x', label='Zeta zeros')
+        plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
+    else:
+        plt.scatter(zero, 0, color='r', marker='x')
+        plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
 plt.xlabel('Momentum (k in units of 2*pi/a)')
 plt.ylabel('Scattering Amplitude')
 plt.title('Scattering Amplitude vs Momentum (1D)')
 plt.grid(True)
 plt.xlim(k_min_1d, k_max_1d)
-plt.ylim(0, np.max(scattering_amplitude_1d))
-plt.show()
+plt.ylim(0, np.max(scattering_amplitude_1d_b))
+plt.legend()  #
+
