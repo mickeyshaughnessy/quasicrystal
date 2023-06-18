@@ -61,26 +61,30 @@ for wave_number in range(1, wave_number_max+1):
 
 k_min_1d = 0
 k_max_1d = max(momentum_1d) 
+fig, ax1 = plt.subplots(figsize=(10, 8))  # Set figure size
 
-plt.figure(figsize=(10, 8))  # Set figure size
-plt.scatter(momentum_1d, scattering_amplitude_1d_a, s=10, c='b', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1da)) 
-plt.scatter(momentum_1d, scattering_amplitude_1d_b, s=10, c='g', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1db)) 
-
-#plt.scatter(momentum_1d, scattering_amplitude_1d_a, s=1, c='b', label='Scattering amplitude a')
-#plt.scatter(momentum_1d, scattering_amplitude_1d_b, s=1, c='g', label='Scattering amplitude b')
+# Plot the first amplitude on the left y-axis
+ax1.scatter(momentum_1d, scattering_amplitude_1d_a, s=10, c='b', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1da))
 for i, zero in enumerate(zeta_zeros):
     if i == 0:
-        plt.scatter(zero, 0, color='r', marker='x', label='Zeta zeros')
-        plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
+        ax1.scatter(zero, 0, color='r', marker='x', label='RZF zeros')
+        ax1.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
     else:
-        plt.scatter(zero, 0, color='r', marker='x')
-        plt.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
-plt.xlabel('Momentum (k in units of 2*pi/a)', fontsize=14)  # Larger font size
-plt.ylabel('Scattering Amplitude', fontsize=14)  # Larger font size
-plt.title('Scattering Amplitude vs Momentum (1D)', fontsize=16)  # Larger font size
-plt.grid(False)  # Turned off the grid
-plt.xlim(k_min_1d, k_max_1d)
-plt.ylim(0, 0.05*np.max(scattering_amplitude_1d_b))
-legend = plt.legend(fontsize=12, loc='upper right')  # Larger font size and custom location
+        ax1.scatter(zero, 0, color='r', marker='x')
+        ax1.axvline(x=zero, color='r', linestyle='--', linewidth=0.5)
+ax1.set_xlabel('Momentum (k in units of 2*pi/a)', fontsize=14)  # Larger font size
+ax1.set_ylabel('Scattering Amplitude A', fontsize=14)  # Larger font size for the first amplitude
+ax1.set_title('Scattering Amplitude vs Momentum (1D)', fontsize=16)  # Larger font size
+ax1.grid(False)  # Turn off the grid
+ax1.set_xlim(k_min_1d, k_max_1d)
+ax1.set_ylim(0, 0.05*np.max(scattering_amplitude_1d_a))
+ax1.legend(fontsize=12, loc='upper right')  # Larger font size and custom location
+
+# Create a twin Axes for the second amplitude on the right y-axis
+ax2 = ax1.twinx()
+ax2.scatter(momentum_1d, scattering_amplitude_1d_b, s=10, c='g', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1db))
+ax2.set_ylabel('Scattering Amplitude B', fontsize=14)  # Larger font size for the second amplitude
+ax2.set_ylim(0, 0.05*np.max(scattering_amplitude_1d_b))
+
 plt.show()
 
