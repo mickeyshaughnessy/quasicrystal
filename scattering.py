@@ -5,7 +5,7 @@ from mpmath import zetazero
 import math
 
 # Parameterization
-num_primes_1da = 80000
+num_primes_1da = 700000
 num_primes_1db = 800000
 num_zeros = 200
 
@@ -66,7 +66,7 @@ la, lb = 'Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1da), 'Scatt
 
 
 # Plot the first amplitude on the left y-axis
-ax1.scatter(momentum_1d, scattering_amplitude_1d_a, s=10, c='b', label=la)
+ax1.scatter(momentum_1d, scattering_amplitude_1d_a, s=5, c='b', label=la)
 for i, zero in enumerate(zeta_zeros):
     if i == 0:
         ax1.scatter(zero, 0, color='r', marker='x', label='RZF zeros')
@@ -83,9 +83,9 @@ ax1.set_ylim(np.min(scattering_amplitude_1d_a), 0.05*np.max(scattering_amplitude
 
 # Create a twin Axes for the second amplitude on the right y-axis
 ax2 = ax1.twinx()
-ax2.scatter(momentum_1d, scattering_amplitude_1d_b, s=10, c='g', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1db))
+ax2.scatter(momentum_1d, scattering_amplitude_1d_b, s=5, c='g', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1db))
 ax2.set_ylabel(lb, fontsize=14)  # Larger font size for the second amplitude
-ax2.set_ylim(np.min(scattering_amplitude_1d_b), 0.01*np.max(scattering_amplitude_1d_b))
+ax2.set_ylim(np.min(scattering_amplitude_1d_b), 0.05*np.max(scattering_amplitude_1d_b))
 
 
 # Combine the legends from both axes
