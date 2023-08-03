@@ -5,7 +5,7 @@ from mpmath import zetazero
 import math
 
 # Parameterization
-num_primes_1da = 700000
+num_primes_1da = 500000
 num_primes_1db = 800000
 num_zeros = 200
 

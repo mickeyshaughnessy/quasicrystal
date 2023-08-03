@@ -1,104 +1,100 @@
-%\documentclass[twocolumn,aps]{revtex4-2}
+
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+%SetFonts
+
+%SetFonts
 
 
-\documentclass[aps,prb,twocolumn,superscriptaddress]{revtex4}
-
-\usepackage{graphicx}
-\usepackage{amsmath}
+\title{Brief Article}
+\author{The Author}
+%\date{}							% Activate to display a given date or no date
 
 \begin{document}
-\title{Quasicrystals and Prime Numbers}
-
-\author{Michael Shaughnessy}
-\email{mickeyshaughnessy@gmail.com}
-\author{CY Fong}
-\email{fong@solid.physics.ucdavis.edu}
-
-\begin{abstract}
-This section is the abstract. We describe a pair of transformations (exponential and Fourier) of the distribution of prime numbers. We establish a few properties of the distribution of primes as it relates to scattering. We calculate the scattering amplitude function as a volume in the space of amplituhedrons  
-\end{abstract}
-
 \maketitle
 
+\begin{abstract}
+We carry out scattering calculations on a one-dimensional point like arrangement of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
+We show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic structure of the scattering amplitude. 
+Inspired by Dyson's suggestion \ref[Dyson] we present a simple proof that the non-trivial zeros of the RZF all lie along the line $Re = 1/2$ in the complex plane.
+\end{abstract}
+
 \section{Introduction}
-Consider a scattering potential and it's Fourier transform:
+
+\subsection{Fourier Transform}
+The Fourier transform of $V(x)$ is $\hat{V}(k)$ 
+
+\begin{equation}
+\hat{V}(k) = \int_{-\infty}^{\infty}V(x)e^{-i2\pi kx}dx
+\end{equation}
+
+A one-dimensional scattering potential may be of the form 
+\begin{equation}
+V(x) = \sum_{x_n \in X}\delta_D(x - x_n)
+\end{equation} 
+ 
+where the $x_n$ are elements of a countable set of real numbers. 
+Then $V(x)$ is called a tempered distribution.
+ For certain $V(x)$ it is the case that it's Fourier transform, $\hat{V}(k)$, is also contain a tempered distribution. 
+  
 \begin{equation}
  \label{eq: RiemannFourier}
- \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = \sum_{k_m \in X^{*}} F_{m} \delta_D(k - k_{m}),
+ \mathcal{F}\left \{V(x)\right \} = \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = \hat{h}(k) +  \sum_{k_m \in X^{*}} V_{m} \delta_D(k - k_{m}),
 \end{equation}
 
-
-According to Dyson's quasicrystal hypothesis, if we can show the distribution of the prime numbers has a quasicrystalline structure, meaning the scattering spectrum of the distribution contains a Cantor set of zero measure (point-like), then we can identify the 1-dimensional quasicrystal whose corresponding spectrum is the zeros of the famed Riemann Zeta Function (RZF).
-
-The prime numbers present a special challenge for discussions of scattering, because scattering, and the associated spectral patterns, is understood with the mathematical tool of the Fourier transform, which allows to change variables between real-space coordinates $(x)$ and the coordinates of reciprocal momentum space representation, $(k)$. We suggest first applying a 1-dimensional change of variables from $x$ to $\frac{1}{\ln{x}}$. 
+If $\hat{h}(k) = 0$ everywhere, then $V(x)$ is called a quasicrystal.
+By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. 
 
 
 
-The boundaries of the amplituhedron, $A$, are where the volume form logarithmically diverges, so in computing scattering amplitudes, it's natural to consider such a logarithmic change of variables. 
 
-\begin{align}
-x \rightarrow \frac{x}{\ln(x)}
-\end{align}
 
-before applying the Fourier transform 
+
+In general, $\hat{V}(k) =\hat{g}(k) + \hat{h}(k)$ may have a discrete component, $\hat{g}(k)$  and a continuous component,$\hat{h}(k)$.
 
 \begin{equation}
-F(k) = \int_{-\infty}^{\infty}f(x)\exp^{2\pi ikx}dx
-\end{equation}
-
-In terms of the 
-
+ \label{eq: RiemannFourier}
+ \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = h(k) +  \sum_{k_m \in X^{*}} F_{m} \delta_D(k - k_{m}),
+\end{equation}.
 
 
-For certain spiral distributions \cite{Varma2016}, related to the Fibonacci sequence, it has been shown that the spectrum may be a Cantor set of measure zero.
+\subsection{Wave scattering}
+Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
+The delta functions are located at integers and so they have spacing at least 1.
 
-%What is the spectrum of the transformed prime numbers? Is it a Cantor set of zero measure?
+\subsection{The Quasicrystal $\chi$ and Wave Scattering}
+Following \ref{Varma2016} we define a specific quasicrystalline arrangement of atoms suitable for scattering calculations.
+Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
+The delta functions are located at integers and so they have spacing at least 1.
+It is well known that the prime counting function, $\pi(x)$, is approximately $\frac{x}{log(x)}$
 
+\begin{figure}[htbp]
+\begin{center}
 
-%\begin{equation}
-%\sum_{\gamma_n \in X}\delta_D(\gamma - \gamma_n) 
-%\end{equation}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.5\columnwidth]{square_fractions.png}
-  \caption{The sum of $\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots$}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\columnwidth]
-  {primes.png}
-    \caption{The prime and exponentially squished prime scattering potentials and associated prime counting functions}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\columnwidth]
-  {RZF.png}
-    \caption{The zeros of the Riemann zeta function are the tips of the feathers extending in the vertical direction.}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\columnwidth]
-  {vector_flow.png}
-    \caption{Newton flow vector representation of the RZF}
+\caption{default}
+\label{default}
+\end{center}
 \end{figure}
 
 
-\section{Amplituhedron}
-   Instead of considering triangulations as in \cite{ArakaniHamed_2014}, we consider decompositions into hyper-rectangular volumes as the basic building block of scattering amplitudes. In this concept  it's natural to consider primes   
+V(k) is a function on the complex plane, $k = k_{Re} + ik_{Im}$
+If V(k) is holomorphic, we can compute it by contour integration from V(x).
 
 
+\section{Method}
+\section{Results}
+\section{Proof that all nontrivial zeros of the RZF lie on the line $Re = \frac{1}/{2}$}
 \section{Conclusion}
-
-This is the conclusion of the document.
-
-\end{document}
+\section{Appendix 1
 
 
 
-
-This is a short paper on the quasicrystalline distribution of the prime numbers and the associated scattering properties of physical Al-Mn quasicrystals
+\end{document}  
 
