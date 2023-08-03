@@ -1,5 +1,5 @@
 # quasicrystal
-prime numbers, quasicrystals, and spirals
+prime numbers, quasicrystals, and the Riemann Hypothesis
 
 This repository has scripts for caluclating properties of prime numbers.
 
