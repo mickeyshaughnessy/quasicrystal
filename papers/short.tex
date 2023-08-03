@@ -32,7 +32,7 @@ Inspired by Dyson's suggestion \ref[Dyson] we present a simple proof that the no
 \subsection{Fourier Transform}
 \begin{figure}
     \centering
-    \animategraphics[width=0.8\linewidth,autoplay,loop]{627}{../images/FT_animation-}{0}{626}
+    \animategraphics[width=0.8\linewidth,autoplay,loop]{627}{../animations/FT_animation-}{0}{626}
     \caption{Fourier Transform animated. Open with Adobe Acrobat Reader to watch}
     \label{fig:FT_animation}
 \end{figure}
@@ -50,54 +50,87 @@ V(x) = \sum_{x_n \in X}\delta_D(x - x_n)
  
 where the $x_n$ are elements of a countable set of real numbers. 
 Then $V(x)$ is called a tempered distribution.
- For certain $V(x)$ it is the case that it's Fourier transform, $\hat{V}(k)$, is also contain a tempered distribution. 
+ For certain $V(x)$ of the form above it is the case that it's Fourier transform, $\hat{V}(k)$, also contains a tempered distribution. 
   
 \begin{equation}
  \label{eq: RiemannFourier}
- \mathcal{F}\left \{V(x)\right \} = \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = \hat{h}(k) +  \sum_{k_m \in X^{*}} V_{m} \delta_D(k - k_{m}),
+ \mathcal{F}\left \{V(x)\right \} = \hat{V}(k) = \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = \hat{h}(k) +  \sum_{k_m \in X^{*}} \hat{V_{m}} \delta_D(k - k_{m}),
 \end{equation}
 
 If $\hat{h}(k) = 0$ everywhere, then $V(x)$ is called a quasicrystal.
-By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. 
+By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. When all the $x_n$ lie along a line, the $k_m$ must also lie along a line in the complex plane, because applying the Fourier transform twice gives us back our original $V(x)$.
 
 
 
 
 
 
-In general, $\hat{V}(k) =\hat{g}(k) + \hat{h}(k)$ may have a discrete component, $\hat{g}(k)$  and a continuous component, $\hat{h}(k)$.
+%In general, $\hat{V}(k) =\hat{g}(k) + \hat{h}(k)$ may have a discrete component, $\hat{g}(k)$  and a continuous component, $\hat{h}(k)$.
 
-\begin{equation}
- \label{eq: RiemannFourier}
- \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = h(k) +  \sum_{k_m \in X^{*}} F_{m} \delta_D(k - k_{m}),
-\end{equation}.
+%\begin{equation}
+ %\label{eq: RiemannFourier}
+ %\mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = h(k) +  \sum_{k_m \in X^{*}} F_{m} \delta_D(k - k_{m}),
+%\end{equation}.
 
 
-\subsection{Wave scattering}
-Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
-The delta functions are located at integers and so they have spacing at least 1.
+%\subsection{Wave scattering}
+%Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
+%The delta functions are located at integers and so they have spacing at least 1.
 
 \subsection{The Quasicrystal $\chi$ and Wave Scattering}
-Following \ref{Varma2016} we define a specific quasicrystalline arrangement of atoms suitable for scattering calculations.
+Inspired by Varma's approach, \ref{Varma2016} we define a specific quasicrystalline arrangement of atoms suitable for scattering calculations.
+Unlike Varma, we apply the shift transformation directly to the real space atomic positions, as opposed to the k-space positions of the zeros of the RZF.
+
 Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
 The delta functions are located at integers and so they have spacing at least 1.
-It is well known that the prime counting function, $\pi(x)$, is approximately $\frac{x}{log(x)}$
+Do they also have a maximum spacing? The answer is they do not \ref{PrimeSpacing}
+
+The exact expression \cite{Riemann} for $\pi(x)$ when $x>1$ is:
+
+\begin{equation}
+\pi(x) = \pi_0(x) - \frac{1}{2} = R(x) - \sum_{\rho}R(x^{\rho}) - \frac{1}{2}
+\end{equation}
+
+where
+
+\begin{equation}
+R(x) = \sum_{n=1}^{\infty}\frac{\mu(n)}{n}li(x^{\frac{1}{n}})
+\end{equation}
+
+where $\mu(x)$ is the M\"obius function, $li(x)$ is the logarithmic integral function, and $\rho$ runs over all the zeros of the RZF.
+
+If the trivial zeros are collected and the sum is taken only over the non-trivial zeros, then
+
+\begin{equation}
+\pi_0(x) \approx R(x) - \sum_{\rho}R(x^{\rho}) - \frac{1}{\log(x)} + \frac{1}{\pi}\arctan(\frac{1}{\log(x)}
+\end{equation}
+ 
+It is well known that $\pi(x)$, is also approximately $\frac{x}{log(x)}$ in a rougher approximation.
+
+The quantity $\pi(x)/x$ has units of density - it presents the density of atoms around $x$ in the specific scattering potential defined by $V(x)$.
+
+We normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and approximately constant density - we call this potential $\chi(x)$.
+
+
+
+
+%V(k) is a function on the complex plane, $k = k_{Re} + ik_{Im}$
+%If V(k) is holomorphic, we can compute it by contour integration from V(x).
+
+
+\section{Method}
+\section{Results}
 
 \begin{figure}[htbp]
 \begin{center}
-
-\caption{default}
+    \includegraphics[width=0.8\linewidth]{../images/zoomed_scattering.png}
+   
+\caption{Scattering amplitude for finite $L_{\chi}$}
 \label{default}
 \end{center}
 \end{figure}
 
 
-V(k) is a function on the complex plane, $k = k_{Re} + ik_{Im}$
-If V(k) is holomorphic, we can compute it by contour integration from V(x).
-
-
-\section{Method}
-\section{Results}
 \section{Proof that all nontrivial zeros of the RZF lie on the line $Re = \frac{1}/{2}$}
 \section{Conclusion}
 \section{Appendix 1}
