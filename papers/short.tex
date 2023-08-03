@@ -1,6 +1,7 @@
 
 \documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
 \usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\usepackage{animate}
 \geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
 %\geometry{landscape}                		% Activate for rotated page geometry
 %\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
@@ -13,15 +14,15 @@
 %SetFonts
 
 
-\title{Brief Article}
-\author{The Author}
+\title{Quasicrystal Scattering and the Riemann Zeta Function}
+\author{Michael Shaughnessy, CY Fong}
 %\date{}							% Activate to display a given date or no date
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We carry out scattering calculations on a one-dimensional point like arrangement of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
+We carry out scattering calculations against a one-dimensional point like arrangement of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
 We show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic structure of the scattering amplitude. 
 Inspired by Dyson's suggestion \ref[Dyson] we present a simple proof that the non-trivial zeros of the RZF all lie along the line $Re = 1/2$ in the complex plane.
 \end{abstract}
@@ -29,6 +30,13 @@ Inspired by Dyson's suggestion \ref[Dyson] we present a simple proof that the no
 \section{Introduction}
 
 \subsection{Fourier Transform}
+\begin{figure}
+    \centering
+    \animategraphics[width=0.8\linewidth,autoplay,loop]{627}{../images/FT_animation-}{0}{626}
+    \caption{Fourier Transform animated. Open with Adobe Acrobat Reader to watch}
+    \label{fig:FT_animation}
+\end{figure}
+
 The Fourier transform of $V(x)$ is $\hat{V}(k)$ 
 
 \begin{equation}
@@ -57,7 +65,7 @@ By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident t
 
 
 
-In general, $\hat{V}(k) =\hat{g}(k) + \hat{h}(k)$ may have a discrete component, $\hat{g}(k)$  and a continuous component,$\hat{h}(k)$.
+In general, $\hat{V}(k) =\hat{g}(k) + \hat{h}(k)$ may have a discrete component, $\hat{g}(k)$  and a continuous component, $\hat{h}(k)$.
 
 \begin{equation}
  \label{eq: RiemannFourier}
@@ -92,7 +100,7 @@ If V(k) is holomorphic, we can compute it by contour integration from V(x).
 \section{Results}
 \section{Proof that all nontrivial zeros of the RZF lie on the line $Re = \frac{1}/{2}$}
 \section{Conclusion}
-\section{Appendix 1
+\section{Appendix 1}
 
 
 
