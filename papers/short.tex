@@ -22,9 +22,9 @@
 \maketitle
 
 \begin{abstract}
-We carry out scattering calculations against a one-dimensional point like arrangement of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
-We show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic structure of the scattering amplitude. 
-Inspired by Dyson's quasicrystal suggestion \ref{Dyson} we present a cryptic speculation in the Appendix, vaguely indicating how the real component of every non-trivial zero of the storied Riemann Zeta Function might be determined.
+I carry out scattering calculations against a one-dimensional point like arrangement of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
+I show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic structure of the scattering amplitude. 
+Inspired by Dyson's quasicrystal suggestion \ref{Dyson} I present a cryptic speculation in the Appendix, vaguely indicating how the real component of every non-trivial zero of the storied Riemann Zeta Function might be determined.
 \end{abstract}
 
 \section{Introduction}
@@ -44,13 +44,13 @@ B. Riemann showed the prime numbers are partially ordered and are not periodic \
 The explicit formula of Guinand and Weil \ref{Weil} is a formula for the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms.  
 
 
-\subsection{Fourier Transform}
-\begin{figure}
-    \centering
-    \animategraphics[width=0.8\linewidth,autoplay,loop]{627}{../animations/FT_animation-}{0}{626}
-    \caption{Fourier Transform animated. Open with Adobe Acrobat Reader to watch}
-    \label{fig:FT_animation}
-\end{figure}
+%\subsection{Fourier Transform}
+%\begin{figure}
+ %   \centering
+%    \animategraphics[width=0.8\linewidth,autoplay,loop]{627}{../animations/FT_animation-}{0}{626}
+%    \caption{Fourier Transform animated. Open with Adobe Acrobat Reader to watch}
+%    \label{fig:FT_animation}
+%!TEX encoding = UTF-8 Unicode\end{figure}
 
 The Fourier transform of $V(x)$ is $\hat{V}(k)$ 
 
@@ -127,9 +127,9 @@ The quantity $\pi(x)/x$ has units of density - it presents the density of atoms 
 
 I normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and approximately constant density - I call this potential $\chi(x)$ and the shift operator $p$: $p([x_n]) = [x_n * \frac{1}{\pi(x_n)}] \sim [\log(x_n)]$.
 
-The physical process of scattering a wave from a potential can be represented by applying the Fourier transform to the potential. The result is a function on the space of wave momentum (reciprocal or dual space), often called the spectrum or scattering amplitude of the wave on the potential. The scattering amplitude can be measured by plotting the number of times a reflected wave arrives back at the wave source as a function of the wave momentum, $k$.
+The physical process of scattering a wave from a potential can be represented by applying the Fourier transform to the potential. The result is a function on the space of wave momentum (reciprocal or dual space), often called the spectrum or scattering amplitude of the wave against the potential. The scattering amplitude can be measured by plotting the number of times a reflected wave arrives back at the wave source as a function of the wave momentum, $k$.
 
-I carry out numerical scattering calculations on finite-length approximants (parameterized by the total number of atoms, $L_{\chi}$) of the potential $\chi(x)$.
+I carry out numerical scattering calculations on finite-length approximates (parameterized by the total number of atoms, $L_{\chi}$) of the potential $\chi(x)$.
 
 
 \section{Method}
@@ -157,7 +157,7 @@ I carry out numerical scattering calculations on finite-length approximants (par
 
 \section{Conclusion}
 \section{Acknowledgements}
-I gratefully acknowledge helpful conversations with CY Fong, John Baez, and Catalin Spataru.
+I gratefully acknowledge helpful conversations with CY Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin and Catalin Spataru.
 \section{Appendix}
 
 
