@@ -7,10 +7,10 @@ import math
 # Parameterization
 num_primes_1da = 500000
 num_primes_1db = 800000
-num_zeros = 200
+num_zeros = 100
 
 dk_1d = 0.01  # Grid resolution in k-space for 1D plot
-wave_number_max = 2000
+wave_number_max = 1000
 
 # 1D Calculation and Plotting
 prime_numbers_a = np.array(list(primerange(1, num_primes_1da + 1)))
@@ -86,7 +86,6 @@ ax2 = ax1.twinx()
 ax2.scatter(momentum_1d, scattering_amplitude_1d_b, s=5, c='g', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1db))
 ax2.set_ylabel(lb, fontsize=14)  # Larger font size for the second amplitude
 ax2.set_ylim(np.min(scattering_amplitude_1d_b), 0.05*np.max(scattering_amplitude_1d_b))
-
 
 # Combine the legends from both axes
 handles1, labels1 = ax1.get_legend_handles_labels()

@@ -8,7 +8,7 @@
 \usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
 								% TeX will automatically convert eps --> pdf in pdflatex		
 \usepackage{amssymb}
-
+\usepackage[backend=bibtex]{biblatex}
 %SetFonts
 
 %SetFonts
@@ -22,27 +22,26 @@
 \maketitle
 
 \begin{abstract}
-I carry out scattering calculations against a one-dimensional point like arrangement of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
+I carry out numerical scattering calculations against a family of one-dimensional point like arrangements of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
 I show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic structure of the scattering amplitude. 
-Inspired by Dyson's quasicrystal suggestion \ref{Dyson} I present a cryptic speculation in the Appendix, vaguely indicating how the real component of every non-trivial zero of the storied Riemann Zeta Function might be determined.
+%Inspired by Dyson's quasicrystal suggestion \cite{Dyson} I present a cryptic speculation in the Appendix, vaguely indicating how the real component of every non-trivial zero of the storied Riemann Zeta Function might be determined.
 \end{abstract}
 
 \section{Introduction}
 
 There have been many explanations of the curious relationship between the prime numbers and the values of the non-trivial zeros of the Riemann Zeta Function (RZF).
 
-\ref{Riemann, Selberg, Dyson, Zhang}
+\cite{Riemann, Selberg, Dyson, Zhang}
 
-Freeman Dyson \ref{Baez} speculated about a possible path to determining the relationship between the real and the imaginary components of the non-trivial zeros of the RZF, using the concept of a quasicrystal.
+Freeman Dyson \cite{Baez} speculated about a possible path to determining the relationship between the real and the imaginary components of the non-trivial zeros of the RZF, using the concept of a quasicrystal.
 
 A quasiperiodic crystal, or quasicrystal, is a structure that is ordered but not periodic.
 
-Quasicrystals were experimentally observed by Shechtman in 1985 \ref{Shechtman1985}. 
+Quasicrystals were experimentally observed by Shechtman in 1985 \cite{Shechtman1985}. 
 
-B. Riemann showed the prime numbers are partially ordered and are not periodic \ref{Riemann1859} in 1859 and H. Von Mangoldt \ref{VonMangoldt1895} proved the explicit formula in 1895.
+B. Riemann showed the prime numbers are partially ordered and are not periodic \cite{Riemann1859} in 1859 and H. Von Mangoldt \cite{VonMangoldt1895} proved the explicit formula in 1895.
 
-The explicit formula of Guinand and Weil \ref{Weil} is a formula for the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms.  
-
+The explicit formula of Guinand and Weil \cite{Weil} is a formula for the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms.  
 
 %\subsection{Fourier Transform}
 %\begin{figure}
@@ -63,8 +62,10 @@ A one-dimensional scattering potential may be of the form
 V(x) = \sum_{x_n \in X}\delta_D(x - x_n)
 \end{equation} 
  
-where the $x_n$ are elements of a countable set of real numbers. 
+where the $x_n$ are elements of a countable set of real numbers.
+ 
 Then $V(x)$ is called a tempered distribution.
+
  For certain $V(x)$ of the form above it is the case that it's Fourier transform, $\hat{V}(k)$, also contains a tempered distribution. 
   
 \begin{equation}
@@ -73,6 +74,7 @@ Then $V(x)$ is called a tempered distribution.
 \end{equation}
 
 If $\hat{h}(k) = 0$ everywhere, then $V(x)$ is called a quasicrystal.
+
 By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. When all the $x_n$ lie along a line, the $k_m$ must also lie along a line in the complex plane - applying the Fourier transform twice gives us back our original $V(x)$.
 
 
@@ -93,13 +95,14 @@ By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident t
 %The delta functions are located at integers and so they have spacing at least 1.
 
 \subsection{Wave Scattering and $\chi$}
-Inspired by Varma's approach, \ref{Varma2016} I define a specific 1-dimensional arrangement of atoms suitable for scattering calculations through a normalization or shift operation yielding an approximately constant atomic density.
+Inspired by Varma's approach, \cite{Varma2016} I define a specific 1-dimensional arrangement of atoms suitable for scattering calculations through a normalization or shift operation yielding an approximately constant atomic density.
 
-Unlike Varma, I apply the shift transformation directly to the real space atomic positions, as opposed to the k-space positions of the zeros of the RZF.
+I apply the shift transformation directly to the real space atomic positions, as opposed to the k-space positions of the zeros of the RZF in Varma.
 
 Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
 The delta functions are located at integers and so they have spacing at least 1.
-Do they also have a maximum spacing? The answer is they do not \ref{PrimeSpacing}
+
+Do they also have a maximum spacing? The answer is they do not \cite{PrimeSpacing}
 
 The exact expression \cite{Riemann} for $\pi(x)$ when $x>1$ is:
 
@@ -123,26 +126,13 @@ If the trivial zeros are collected and the sum is taken only over the non-trivia
  
 It is well known that $\pi(x) \sim \frac{x}{log(x)}$ in a rougher approximation.
 
-The quantity $\pi(x)/x$ has units of density - it presents the density of atoms around $x$ in the specific scattering potential defined by $V(x)$.
+The quantity $\pi(x)/x$ has units of density - it represents the density of atoms around $x$ in the scattering potential defined by $V(x)$.
 
-I normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and approximately constant density - I call this potential $\chi(x)$ and the shift operator $p$: $p([x_n]) = [x_n * \frac{1}{\pi(x_n)}] \sim [\log(x_n)]$.
+In the numerical calculations below, I normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and asymptotically constant density. Call this potential $\chi(x)$ and the shift operator $p$: $p([x_n]) = [x_n * \frac{1}{\pi(x_n)}] \sim [\log(x_n)]$.
 
 The physical process of scattering a wave from a potential can be represented by applying the Fourier transform to the potential. The result is a function on the space of wave momentum (reciprocal or dual space), often called the spectrum or scattering amplitude of the wave against the potential. The scattering amplitude can be measured by plotting the number of times a reflected wave arrives back at the wave source as a function of the wave momentum, $k$.
 
 I carry out numerical scattering calculations on finite-length approximates (parameterized by the total number of atoms, $L_{\chi}$) of the potential $\chi(x)$.
-
-
-\section{Method}
-
- Code for the scattering calculation is available at 
- 
- https://github.com/mickeyshaughnessy/quasicrystal/blob/main/scattering.py
- 
-   
-
-
-%V(k) is a function on the complex plane, $k = k_{Re} + ik_{Im}$
-%If V(k) is holomorphic, we can compute it by contour integration from V(x).
 
 \section{Results}
 \begin{figure}[htbp]
@@ -153,6 +143,44 @@ I carry out numerical scattering calculations on finite-length approximates (par
 \label{default}
 \end{center}
 \end{figure}
+
+
+\section{Method}
+
+ Code for the scattering calculation is available at 
+ 
+ https://github.com/mickeyshaughnessy/quasicrystal/blob/main/scattering.py
+ 
+  \begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=0.8\linewidth]{../images/scattering_code.png}
+   
+\caption{Code for computing scattering amplitude}
+\label{default}
+\end{center}
+\end{figure}
+ 
+ 
+ \begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=0.8\linewidth]{../images/plotting_code.png}
+   
+\caption{Code for generating spectral plot}
+\label{default}
+\end{center}
+\end{figure}
+ 
+\subsection{Numerical Method}
+
+\subsection{Analytical Method}
+We compute the Fourier transform of the potential $\chi(x)$ by analytical continuation of the integrand into the complex plane. 
+The RZF zeros appear in the denominator through the shift by $\pi(x)$. 
+   
+
+
+%V(k) is a function on the complex plane, $k = k_{Re} + ik_{Im}$
+%If V(k) is holomorphic, we can compute it by contour integration from V(x).
+
 
 
 \section{Conclusion}
