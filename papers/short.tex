@@ -14,7 +14,13 @@
 \maketitle
 
 \begin{abstract}
+<<<<<<< HEAD
 In this paper, I perform numerical scattering calculations on a family of one-dimensional point-like atomic arrangements, denoted as $\mathbf{\chi(x)}$. These arrangements are derived from the distribution of prime numbers through a shift operation that results in an approximately constant atomic density. My analysis reveals how the Riemann Zeta Function (RZF) naturally emerges as a parameterization of the analytic structure in the scattering amplitude.
+=======
+I carry out scattering calculations against a one-dimensional point like arrangement of atoms, $\mathbf{\chi(x)}$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
+I show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic structure of the scattering amplitude. 
+% Inspired by Dyson's quasicrystal suggestion \ref{Dyson} I present a cryptic speculation in the Appendix, vaguely indicating how the real component of every non-trivial zero of the storied Riemann Zeta Function might be determined.
+>>>>>>> e725d538671bf042b86d8033deaaf81cb9bcfe90
 \end{abstract}
 
 \section{Introduction}
@@ -25,7 +31,11 @@ Freeman Dyson's speculation \cite{Baez} about using quasicrystals to determine t
 
 The connection between prime numbers and quasicrystals is not entirely new. Riemann demonstrated in 1859 that prime numbers are partially ordered and non-periodic \cite{Riemann1859}, characteristics shared with quasicrystals. Later, in 1895, Von Mangoldt \cite{VonMangoldt1895} proved the explicit formula, further solidifying this connection.
 
+<<<<<<< HEAD
 Of particular relevance to this work is the explicit formula of Guinand and Weil \cite{Weil}, which expresses the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms. This formula provides a crucial link between the distribution of primes and the zeros of the RZF, which I exploit in my scattering calculations.
+=======
+A quasiperiodic crystal, or quasicrystal, is a structure that is ordered in some way but not strictly periodic. A spiral pattern is an example of a quasicrystal. 
+>>>>>>> e725d538671bf042b86d8033deaaf81cb9bcfe90
 
 In the following sections, I'll detail my approach to creating a quasicrystal-like structure based on the distribution of primes, and how I use this structure to perform scattering calculations that reveal the underlying connection to the RZF.
 
@@ -43,9 +53,28 @@ In my work, I consider a one-dimensional scattering potential of the form:
 
 \begin{equation}
 V(x) = \sum_{x_n \in X}\delta_D(x - x_n)
+<<<<<<< HEAD
 \end{equation}
 
 where $x_n$ are elements of a countable set of real numbers, and $\delta_D$ is the Dirac delta function. This type of potential is known as a tempered distribution.
+=======
+\end{equation} 
+ 
+where the $x_n$ are elements of a countable set of real numbers. 
+Then $V(x)$ is called a tempered distribution.
+
+
+ For certain $V(x)$ of the form above it is the case that it's Fourier transform, $\hat{V}(k)$, also contains a tempered distribution. 
+  
+\begin{equation}
+ \label{eq: RiemannFourier}
+ \mathcal{F}\left \{V(x)\right \} = \hat{V}(k) = \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = \hat{h}(k) +  \sum_{k_m \in X^{*}} \hat{V_{m}} \delta_D(k - k_{m}),
+\end{equation}
+
+If $\hat{h}(k) = 0$ everywhere, then $V(x)$ is called a quasicrystal.
+
+By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. When all the $x_n$ lie along a line, the $k_m$ must also lie along a line in the complex plane - applying the Fourier transform twice gives us back our original $V(x)$.
+>>>>>>> e725d538671bf042b86d8033deaaf81cb9bcfe90
 
 Interestingly, for certain $V(x)$ of this form, the Fourier transform $\hat{V}(k)$ also contains a tempered distribution:
   
@@ -54,15 +83,51 @@ Interestingly, for certain $V(x)$ of this form, the Fourier transform $\hat{V}(k
 \mathcal{F}\left \{V(x)\right \} = \hat{V}(k) = \mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = \hat{h}(k) +  \sum_{k_m \in X^{*}} \hat{V_{m}} \delta_D(k - k_{m})
 \end{equation}
 
+<<<<<<< HEAD
 When $\hat{h}(k) = 0$ everywhere, $V(x)$ is called a quasicrystal. A fascinating property of quasicrystals is that applying the Fourier transform twice returns us to the original $V(x)$, with the $k_m$ values lying along a line in the complex plane if all $x_n$ lie along a line.
 
 \subsection{Prime Number Distribution and $\chi(x)$}
+=======
+%where $\pi(x)$ is the prime counting function.
+>>>>>>> e725d538671bf042b86d8033deaaf81cb9bcfe90
 
 My approach, inspired by Varma's work \cite{Varma2016}, involves creating a specific 1-dimensional arrangement of atoms suitable for scattering calculations. I do this through a normalization or shift operation that yields an approximately constant atomic density.
 
 I start with a scattering potential $V(x)$ consisting of Dirac delta functions along the positive real line, with one at each prime number. Unlike Varma, who worked in k-space, I apply the shift transformation directly to the real space atomic positions.
 
+<<<<<<< HEAD
 The distribution of primes is described by the prime counting function $\pi(x)$, which for $x > 1$ is given exactly by:
+=======
+%In general, $\hat{V}(k) =\hat{g}(k) + \hat{h}(k)$ may have a discrete component, $\hat{g}(k)$  and a continuous component, $\hat{h}(k)$.
+
+%\begin{equation}
+ %\label{eq: RiemannFourier}
+ %\mathcal{F}\left \{ \sum_{x_n \in X}\delta_D(x - x_n) \right \} = h(k) +  \sum_{k_m \in X^{*}} F_{m} \delta_D(k - k_{m}),
+%\end{equation}.
+
+
+%\subsection{Wave scattering}
+%Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
+%The delta functions are located at integers and so they have spacing at least 1.
+
+\subsection{Wave scattering on $\chi$}
+Inspired by Varma's approach, \ref{Varma2016} I define a specific 1-dimensional arrangement of atoms suitable for scattering calculations through a normalization or shift operation yielding an approximately constant atomic density, $\chi$.
+
+Consider the specific scattering potential, $\chi$
+\begin{equation}
+\chi(x) = \sum_{p, \text{prime}}^{\infty} \delta(x - \frac{x_p}{\pi(x_p)}).
+\end{equation}
+
+
+Unlike Varma, I apply the shift transformation directly to the real space atomic positions, as opposed to the k-space positions of the zeros of the RZF.
+
+Consider a scattering potential, V(x), which is distribution of Dirac delta functions along the positive real line, one at each prime number. 
+The delta functions are located at integers and so they have spacing at least 1.
+
+Do they also have a maximum spacing? They do not \ref{PrimeSpacing}.
+
+The exact expression \cite{Riemann} for $\pi(x)$ when $x>1$ is:
+>>>>>>> e725d538671bf042b86d8033deaaf81cb9bcfe90
 
 \begin{equation}
 \pi(x) = \pi_0(x) - \frac{1}{2} = R(x) - \sum_{\rho}R(x^{\rho}) - \frac{1}{2}
@@ -79,17 +144,27 @@ Here, $\mu(x)$ is the Möbius function, $li(x)$ is the logarithmic integral func
 \begin{equation}
 \pi_0(x) \approx R(x) - \sum_{\rho}R(x^{\rho}) - \frac{1}{\log(x)} + \frac{1}{\pi}\arctan(\frac{1}{\log(x)})
 \end{equation}
+<<<<<<< HEAD
+=======
+ 
+
+>>>>>>> e725d538671bf042b86d8033deaaf81cb9bcfe90
 
 It's well known that $\pi(x) \sim \frac{x}{\log(x)}$ in a rougher approximation.
 
+<<<<<<< HEAD
 The quantity $\pi(x)/x$ represents the density of atoms around $x$ in our scattering potential $V(x)$. In my numerical calculations, I normalize the positions of the atoms in $V(x)$ with a shift operation, creating a potential $\chi(x)$ with approximately constant density:
 
 \begin{equation}
 \chi(x) = p(V(x))
 \end{equation}
+%I normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and approximately constant density - I call this potential $\chi(x)$ and the shift operator $p$: $p([x_n]) = [x_n * \frac{1}{\pi(x_n)}] \sim [\log(x_n)]$.
+
+The physical process of scattering a wave from a potential can be represented by applying the Fourier transform to the potential. The result is a function onto the space of wave momentum (reciprocal, k-, or dual space), often called the spectrum or scattering amplitude of the wave against the potential. The scattering amplitude can be measured by plotting the number of times a reflected wave arrives back at the wave source as a function of the wave momentum, $k$.
 
 where $p$ is the shift operator: $p([x_n]) = [x_n * \frac{1}{\pi(x_n)}] \sim [\log(x_n)]$.
 
+<<<<<<< HEAD
 This shifted potential $\chi(x)$ forms the basis of my scattering calculations, which I'll describe in the next section.
 
 \section{Numerical Methods and Results}
@@ -139,9 +214,34 @@ Several interesting features are apparent in this plot:
 \begin{center}
     \includegraphics[width=0.8\linewidth]{../images/zoomed_scattering.png}
 \caption{Scattering amplitude for $L_\chi = 500,000$ and $L_\chi = 800,000$. Vertical red lines indicate the positions of the imaginary part of the non-trivial zeros of the RZF.}
-\label{fig:scattering_amplitude}
+
+\section{Numerical Method}
+
+ Code for the scattering calculation is available at 
+ 
+ https://github.com/mickeyshaughnessy/quasicrystal/blob/main/scattering.py
+ 
+It is well known that $\pi(x) \sim \frac{x}{log(x)}$ and this is used as the prime density function in the results that follow.
+ 
+I evaluate the Fourier transform numerically for both $\chi(x)$ and $\hat{\chi}(k)$ and observe the approximate locations of peaks in both.
+ 
+ \section{Results}
+ Figure 1. shows the computed scattering amplitudes as a function of wave momentum (k) for two finite approximates, whose total length is parameterized by $L_{\chi}$. Vertical red dashes are drawn at the approximate locations of the imaginary component of the nontrivial RZF zeros. These seem to align in a 1-to-1 fashion with the computed peaks in the spectrum.
+ 
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=0.8\linewidth]{../images/zoomed_scattering.png}
+   
+\caption{Scattering amplitudes for finite $L_{\chi}$. Vertical red lines indicate the positions of the imaginary part of the non-trivial zeros of the RZF.}
+\label{default}
 \end{center}
 \end{figure}
+ 
+\section{Exact Calculation using the Residue Theorem}
+
+I compute the Fourier transforms of $\chi(x)$ and $\hat{\chi}(k)$ using a contour integral, making clear how the zeta function enters through the prime density function and the residue theorem.
+
+I discuss the continuous component of both spectra as the contribution of the "prime at infinity".
 
 Several interesting features are apparent in this plot:
 
@@ -195,6 +295,7 @@ In conclusion, this study demonstrates the power of interdisciplinary approaches
 
 \section{Acknowledgements}
 I gratefully acknowledge helpful conversations with CY Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, and Catalin Spataru.
+
 
 \printbibliography
 
