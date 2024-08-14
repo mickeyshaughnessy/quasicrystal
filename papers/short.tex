@@ -1,10 +1,10 @@
-
 \documentclass[11pt, oneside]{article}
 \usepackage{geometry}
 \usepackage{animate}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage[backend=bibtex]{biblatex}
+\addbibresource{references.bib}
 
 \geometry{letterpaper}
 
@@ -93,6 +93,38 @@ The physical process of scattering a wave from a potential can be represented by
 
 I carry out numerical scattering calculations on finite-length approximates (parameterized by the total number of atoms, $L_{\chi}$) of the potential $\chi(x)$.
 
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=0.8\linewidth]{../images/normalizing.png}
+\caption{Normalized atomic positions in the $\chi(x)$ potential. The x-axis represents the index of each atom, while the y-axis shows its normalized position.}
+\label{fig:normalized_positions}
+\end{center}
+\end{figure}
+
+Figure \ref{fig:normalized_positions} shows the normalized positions of atoms in our $\chi(x)$ potential. This normalization is crucial for understanding how the RZF zeros enter our scattering calculation.
+
+The shift transform we apply to normalize the atomic positions can be expressed explicitly as:
+
+\begin{equation}
+p(x_n) = x_n \cdot \frac{1}{\pi(x_n)} \approx \log(x_n)
+\end{equation}
+
+where $x_n$ is the nth prime number and $\pi(x_n)$ is the prime counting function.
+
+The RZF zeros enter our scattering calculation through this normalization process. Specifically, they create poles along the axis Re(z) = 1/2 in the complex plane. This occurs because the prime counting function $\pi(x)$ in the denominator of our shift transform is intimately related to the RZF.
+
+Recall the exact expression for $\pi(x)$:
+
+\begin{equation}
+\pi(x) = R(x) - \sum_{\rho}R(x^{\rho}) - \frac{1}{2}
+\end{equation}
+
+where $\rho$ runs over all the zeros of the RZF. When we perform the Fourier transform of our normalized potential $\chi(x)$, we are essentially analytically continuing this function into the complex plane. The RZF zeros $\rho$ in the sum create poles at Re(z) = 1/2, which directly influence the structure of our scattering amplitude.
+
+This connection explains the correspondence we observe between the peaks in our scattering amplitude and the positions of the RZF zeros. Each zero contributes to the scattering process through these poles, manifesting as features in the scattering spectrum.
+
+Understanding this relationship not only provides insight into the mathematical structure of our scattering problem but also offers a physical interpretation of the RZF zeros in terms of wave scattering from a carefully constructed potential. This perspective might offer new avenues for exploring the properties of the RZF and its zeros through the lens of physical scattering processes.
+
 \section{Results}
 \begin{figure}[htbp]
 \begin{center}
@@ -133,6 +165,28 @@ $\hat{V}(k) = \int_{-\infty}^{\infty}V(x)e^{-i2\pi kx}dx$
 Using the residue theorem, it is straightforward to see $\hat{V}(k)$ contains a sum of delta functions over the zeros of the RZF, through the shift operation on $x$ in $V(x)$ and the filtering property of the delta function.
 
 \section{Conclusion}
+
+The results of our calculations, as presented in Figure \ref{fig:scattering_amplitude}, reveal several interesting features:
+
+1. The scattering amplitude exhibits a series of peaks and troughs, with the overall amplitude decreasing as momentum increases.
+
+2. There is a clear correspondence between the positions of the RZF zeros and features in the scattering amplitude. Many of the prominent peaks in the scattering amplitude align closely with the RZF zeros.
+
+3. The scattering amplitudes for different $L_\chi$ values show very similar behavior, suggesting that the observed features are robust and not artifacts of the finite lattice size.
+
+4. The overall structure of the scattering amplitude, when viewed across a wider range of momentum values, shows a consistent pattern of peaks and troughs that seems to be related to the distribution of RZF zeros.
+
+These observations support our theoretical analysis of how the RZF zeros enter the scattering calculation through the normalization process. The peaks in the scattering amplitude that align with the RZF zeros are likely manifestations of the poles created by these zeros in the complex plane.
+
+This work provides a novel physical interpretation of the RZF zeros in terms of wave scattering from a carefully constructed potential. It suggests that the RZF zeros might be understood as resonances in this scattering system, where each zero corresponds to a particular scattering mode.
+
+Furthermore, the robustness of these features across different $L_\chi$ values suggests that this relationship between the RZF zeros and scattering amplitudes is not an artifact of our finite approximation, but rather a fundamental property of the system we've constructed.
+
+This approach opens up new avenues for e/axploring the properties of the RZF and its zeros. By studying the scattering amplitudes and their relationship to the RZF zeros, we might gain new insights into the distribution and properties of these zeros. Conversely, known properties of the RZF zeros might help us understand and predict features of the scattering amplitude in this and similar systems.
+
+Future work could explore extending this approach to higher dimensions, investigating the effects of different normalization schemes, or studying how perturbations to the potential affect the relationship between scattering amplitudes and RZF zeros.
+
+In conclusion, this work demonstrates a intriguing connection between number theory, specifically the Riemann Zeta Function and its zeros, and the physics of wave scattering. It provides a new perspective on these mathematical objects and suggests potential new approaches for studying them through physical analogies.
 
 \section{Acknowledgements}
 I gratefully acknowledge helpful conversations with CY Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, and Catalin Spataru.
