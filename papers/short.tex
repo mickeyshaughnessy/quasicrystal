@@ -3,7 +3,12 @@
 \usepackage{animate}
 \usepackage{graphicx}
 \usepackage{amssymb}
-\usepackage[backend=bibtex]{biblatex}
+\usepackage[
+  backend=bibtex,
+  style=numeric,
+  sorting=none,
+  citestyle=numeric-comp
+]{biblatex}
 \addbibresource{references.bib}
 
 \geometry{letterpaper}
@@ -31,6 +36,14 @@ B. Riemann showed the prime numbers are partially ordered and are not periodic \
 
 The explicit formula of Guinand and Weil \cite{Weil} is a formula for the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms.  
 
+\begin{equation}
+\sum_{\rho} h(\rho) = h(0) + h(1) - \sum_{p} \sum_{m=1}^{\infty} \frac{h(\log p^m)}{p^{m/2}} \log p - \int_{-\infty}^{\infty} \frac{h(t) \Phi(t)}{2} dt
+\end{equation}
+
+The explicit formula of Guinand and Weil is the dual of the prime counting function expression of Von Mangoldt \cite{VonMangoldt1895}.
+
+
+\subsection{Fourier Transform}
 The Fourier transform of $V(x)$ is $\hat{V}(k)$:
 
 \begin{equation}
