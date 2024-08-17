@@ -21,7 +21,7 @@ I show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic 
 
 \section{Introduction}
 
-There have been many explanations of the curious relationship between the prime numbers and the values of the non-trivial zeros of the Riemann Zeta Function (RZF) \cite{Riemann, Selberg, Dyson, Zhang}.
+There have been many explanations of the curious relationship between the prime numbers and the values of the non-trivial zeros of the Riemann Zeta Function (RZF) \cite{Riemann1859, Selberg, Dyson, Zhang}.
 
 Freeman Dyson \cite{Baez} speculated about a possible path to determining the relationship between the real and the imaginary components of the non-trivial zeros of the RZF, using the concept of a quasicrystal.
 
@@ -36,6 +36,8 @@ The Fourier transform of $V(x)$ is $\hat{V}(k)$:
 \begin{equation}
 \hat{V}(k) = \int_{-\infty}^{\infty}V(x)e^{-i2\pi kx}dx
 \end{equation}
+
+The physical process of scattering a wave from a potential can be represented by applying the Fourier transform to the potential. The result is a function on the space of wave momentum (reciprocal or dual space), often called the spectrum or scattering amplitude of the wave against the potential. The scattering amplitude can be measured by plotting the number of times a reflected wave arrives back at the wave source as a function of the wave momentum, $k$.
 
 A one-dimensional scattering potential may be of the form:
 \begin{equation}
@@ -89,7 +91,10 @@ The quantity $\pi(x)/x$ has units of density - it represents the density of atom
 
 In the numerical calculations below, I normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and asymptotically constant density. Call this potential $\chi(x)$ and the shift operator $p$: $p([x_n]) = [x_n * \frac{1}{\pi(x_n)}] \sim [\log(x_n)]$.
 
-The physical process of scattering a wave from a potential can be represented by applying the Fourier transform to the potential. The result is a function on the space of wave momentum (reciprocal or dual space), often called the spectrum or scattering amplitude of the wave against the potential. The scattering amplitude can be measured by plotting the number of times a reflected wave arrives back at the wave source as a function of the wave momentum, $k$.
+% TODO: Provide a more detailed explanation of how this shift operation relates to the RZF zeros
+
+
+
 
 I carry out numerical scattering calculations on finite-length approximates (parameterized by the total number of atoms, $L_{\chi}$) of the potential $\chi(x)$.
 
@@ -102,6 +107,8 @@ I carry out numerical scattering calculations on finite-length approximates (par
 \end{figure}
 
 Figure \ref{fig:normalized_positions} shows the normalized positions of atoms in our $\chi(x)$ potential. This normalization is crucial for understanding how the RZF zeros enter our scattering calculation.
+
+% TODO: Add quantitative analysis of the correspondence between scattering amplitude peaks and RZF zeros
 
 The shift transform we apply to normalize the atomic positions can be expressed explicitly as:
 
@@ -157,6 +164,7 @@ Code for the scattering calculation is available at:
 \end{figure}
 
 \subsection{Analytical Computation}
+% TODO: Expand on the analytical computation, possibly adding equations for the residue theorem application
 We compute the Fourier transform of the potential $\chi(x)$ by analytical continuation of the integrand into the complex plane. 
 The RZF zeros appear in the denominator through the shift by $\pi(x)$. 
  
@@ -166,23 +174,21 @@ Using the residue theorem, it is straightforward to see $\hat{V}(k)$ contains a 
 
 \section{Conclusion}
 
-The results of our calculations, as presented in Figure \ref{fig:scattering_amplitude}, reveal several interesting features:
+The results of our calculations, as presented in Figure \ref{fig:scattering_amplitude}, reveal:
 
 1. The scattering amplitude exhibits a series of peaks and troughs, with the overall amplitude decreasing as momentum increases.
 
-2. There is a clear correspondence between the positions of the RZF zeros and features in the scattering amplitude. Many of the prominent peaks in the scattering amplitude align closely with the RZF zeros.
+2. There is a clear correspondence between the positions of the RZF zeros and peaks in the scattering amplitude. Many of the prominent peaks in the scattering amplitude align closely with the RZF zeros.
 
 3. The scattering amplitudes for different $L_\chi$ values show very similar behavior, suggesting that the observed features are robust and not artifacts of the finite lattice size.
 
 4. The overall structure of the scattering amplitude, when viewed across a wider range of momentum values, shows a consistent pattern of peaks and troughs that seems to be related to the distribution of RZF zeros.
 
-These observations support our theoretical analysis of how the RZF zeros enter the scattering calculation through the normalization process. The peaks in the scattering amplitude that align with the RZF zeros are likely manifestations of the poles created by these zeros in the complex plane.
+These observations support our physical picture of how the RZF zeros enter the scattering calculation through the normalization process. The peaks in the scattering amplitude that align with the RZF zeros are likely manifestations of the poles created by these zeros in the complex plane.
 
 This work provides a novel physical interpretation of the RZF zeros in terms of wave scattering from a carefully constructed potential. It suggests that the RZF zeros might be understood as resonances in this scattering system, where each zero corresponds to a particular scattering mode.
 
 Furthermore, the robustness of these features across different $L_\chi$ values suggests that this relationship between the RZF zeros and scattering amplitudes is not an artifact of our finite approximation, but rather a fundamental property of the system we've constructed.
-
-This approach opens up new avenues for e/axploring the properties of the RZF and its zeros. By studying the scattering amplitudes and their relationship to the RZF zeros, we might gain new insights into the distribution and properties of these zeros. Conversely, known properties of the RZF zeros might help us understand and predict features of the scattering amplitude in this and similar systems.
 
 Future work could explore extending this approach to higher dimensions, investigating the effects of different normalization schemes, or studying how perturbations to the potential affect the relationship between scattering amplitudes and RZF zeros.
 
