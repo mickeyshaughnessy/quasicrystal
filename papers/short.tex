@@ -134,6 +134,10 @@ This connection explains the correspondence we observe between the peaks in our 
 This relationship not only provides insight into the mathematical structure of our scattering problem but also offers a physical interpretation of the RZF zeros in terms of wave scattering from a carefully constructed potential. Further exploration of the properties of the RZF and its zeros through the lens of physical scattering processes could be beneficial.
 
 \section{Results}
+We carry out scattering calculations for a family of supercell potentials $[\chi_L(x)]$ potential using the 1-d planewave basis.
+
+The results show a remarkable pattern - a series of peaks appear in the scattering amplitude as a function of momentum, one for each zero of the Riemann Zeta Function. 
+There is also a gradual decay of the scattering amplitude with greater momentum.
 \begin{figure}[htbp]
 \begin{center}
     \includegraphics[width=0.8\linewidth]{zoomed_scattering.png}
@@ -147,25 +151,26 @@ This relationship not only provides insight into the mathematical structure of o
 Code for the scattering calculation is available at:
  
 \url{https://github.com/mickeyshaughnessy/quasicrystal/blob/main/scattering.py}
- 
-\begin{figure}[htbp]
-\begin{center}
-    %\includegraphics[width=0.8\linewidth]{../images/scattering_code.png}
-    \includegraphics[width=0.8\linewidth]{scattering_code.png}
-\caption{Code for computing scattering amplitude}
-\label{fig:scattering_code}
-\end{center}
-\end{figure}
- 
-\begin{figure}[htbp]
-\begin{center}
-    %\includegraphics[width=0.8\linewidth]{../images/plotting_code.png}
-     \includegraphics[width=0.8\linewidth]{plotting_code.png}
 
-\caption{Code for generating spectral plot}
-\label{fig:plotting_code}
-\end{center}
-\end{figure}
+'
+%\begin{figure}[htbp]
+%\begin{center}
+%    %\includegraphics[width=0.8\linewidth]{../images/scattering_code.png}
+%    \includegraphics[width=0.8\linewidth]{scattering_code.png}
+%\caption{Code for computing scattering amplitude}
+%\label{fig:scattering_code}
+%\end{center}
+%\end{figure}
+% 
+%\begin{figure}[htbp]
+%\begin{center}
+%    %\includegraphics[width=0.8\linewidth]{../images/plotting_code.png}
+%     \includegraphics[width=0.8\linewidth]{plotting_code.png}
+%
+%\caption{Code for generating spectral plot}
+%\label{fig:plotting_code}
+%\end{center}
+%\end{figure}
 
 \subsection{Analytical Computation}
 
@@ -318,7 +323,7 @@ Future work could explore extending this approach to higher dimensions, investig
 In conclusion, this work demonstrates an intriguing connection between number theory, specifically the Riemann Zeta Function and its zeros, and the physics of wave scattering. It provides a new perspective on these mathematical objects and suggests potential new approaches for studying them through physical analogies.
 
 \section{Acknowledgements}
-I gratefully acknowledge helpful conversations with C.Y. Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, and Catalin Spataru.
+I gratefully acknowledge helpful conversations with C.Y. Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, Aftab Ahmed, Catalin Spataru, and all the lovely anons on X.
 
 \printbibliography
 
