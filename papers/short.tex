@@ -122,7 +122,7 @@ I carry out numerical scattering calculations on finite-length approximations (p
 \begin{figure}[htbp]
 \begin{center}
     \includegraphics[width=0.8\linewidth]{normalizing.png}
-\caption{Normalized atomic positions in the $\chi(x)$ potential. The x-axis represents the index of each atom, while the y-axis shows its normalized position.}
+\caption{Un-normalized and normalized atomic positions in the $\chi(x)$ potential. The lower blue dots depict the positions of the first few atoms and the upper yellow dots depict the positions of the same atoms in the shifted structure, $\chi$}
 \label{fig:normalized_positions}
 \end{center}
 \end{figure}
@@ -132,19 +132,6 @@ Figure \ref{fig:normalized_positions} shows the normalized positions of atoms in
 This connection explains the correspondence we observe between the peaks in our scattering amplitude and the positions of the RZF zeros. Each zero contributes to the scattering process through these poles, manifesting as features in the scattering spectrum.
 
 This relationship not only provides insight into the mathematical structure of our scattering problem but also offers a physical interpretation of the RZF zeros in terms of wave scattering from a carefully constructed potential. Further exploration of the properties of the RZF and its zeros through the lens of physical scattering processes could be beneficial.
-
-\section{Results}
-We carry out scattering calculations for a family of supercell potentials $[\chi_L(x)]$ potential using the 1-d planewave basis.
-
-The results show a remarkable pattern - a series of peaks appear in the scattering amplitude as a function of momentum, one for each zero of the Riemann Zeta Function. 
-There is also a gradual decay of the scattering amplitude with greater momentum.
-\begin{figure}[htbp]
-\begin{center}
-    \includegraphics[width=0.8\linewidth]{zoomed_scattering.png}
-\caption{Scattering amplitude for finite $L_{\chi}$. Vertical red lines indicate the positions of the imaginary part of the non-trivial zeros of the RZF.}
-\label{fig:scattering_amplitude}
-\end{center}
-\end{figure}
 
 \section{Method}
 
@@ -299,6 +286,19 @@ By introducing a convergence factor and applying complex analysis techniques, we
 
 This analytical computation explains the correspondence observed between the peaks in the scattering amplitude and the RZF zeros in our numerical results, providing a deep connection between number theory and wave scattering phenomena.
 
+
+\section{Results}
+We carry out scattering calculations for a family of supercell potentials $[\chi_L(x)]$ potential using the 1-d planewave basis.
+
+The results show a remarkable pattern - a series of peaks appear in the scattering amplitude as a function of momentum, one for each zero of the Riemann Zeta Function. 
+There is also a gradual decay of the scattering amplitude with greater momentum.
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=0.8\linewidth]{zoomed_scattering.png}
+\caption{Scattering amplitude for finite $L_{\chi}$. Vertical red lines indicate the positions of the imaginary part of the non-trivial zeros of the RZF.}
+\label{fig:scattering_amplitude}
+\end{center}
+\end{figure}
 
 \section{Conclusion}
 
