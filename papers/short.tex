@@ -27,7 +27,7 @@ I show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic 
 
 \section{Introduction}
 
-There have been many explanations of the curious relationship between the prime numbers and the values of the non-trivial zeros of the Riemann Zeta Function (RZF) \cite{Riemann1859, Selberg1956, Dyson2009, Zhang2014}.
+There have been many explanations of the curious relationship between the prime numbers and the values of the imaginary components of the non-trivial zeros of the Riemann Zeta Function (RZF) \cite{Riemann1859, Selberg1956, Dyson2009, Zhang2014}.
 
 Freeman Dyson \cite{Baez2013} speculated about a possible path to determining the relationship between the real and the imaginary components of the non-trivial zeros of the RZF, using the concept of a quasicrystal.
 
@@ -42,6 +42,8 @@ The explicit formula of Guinand and Weil \cite{Weil} is a formula for the Fourie
 \end{equation}
 
 The explicit formula of Guinand and Weil is the dual of the prime counting function expression of von Mangoldt \cite{VonMangoldt1895}.
+
+In this paper we estimate the scattering spectrum of a particular 1d arrangement of atoms - the spectrum appears to have peaks at each of the non-trivial zeros of the RZF.  
 
 \subsection{Fourier Transform}
 The Fourier transform of $V(x)$ is $\hat{V}(k)$:
@@ -74,12 +76,31 @@ By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident t
 
 \subsection{Wave Scattering and $\chi$}
 Inspired by Varma's approach \cite{Varma2016}, I define a specific 1-dimensional arrangement of atoms suitable for scattering calculations through a normalization or shift operation yielding an approximately constant atomic density.
+\begin{equation}
+V(x) = \sum_{p \text{ prime}} \delta(x - p) = \delta(x - 2) + \delta(x - 3) + \delta(x - 5) + \delta(x - 7) + \delta(x - 11) + ...
+\end{equation}
+
 
 I apply the shift transformation directly to the real-space atomic positions, as opposed to the k-space positions of the zeros of the RZF in \cite{Varma2016}.
 
 Consider a scattering potential, $V(x)$, which is a distribution of Dirac delta functions along the positive real line, one at each prime number.
 
 The delta functions are located at integers and so they have spacing at least 1. They do not have a maximum spacing \cite{Westzynthius1931, Erdos1950}.
+
+The Fourier transform takes the form:
+
+\begin{equation}
+\hat{V}(k) = \sum_{x} V(x) e^{-ikp} =  \sum_{p \text{ prime}} e^{-ikp}
+\end{equation}
+
+This is essentially a prime number zeta function. When we consider the absolute value squared (which would appear in scattering calculations):
+
+\begin{equation}
+|\hat{V}(k)|^2 = \sum_{p,q \text{ prime}} e^{-ik(p-q)}
+\end{equation}
+
+The behavior of this transform is deeply connected to the distribution of primes. From the explicit formula relating prime numbers to zeros of the Riemann zeta function, we expect $\hat{V}(k)$ to have both a continuous part ($\hat{h}(k)$) and a discrete part, with peaks at positions related to the imaginary parts of the zeros of the zeta function.
+
 
 The exact expression \cite{Riemann1859} for $\pi(x)$ when $x>1$ is:
 
@@ -88,7 +109,6 @@ The exact expression \cite{Riemann1859} for $\pi(x)$ when $x>1$ is:
 \end{equation}
 
 where
-
 \begin{equation}
 R(x) = \sum_{n=1}^{\infty}\frac{\mu(n)}{n}\operatorname{li}(x^{\frac{1}{n}})
 \end{equation}
@@ -323,7 +343,7 @@ Future work could explore extending this approach to higher dimensions, investig
 In conclusion, this work demonstrates an intriguing connection between number theory, specifically the Riemann Zeta Function and its zeros, and the physics of wave scattering. It provides a new perspective on these mathematical objects and suggests potential new approaches for studying them through physical analogies.
 
 \section{Acknowledgements}
-I gratefully acknowledge helpful conversations with C.Y. Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, Aftab Ahmed, Catalin Spataru, and all the lovely anons on X.
+I gratefully acknowledge helpful conversations with C.Y. Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, Aftab Ahmed, Catalin Spataru, various LLMs, and all the lovely anons on X.
 
 \printbibliography
 
