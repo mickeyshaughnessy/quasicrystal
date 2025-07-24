@@ -5,21 +5,25 @@ from mpmath import zetazero
 import math
 
 # Parameterization
-num_primes_1da = 500000
-num_primes_1db = 800000
+num_primes_1da = 50000
+num_primes_1db = 300000
+num_primes_1dc = 900000
 num_zeros = 100
 
 dk_1d = 0.01  # Grid resolution in k-space for 1D plot
-wave_number_max = 10000
+wave_number_max = 4000
 
 # 1D Calculation and Plotting
 prime_numbers_a = np.array(list(primerange(1, num_primes_1da + 1)))
 prime_numbers_b = np.array(list(primerange(1, num_primes_1db + 1)))
+prime_numbers_c = np.array(list(primerange(1, num_primes_1dc + 1)))
 prime_lattice_a = np.array([math.log(x) for x in prime_numbers_a])
 prime_lattice_b = np.array([math.log(x) for x in prime_numbers_b])
+prime_lattice_c = np.array([math.log(x) for x in prime_numbers_c])
 
 scattering_amplitude_1d_a = []
 scattering_amplitude_1d_b = []
+scattering_amplitude_1d_c = []
 momentum_1d = [] 
 
 zeta_zeros = []
@@ -32,6 +36,7 @@ for wave_number in range(1, wave_number_max+1):
     wave_vector = 2 * np.pi * wave_number * dk_1d
     sum_cosine_a, sum_sine_a, sum_magnitude_a = 0, 0, 0
     sum_cosine_b, sum_sine_b, sum_magnitude_b = 0, 0, 0
+    sum_cosine_c, sum_sine_c, sum_magnitude_c = 0, 0, 0
 
     if wave_number % 3 == 0:
         print(f"Calculating scattering amplitude (1D): {wave_number}/{wave_number_max}...")
@@ -58,11 +63,24 @@ for wave_number in range(1, wave_number_max+1):
         sum_magnitude_b += np.sqrt(sum_cosine_sine_b)
 
     scattering_amplitude_1d_b.append(sum_magnitude_b)
+    
+    for i, prime in enumerate(prime_lattice_c):
+        phase = wave_vector * prime
+        sum_cosine_c += np.cos(phase)
+        sum_sine_c += np.sin(phase)
+        sum_cosine_squared_c = sum_cosine_c ** 2
+        sum_sine_squared_c = sum_sine_c ** 2
+        sum_cosine_sine_c = sum_cosine_squared_c + sum_sine_squared_c
+        sum_magnitude_c += np.sqrt(sum_cosine_sine_c)
+    
+    scattering_amplitude_1d_c.append(sum_magnitude_c)
+
 
 k_min_1d = 0
 k_max_1d = max(momentum_1d)
 fig, ax1 = plt.subplots(figsize=(10, 8))  # Set figure size
 la, lb = 'Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1da), 'Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1db)
+la, lb, lc = 'Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1da), 'Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1db), 'Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1dc)
 
 
 # Plot the first amplitude on the left y-axis
@@ -87,13 +105,19 @@ ax2.scatter(momentum_1d, scattering_amplitude_1d_b, s=5, c='g', label='Scatterin
 ax2.set_ylabel(lb, fontsize=14)  # Larger font size for the second amplitude
 ax2.set_ylim(np.min(scattering_amplitude_1d_b), 0.05*np.max(scattering_amplitude_1d_b))
 
+ax3 = ax2.twinx()
+ax3.scatter(momentum_1d, scattering_amplitude_1d_c, s=5, c='o', label='Scattering amplitude $L_{{\chi}}$ = {}'.format(num_primes_1dc))
+ax3.set_ylabel(lc, fontsize=14)  # Larger font size for the second amplitude
+ax3.set_ylim(np.min(scattering_amplitude_1d_c), 0.05*np.max(scattering_amplitude_1d_c))
+
 # Combine the legends from both axes
 handles1, labels1 = ax1.get_legend_handles_labels()
 handles2, labels2 = ax2.get_legend_handles_labels()
+handles3, labels3 = ax3.get_legend_handles_labels()
 
 # Rearrange the handles and labels to put "RZF zeros" last
-handles = handles1 + handles2
-labels = labels1 + labels2
+handles = handles1 + handles2 + handles3 
+labels = labels1 + labels2 + labels3
 
 # Find the index of the "RZF zeros" label
 rzf_zeros_index = labels.index('RZF zeros')

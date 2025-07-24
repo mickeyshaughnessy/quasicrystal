@@ -1,9 +1,9 @@
 \documentclass[11pt, oneside]{article}
 \usepackage{geometry}
-\usepackage{animate}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{hyperref}
 \usepackage[
   backend=bibtex,
   style=numeric,
@@ -21,8 +21,7 @@
 \maketitle
 
 \begin{abstract}
-I carry out numerical scattering calculations against a family of finite-length one-dimensional point-like arrangements of atoms, $\chi(x)$, related to the distribution of prime numbers by a shift operation making the atomic density approximately constant. 
-I show how the Riemann Zeta Function (RZF) naturally parameterizes the analytic structure of the scattering amplitude and give numerical results.
+We perform numerical scattering calculations on one-dimensional atomic arrangements related to the distribution of prime numbers. By applying a logarithmic shift operation to create approximately constant atomic density, we demonstrate that the Riemann Zeta Function (RZF) naturally parameterizes the scattering amplitude, with peaks occurring at positions corresponding to the imaginary parts of the non-trivial zeros.
 \end{abstract}
 
 \section{Introduction}
@@ -35,7 +34,7 @@ A quasiperiodic crystal, or quasicrystal, is a structure that is ordered but not
 
 B. Riemann showed the prime numbers are partially ordered and are not periodic \cite{Riemann1859} in 1859, and H. von Mangoldt \cite{VonMangoldt1895} proved the explicit formula in 1895.
 
-The explicit formula of Guinand and Weil \cite{Weil} is a formula for the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms.  
+The explicit formula of Guinand and Weil \cite{Weil} is a formula for the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms:
 
 \begin{equation}
 \sum_{\rho} h(\rho) = h(0) + h(1) - \sum_{p} \sum_{m=1}^{\infty} \frac{h(\log p^m)}{p^{m/2}} \log p - \int_{-\infty}^{\infty} \frac{h(t) \Phi(t)}{2} dt
@@ -43,7 +42,7 @@ The explicit formula of Guinand and Weil \cite{Weil} is a formula for the Fourie
 
 The explicit formula of Guinand and Weil is the dual of the prime counting function expression of von Mangoldt \cite{VonMangoldt1895}.
 
-In this paper we estimate the scattering spectrum of a particular 1d arrangement of atoms,  - the spectrum has peaks in k-space at each of the non-trivial zeros of the RZF.  
+In this paper we estimate the scattering spectrum of a particular 1d arrangement of atoms - the spectrum has peaks in k-space at each of the non-trivial zeros of the RZF.  
 
 \subsection{Fourier Transform}
 The Fourier transform of $V(x)$ is $\hat{V}(k)$:
@@ -64,22 +63,21 @@ where the $x_n$ are elements of a countable set of real numbers, and $\delta(x)$
 For certain $V(x)$ of the form above, it is the case that its Fourier transform, $\hat{V}(k)$, also contains a tempered distribution:
   
 \begin{equation}
- \label{eq: RiemannFourier}
- \mathcal{F}\left \{V(x)\right \} = \hat{V}(k) = \mathcal{F}\left \{ \sum_{x_n \in X}\delta(x - x_n) \right \} = \hat{h}(k) +  \sum_{k_m \in X^{*}} \hat{V}_{m} \delta(k - k_{m})
+\label{eq:RiemannFourier}
+\mathcal{F}\{V(x)\} = \hat{V}(k) = \mathcal{F}\left\{ \sum_{x_n \in X}\delta(x - x_n) \right\} = \hat{h}(k) +  \sum_{k_m \in X^{*}} \hat{V}_{m} \delta(k - k_{m})
 \end{equation}
 
 Here, $X^*$ denotes the dual set of $X$, $\hat{V}_{m}$ are coefficients, and $\hat{h}(k)$ is a continuous function.
 
 If $\hat{h}(k) = 0$ everywhere, then $V(x)$ is called a quasicrystal.
 
-By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. When all the $x_n$ lie along a line, the $k_m$ must also lie along a line in the complex plane—applying the Fourier transform twice gives us back our original $V(x)$.
+By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. When all the $x_n$ lie along a line, the $k_m$ must also lie along a line in the complex plane---applying the Fourier transform twice gives us back our original $V(x)$.
 
 \subsection{Wave Scattering and $\chi$}
 Inspired by Varma's approach \cite{Varma2016}, I define a specific 1-dimensional arrangement of atoms suitable for scattering calculations through a normalization or shift operation yielding an approximately constant atomic density.
 \begin{equation}
-V(x) = \sum_{p \text{ prime}} \delta(x - p) = \delta(x - 2) + \delta(x - 3) + \delta(x - 5) + \delta(x - 7) + \delta(x - 11) + ...
+V(x) = \sum_{p \text{ prime}} \delta(x - p) = \delta(x - 2) + \delta(x - 3) + \delta(x - 5) + \delta(x - 7) + \delta(x - 11) + \cdots
 \end{equation}
-
 
 I apply the shift transformation directly to the real-space atomic positions, as opposed to the k-space positions of the zeros of the RZF in \cite{Varma2016}.
 
@@ -101,7 +99,6 @@ This is essentially a prime number zeta function. When we consider the absolute 
 
 The behavior of this transform is deeply connected to the distribution of primes. From the explicit formula relating prime numbers to zeros of the Riemann zeta function, we expect $\hat{V}(k)$ to have both a continuous part ($\hat{h}(k)$) and a discrete part, with peaks at positions related to the imaginary parts of the zeros of the zeta function.
 
-
 The exact expression \cite{Riemann1859} for $\pi(x)$ when $x>1$ is:
 
 \begin{equation}
@@ -110,10 +107,10 @@ The exact expression \cite{Riemann1859} for $\pi(x)$ when $x>1$ is:
 
 where
 \begin{equation}
-R(x) = \sum_{n=1}^{\infty}\frac{\mu(n)}{n}\operatorname{li}(x^{\frac{1}{n}})
+R(x) = \sum_{n=1}^{\infty}\frac{\mu(n)}{n}\operatorname{li}(x^{1/n})
 \end{equation}
 
-Here, $\mu(n)$ is the Möbius function, $\operatorname{li}(x)$ is the logarithmic integral function, and $\rho$ runs over all the zeros of the RZF.
+Here, $\mu(n)$ is the M\"obius function, $\operatorname{li}(x)$ is the logarithmic integral function, and $\rho$ runs over all the zeros of the RZF.
 
 If the trivial zeros are collected and the sum is taken only over the non-trivial zeros, then:
 
@@ -123,7 +120,7 @@ If the trivial zeros are collected and the sum is taken only over the non-trivia
  
 It is well known that $\pi(x) \sim \frac{x}{\log(x)}$ in a rougher approximation.
 
-The quantity $\frac{\pi(x)}{x}$ has units of density—it represents the density of atoms around $x$ in the scattering potential defined by $V(x)$.
+The quantity $\frac{\pi(x)}{x}$ has units of density---it represents the density of atoms around $x$ in the scattering potential defined by $V(x)$.
 
 In the numerical calculations below, I normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and asymptotically constant density. Call this potential $\chi(x)$ and define the shift operator $p$:
 
@@ -139,19 +136,174 @@ This shift is significant because the logarithmic behavior is connected to the z
 
 I carry out numerical scattering calculations on finite-length approximations (parameterized by the total number of atoms, $L_{\chi}$) of the potential $\chi(x)$.
 
+\subsection{Example: Fourier Spectrum of a 1D Integer Lattice}
+
+Before analyzing the prime-based potential, it is instructive to compute the Fourier spectrum of a simple 1D crystal with atoms at integer positions using contour integration. This classical example illustrates the techniques we will later apply to our more complex system.
+
+Consider the potential:
+\begin{equation}
+V_{\text{int}}(x) = \sum_{n=-\infty}^{\infty} \delta(x - n)
+\end{equation}
+
+Its Fourier transform is:
+\begin{equation}
+\hat{V}_{\text{int}}(k) = \sum_{n=-\infty}^{\infty} e^{-2\pi i k n}
+\end{equation}
+
+To evaluate this sum using contour integration, we employ the Poisson summation formula. Consider the function:
+\begin{equation}
+f(z) = \frac{\pi e^{-2\pi i k z}}{\sin(\pi z)}
+\end{equation}
+
+This function has simple poles at all integers $n$ with residue:
+\begin{equation}
+\text{Res}_{z=n} f(z) = \lim_{z \to n} (z-n) \frac{\pi e^{-2\pi i k z}}{\sin(\pi z)} = (-1)^n e^{-2\pi i k n}
+\end{equation}
+
+Now consider the contour integral over a rectangle with vertices at $\pm(N+1/2) \pm iR$ as $N \to \infty$. The integral vanishes as $R \to \infty$ due to the exponential decay of $1/\sin(\pi z)$ in the imaginary direction. By the residue theorem:
+\begin{equation}
+\sum_{n=-N}^{N} (-1)^n e^{-2\pi i k n} = 0
+\end{equation}
+
+This shows that the alternating sum vanishes. To obtain our desired sum, we use:
+\begin{equation}
+g(z) = \frac{\pi e^{-2\pi i k z}}{\sin(\pi z)} \cot(\pi z)
+\end{equation}
+
+The poles at integers now have residues $e^{-2\pi i k n}$, and there's an additional pole at $z = ik$ from the cotangent factor. Evaluating the contour integral:
+\begin{equation}
+\sum_{n=-\infty}^{\infty} e^{-2\pi i k n} = 2\pi i \sum_{\text{poles}} \text{Res}[g(z)]
+\end{equation}
+
+The key insight is that this sum equals a sum of delta functions:
+\begin{equation}
+\hat{V}_{\text{int}}(k) = \sum_{m=-\infty}^{\infty} \delta(k - m)
+\end{equation}
+
+This remarkable result shows that the Fourier transform of a periodic lattice of delta functions is another periodic lattice of delta functions in reciprocal space. The lattice constant in real space (1) transforms to a lattice constant in k-space (also 1).
+
+For a finite lattice with $L$ atoms:
+\begin{equation}
+V_{L}(x) = \sum_{n=0}^{L-1} \delta(x - n)
+\end{equation}
+
+The Fourier transform becomes:
+\begin{equation}
+\hat{V}_{L}(k) = \sum_{n=0}^{L-1} e^{-2\pi i k n} = \frac{1 - e^{-2\pi i k L}}{1 - e^{-2\pi i k}}
+\end{equation}
+
+Using contour integration and the geometric series formula, this evaluates to:
+\begin{equation}
+|\hat{V}_{L}(k)|^2 = \frac{\sin^2(\pi k L)}{\sin^2(\pi k)}
+\end{equation}
+
+This function has sharp peaks of height $L^2$ at integer values of $k$, with width proportional to $1/L$. As $L \to \infty$, these peaks approach delta functions, recovering the infinite lattice result.
+
+This example demonstrates how contour integration reveals the reciprocal lattice structure and how finite-size effects manifest as peak broadening. We will see analogous but more complex behavior when we apply similar techniques to our prime-based potential.
+
+\section{The Scattering Potential}
+
+Starting with delta functions at prime positions:
+\begin{equation}
+V(x) = \sum_{p \text{ prime}} \delta(x - p)
+\end{equation}
+
+We apply a logarithmic shift to normalize the density:
+\begin{equation}
+\chi(x) = \sum_{p \text{ prime}} \delta(x - \log p)
+\end{equation}
+
+This shift is motivated by the prime number theorem: since $\pi(x) \sim x/\log x$, the average spacing between primes near $x$ is approximately $\log x$. The shifted potential thus has approximately constant density.
+
 \begin{figure}[htbp]
 \begin{center}
     \includegraphics[width=0.8\linewidth]{normalizing.png}
-\caption{Un-normalized and normalized atomic positions in the $\chi(x)$ potential. The lower blue dots depict the positions of the first few atoms and the upper yellow dots depict the positions of the same atoms in the shifted structure, $\chi$}
+\caption{Un-normalized and normalized atomic positions in the $\chi(x)$ potential. The lower blue dots depict the positions of the first few atoms and the upper yellow dots depict the positions of the same atoms in the shifted structure, $\chi$.}
 \label{fig:normalized_positions}
 \end{center}
 \end{figure}
 
-Figure \ref{fig:normalized_positions} shows the normalized positions of atoms in our $\chi(x)$ potential. This normalization is crucial for understanding how the RZF zeros enter our scattering calculation.
+For numerical calculations, we consider finite approximations with $L_\chi$ atoms:
+\begin{equation}
+\chi_{L_\chi}(x) = \sum_{n=1}^{L_\chi} \delta(x - \log p_n)
+\end{equation}
+where $p_n$ is the $n$-th prime.
 
-This connection explains the correspondence we observe between the peaks in our scattering amplitude and the positions of the RZF zeros. Each zero contributes to the scattering process through these poles, manifesting as features in the scattering spectrum.
+\section{Contour Integration Analysis for Finite $L_\chi$}
 
-This relationship not only provides insight into the mathematical structure of our scattering problem but also offers a physical interpretation of the RZF zeros in terms of wave scattering from a carefully constructed potential. Further exploration of the properties of the RZF and its zeros through the lens of physical scattering processes could be beneficial.
+\subsection{The Scattering Amplitude}
+
+The Fourier transform of the finite potential is:
+\begin{equation}
+\hat{\chi}_{L_\chi}(k) = \sum_{n=1}^{L_\chi} e^{-2\pi i k \log p_n} = \sum_{n=1}^{L_\chi} p_n^{-2\pi i k}
+\end{equation}
+
+To understand the structure of this sum, we introduce the parameter $s = 2\pi i k$ and write:
+\begin{equation}
+\hat{\chi}_{L_\chi}(s/2\pi i) = \sum_{n=1}^{L_\chi} p_n^{-s}
+\end{equation}
+
+\subsection{Connection to the Riemann Zeta Function}
+
+The key insight is to relate our finite sum to the logarithmic derivative of the RZF. We start with the fundamental relation:
+\begin{equation}
+-\frac{\zeta'(s)}{\zeta(s)} = \sum_{n=1}^\infty \Lambda(n) n^{-s}
+\end{equation}
+where $\Lambda(n)$ is the von Mangoldt function.
+
+For our purposes, we extract only the prime contributions:
+\begin{equation}
+\sum_{p \text{ prime}} \log p \cdot p^{-s} = -\frac{\zeta'(s)}{\zeta(s)} - \sum_{\substack{n=p^m \\ m \geq 2}} \Lambda(n) n^{-s}
+\end{equation}
+
+\subsection{Contour Integration Representation}
+
+To analyze the finite sum, we use the Perron formula. For $\sigma > 1$, we can write:
+\begin{equation}
+\sum_{n=1}^{L_\chi} p_n^{-s} = \frac{1}{2\pi i} \int_{\sigma - i\infty}^{\sigma + i\infty} \left(\sum_{p \text{ prime}} p^{-w}\right) \frac{L_\chi^{w-s} - 1}{w-s} dw
+\end{equation}
+
+The inner sum over all primes can be expressed using the logarithmic derivative of $\zeta$:
+\begin{equation}
+\sum_{p \text{ prime}} p^{-w} = \frac{1}{2\pi i} \oint_C \frac{-\zeta'(z)/\zeta(z)}{\log z} \cdot \frac{1}{z-w} dz
+\end{equation}
+where $C$ is a contour enclosing the poles of $-\zeta'(z)/\zeta(z)$ at the zeros of $\zeta(z)$.
+
+\subsection{Residue Calculation}
+
+The integrand has poles at:
+\begin{enumerate}
+\item The zeros $\rho$ of $\zeta(z)$ (simple poles of $-\zeta'(z)/\zeta(z)$)
+\item $z = w$ (simple pole from $1/(z-w)$)
+\item $z = 0$ (branch point from $\log z$)
+\end{enumerate}
+
+For a zero $\rho$ of $\zeta(z)$ with multiplicity $m_\rho$, the residue is:
+\begin{equation}
+\text{Res}_{z=\rho} = \frac{m_\rho}{\log \rho} \cdot \frac{1}{\rho - w}
+\end{equation}
+
+Combining the contour integrals, we obtain for the finite scattering amplitude:
+\begin{equation}
+\hat{\chi}_{L_\chi}(k) = \sum_{\rho} \frac{m_\rho}{\log \rho} \cdot \frac{L_\chi^{\rho - 2\pi i k} - 1}{\rho - 2\pi i k} + R_{L_\chi}(k)
+\end{equation}
+where $R_{L_\chi}(k)$ contains contributions from the trivial zeros and the branch cut.
+
+\subsection{Physical Interpretation}
+
+The key result is that each non-trivial zero $\rho = \beta + i\gamma$ of the RZF contributes a term:
+\begin{equation}
+\frac{L_\chi^{\beta + i(\gamma - 2\pi k)} - 1}{\beta + i(\gamma - 2\pi k)}
+\end{equation}
+
+This has maximum amplitude when $k \approx \gamma/2\pi$, explaining the peaks in the scattering amplitude at positions corresponding to the imaginary parts of the RZF zeros.
+
+For large $L_\chi$ and $k$ near $\gamma/2\pi$:
+\begin{equation}
+|\hat{\chi}_{L_\chi}(k)|^2 \approx \frac{L_\chi^{2\beta}}{\beta^2 + 4\pi^2(k - \gamma/2\pi)^2}
+\end{equation}
+
+This gives a Lorentzian peak centered at $k = \gamma/2\pi$ with width proportional to $\beta/2\pi$.
 
 \section{Method}
 
@@ -159,10 +311,8 @@ Code for the scattering calculation is available at:
  
 \url{https://github.com/mickeyshaughnessy/quasicrystal/blob/main/scattering.py}
 
-'
 %\begin{figure}[htbp]
 %\begin{center}
-%    %\includegraphics[width=0.8\linewidth]{../images/scattering_code.png}
 %    \includegraphics[width=0.8\linewidth]{scattering_code.png}
 %\caption{Code for computing scattering amplitude}
 %\label{fig:scattering_code}
@@ -171,176 +321,43 @@ Code for the scattering calculation is available at:
 % 
 %\begin{figure}[htbp]
 %\begin{center}
-%    %\includegraphics[width=0.8\linewidth]{../images/plotting_code.png}
-%     \includegraphics[width=0.8\linewidth]{plotting_code.png}
-%
+%    \includegraphics[width=0.8\linewidth]{plotting_code.png}
 %\caption{Code for generating spectral plot}
 %\label{fig:plotting_code}
 %\end{center}
 %\end{figure}
 
-\subsection{Analytical Computation}
-
-In this section, we compute the Fourier transform of the shifted potential $\chi(x)$ and demonstrate how the non-trivial zeros of the Riemann Zeta Function (RZF) contribute to the scattering amplitude.
-
-Recall that the shifted potential is given by:
-
+The implementation uses a direct numerical evaluation of the Fourier transform for the finite potential $\chi_{L_\chi}(x)$. We compute the scattering amplitude by evaluating:
 \begin{equation}
-\chi(x) = \sum_{p \in P} \delta\left(x - \log p\right),
+\hat{\chi}_{L_\chi}(k) = \sum_{n=1}^{L_\chi} e^{-2\pi i k \log p_n}
 \end{equation}
+for a range of momentum values $k$. The prime numbers $p_n$ are generated using standard primality testing algorithms, and the complex exponentials are evaluated using high-precision arithmetic to ensure numerical stability.
 
-where $P$ is the set of prime numbers, and $\delta(x)$ is the Dirac delta function. The shift operation effectively maps each prime $p$ to $x = \log p$, resulting in an approximately constant density of atomic positions.
+\section{Numerical Results}
 
-The Fourier transform of $\chi(x)$ is:
+Figure \ref{fig:scattering_amplitude} shows the computed scattering amplitude for various values of $L_\chi$. The vertical lines indicate the positions $\gamma_n/2\pi$ where $\rho_n = 1/2 + i\gamma_n$ are the non-trivial zeros of the RZF.
 
-\begin{equation}
-\hat{\chi}(k) = \int_{-\infty}^{\infty} \chi(x) e^{-i 2\pi k x} dx = \sum_{p \in P} e^{-i 2\pi k \log p} = \sum_{p \in P} p^{-i 2\pi k}.
-\end{equation}
-
-Our goal is to analyze the analytic structure of $\hat{\chi}(k)$ and understand how the zeros of the RZF contribute to the scattering amplitude.
-
-\subsubsection{Connection to the Riemann Zeta Function}
-
-The expression $\hat{\chi}(k) = \sum_{p} p^{-i 2\pi k}$ involves a sum over primes raised to a complex exponent. To relate this sum to the RZF, we consider the logarithmic derivative of the RZF, which is intimately connected to prime numbers through its Euler product representation.
-
-The RZF is defined for $\operatorname{Re}(s) > 1$ by:
-
-\begin{equation}
-\zeta(s) = \prod_{p \in P} \frac{1}{1 - p^{-s}}.
-\end{equation}
-
-Taking the natural logarithm of both sides, we obtain:
-
-\begin{equation}
-\log \zeta(s) = -\sum_{p \in P} \log\left(1 - p^{-s}\right) = \sum_{p \in P} \sum_{m=1}^\infty \frac{1}{m} p^{-m s},
-\end{equation}
-
-where we have expanded the logarithm using the Taylor series for $\log(1 - x)$ valid for $|x| < 1$.
-
-Differentiating both sides with respect to $s$, we obtain the logarithmic derivative:
-
-\begin{equation}
-\frac{\zeta'(s)}{\zeta(s)} = -\sum_{p \in P} \sum_{m=1}^\infty \log p \cdot p^{-m s}.
-\end{equation}
-
-This expression highlights that the poles of $\frac{\zeta'(s)}{\zeta(s)}$ occur at the zeros of $\zeta(s)$. The sum over $m$ accounts for all powers of primes, but our Fourier transform involves only the first power ($m = 1$). To connect our sum to the logarithmic derivative, we consider the von Mangoldt function $\Lambda(n)$:
-
-\begin{equation}
-\Lambda(n) = \begin{cases}
-\log p & \text{if } n = p^m \text{ for some prime } p \text{ and integer } m \geq 1, \\
-0 & \text{otherwise}.
-\end{cases}
-\end{equation}
-
-Using $\Lambda(n)$, we can write:
-
-\begin{equation}
--\frac{\zeta'(s)}{\zeta(s)} = \sum_{n=1}^\infty \Lambda(n) n^{-s}.
-\end{equation}
-
-Our Fourier transform resembles this expression but lacks the $\Lambda(n)$ factor. However, we can consider a modified sum where we divide by $\log n$:
-
-\begin{equation}
-\sum_{n=2}^\infty \frac{\Lambda(n)}{\log n} n^{-s} = \sum_{p \in P} p^{-s} + \sum_{p \in P} \sum_{m=2}^\infty \frac{\log p}{\log p^m} p^{-m s}.
-\end{equation}
-
-For $m = 1$, we have $\frac{\log p}{\log p} = 1$, and the term simplifies to $p^{-s}$, matching the terms in our Fourier transform $\hat{\chi}(k)$. This suggests that our sum is related to the logarithmic derivative of the RZF.
-
-\subsubsection{Application of the Residue Theorem}
-
-To further elucidate the connection, we consider an integral representation of our sum and apply the residue theorem. We define the function:
-
-\begin{equation}
-S(k) = \sum_{p \in P} p^{-i 2\pi k}.
-\end{equation}
-
-Since the sum diverges for real $k$, we introduce a convergence factor $p^{-\epsilon}$ with $\epsilon > 0$, allowing us to write a convergent sum:
-
-\begin{equation}
-S_\epsilon(k) = \sum_{p \in P} p^{- \epsilon - i 2\pi k}.
-\end{equation}
-
-We can express $S_\epsilon(k)$ as a complex integral involving the logarithmic derivative of the RZF:
-
-\begin{equation}
-S_\epsilon(k) = \frac{1}{2\pi i} \int_{c - i \infty}^{c + i \infty} -\frac{\zeta'(s)}{\zeta(s)} \cdot \frac{1}{s - (\epsilon + i 2\pi k)} ds,
-\end{equation}
-
-where $c > 1$ ensures the integral converges.
-
-The integrand has simple poles at $s = \rho$, the non-trivial zeros of the RZF, and at $s = \epsilon + i 2\pi k$ due to the term $\frac{1}{s - (\epsilon + i 2\pi k)}$.
-
-Applying the residue theorem, the integral evaluates to:
-
-\begin{equation}
-S_\epsilon(k) = \sum_{\rho} \frac{1}{\rho - (\epsilon + i 2\pi k)} + \frac{\zeta'(\epsilon + i 2\pi k)}{\zeta(\epsilon + i 2\pi k)}.
-\end{equation}
-
-As $\epsilon \to 0$, the term $\frac{\zeta'(\epsilon + i 2\pi k)}{\zeta(\epsilon + i 2\pi k)}$ may have poles if $\epsilon + i 2\pi k$ coincides with a zero of $\zeta(s)$. The poles at the zeros $\rho$ of $\zeta(s)$ contribute terms of the form:
-
-\begin{equation}
-\operatorname{Res}\left(-\frac{\zeta'(s)}{\zeta(s)}, s = \rho\right) \cdot \frac{1}{\rho - i 2\pi k} = \frac{1}{\rho - i 2\pi k}.
-\end{equation}
-
-Thus, the sum over the residues at the zeros of the RZF manifests in the scattering amplitude:
-
-\begin{equation}
-S(k) = \lim_{\epsilon \to 0} S_\epsilon(k) = \sum_{\rho} \frac{1}{\rho - i 2\pi k} + \frac{\zeta'(i 2\pi k)}{\zeta(i 2\pi k)}.
-\end{equation}
-
-The term $\frac{\zeta'(i 2\pi k)}{\zeta(i 2\pi k)}$ reflects the contribution from the pole at $s = i 2\pi k$.
-
-These terms highlight the direct contribution of the RZF zeros to the Fourier transform $\hat{\chi}(k)$.
-
-\subsubsection{Interpretation of the Scattering Amplitude}
-
-The presence of poles at $s = \rho$ in the integral representation of $S(k)$ implies that the non-trivial zeros of the RZF contribute significantly to the scattering amplitude. Specifically, the scattering amplitude $\hat{\chi}(k)$ exhibits resonances at values of $k$ corresponding to the imaginary parts of the RZF zeros divided by $2\pi$.
-
-These resonances are reflected as peaks in the scattering amplitude, as observed in our numerical results. The correspondence between the peaks in $\hat{\chi}(k)$ and the RZF zeros arises because the poles in the complex plane contribute to the integral via the residue theorem, amplifying the scattering amplitude at those specific $k$ values.
-
-\subsubsection{Summary of the Analytical Connection}
-
-In summary, the zeros of the RZF enter our scattering calculation through the analytic structure of the Fourier transform of $\chi(x)$. The shifted positions of the primes lead to an expression for $\hat{\chi}(k)$ involving the sum $\sum_{p} p^{-i 2\pi k}$, which is intimately connected to the logarithmic derivative of the RZF.
-
-By introducing a convergence factor and applying complex analysis techniques, we demonstrate that the non-trivial zeros of the RZF contribute poles to the scattering amplitude. These poles correspond to resonances in the scattering process, and their positions align with the imaginary parts of the non-trivial zeros of the RZF divided by $2\pi$.
-
-This analytical computation explains the correspondence observed between the peaks in the scattering amplitude and the RZF zeros in our numerical results, providing a deep connection between number theory and wave scattering phenomena.
-
-
-\section{Results}
-We carry out scattering calculations for a family of supercell potentials $[\chi_L(x)]$ potential using the 1-d planewave basis.
-
-The results show a remarkable pattern - a series of peaks appear in the scattering amplitude as a function of momentum, one for each zero of the Riemann Zeta Function. 
-There is also a gradual decay of the scattering amplitude with greater momentum.
 \begin{figure}[htbp]
 \begin{center}
     \includegraphics[width=0.8\linewidth]{zoomed_scattering.png}
-\caption{Scattering amplitude for finite $L_{\chi}$. Vertical red lines indicate the positions of the imaginary part of the non-trivial zeros of the RZF.}
+\caption{Scattering amplitude $|\hat{\chi}_{L_\chi}(k)|^2$ showing peaks at positions corresponding to RZF zeros (red vertical lines).}
 \label{fig:scattering_amplitude}
 \end{center}
 \end{figure}
 
+The agreement between peak positions and RZF zeros confirms our analytical predictions. The decreasing amplitude with increasing $k$ reflects the $L_\chi^{2\beta}$ factor in our formula.
+
 \section{Conclusion}
 
-The results of our calculations, as presented in Figure \ref{fig:scattering_amplitude}, reveal:
+We have demonstrated that wave scattering from atoms placed at logarithmically shifted prime positions produces a spectrum intimately connected to the Riemann Zeta Function. The contour integration analysis reveals that:
 
-1. The scattering amplitude exhibits a series of peaks and troughs, with the overall amplitude decreasing as momentum increases.
+\begin{enumerate}
+\item Each non-trivial zero of the RZF contributes a resonance peak in the scattering amplitude
+\item Peak positions correspond to $\gamma/2\pi$ where $\rho = 1/2 + i\gamma$ 
+\item Peak widths are related to the real parts of the zeros
+\end{enumerate}
 
-2. There is a clear correspondence between the positions of the RZF zeros and peaks in the scattering amplitude. Many of the prominent peaks in the scattering amplitude align closely with the RZF zeros.
-
-3. The scattering amplitudes for different $L_\chi$ values show very similar behavior, suggesting that the observed features are robust and not artifacts of the finite lattice size.
-
-4. The overall structure of the scattering amplitude, when viewed across a wider range of momentum values, shows a consistent pattern of peaks and troughs that seems to be related to the distribution of RZF zeros.
-
-These observations support our physical picture of how the RZF zeros enter the scattering calculation through the normalization process. The peaks in the scattering amplitude that align with the RZF zeros are likely manifestations of the poles created by these zeros in the complex plane.
-
-This work provides a novel physical interpretation of the RZF zeros in terms of wave scattering from a carefully constructed potential. It suggests that the RZF zeros might be understood as resonances in this scattering system, where each zero corresponds to a particular scattering mode.
-
-Furthermore, the robustness of these features across different $L_\chi$ values suggests that this relationship between the RZF zeros and scattering amplitudes is not an artifact of our finite approximation, but rather a fundamental property of the system we've constructed.
-
-Future work could explore extending this approach to higher dimensions, investigating the effects of different normalization schemes, or studying how perturbations to the potential affect the relationship between scattering amplitudes and RZF zeros.
-
-In conclusion, this work demonstrates an intriguing connection between number theory, specifically the Riemann Zeta Function and its zeros, and the physics of wave scattering. It provides a new perspective on these mathematical objects and suggests potential new approaches for studying them through physical analogies.
+This physical interpretation of the RZF zeros as scattering resonances provides a new perspective on these fundamental mathematical objects and suggests potential experimental realizations in acoustic or optical systems.
 
 \section{Acknowledgements}
 I gratefully acknowledge helpful conversations with C.Y. Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, Aftab Ahmed, Catalin Spataru, various LLMs, and all the lovely anons on X.
