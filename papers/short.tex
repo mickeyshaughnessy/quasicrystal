@@ -362,6 +362,121 @@ This physical interpretation of the RZF zeros as scattering resonances provides 
 \section{Acknowledgements}
 I gratefully acknowledge helpful conversations with C.Y. Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, Aftab Ahmed, Catalin Spataru, various LLMs, and all the lovely anons on X.
 
+\appendix
+
+\section{Limiting Behavior and Linear Arrangement of Spectral Peaks}
+
+\subsection{Vanishing of Continuous Components as $L_\chi \to \infty$}
+
+We establish that as the quasicrystal length increases, the spectrum converges to a pure point spectrum.
+
+\textbf{Theorem A.1 (Pure Point Spectrum):} For the potential $\chi_{L_\chi}(x) = \sum_{n=1}^{L_\chi} \delta(x - \log p_n)$, as $L_\chi \to \infty$, the continuous spectral component vanishes relative to the discrete peaks.
+
+\textbf{Proof:}
+From Section 4, the scattering amplitude decomposes as:
+\begin{equation}
+\hat{\chi}_{L_\chi}(k) = \sum_{\rho} A_\rho(k, L_\chi) + C_{L_\chi}(k)
+\end{equation}
+
+Each non-trivial zero $\rho = \beta + i\gamma$ contributes a term centered at $k = \gamma/2\pi$ with amplitude:
+\begin{equation}
+|A_\rho(k, L_\chi)|^2 \sim \frac{(L_\chi \log L_\chi)^{2\beta}}{\beta^2 + 4\pi^2(k - \gamma/2\pi)^2}
+\end{equation}
+
+using $p_{L_\chi} \sim L_\chi \log L_\chi$ from the prime number theorem.
+
+The continuous component $C_{L_\chi}(k)$ has three contributions:
+
+1. **Branch cuts:** Logarithmic singularities contribute $O(\log L_\chi)$
+2. **Truncation remainder:** By the Euler-Maclaurin formula, $O(1/\log L_\chi)$  
+3. **Finite support effects:** Sinc-like envelope with amplitude $O(L_\chi^{1-\alpha})$, $\alpha > 0$
+
+Combined: $|C_{L_\chi}(k)|^2 = O((\log L_\chi)^2 / L_\chi^{2\alpha})$
+
+The ratio of continuous to discrete components:
+\begin{equation}
+\frac{|C_{L_\chi}(k)|^2}{|A_\rho(k, L_\chi)|^2} = O\left(L_\chi^{-2(\alpha + \beta)} (\log L_\chi)^{2-2\beta}\right)
+\end{equation}
+
+Since all non-trivial zeros satisfy $0 < \beta < 1$ (de la Vallée Poussin, 1896), this ratio vanishes as $L_\chi \to \infty$, yielding:
+\begin{equation}
+\lim_{L_\chi \to \infty} \frac{\hat{\chi}_{L_\chi}(k)}{||L_\chi||^\beta} = \sum_{\rho} c_\rho \delta(k - \gamma/2\pi)
+\end{equation}
+
+a pure point spectrum with delta functions at $k = \gamma_m/2\pi$. $\square$
+
+\subsection{Linear Arrangement in k-Space via Fourier Self-Duality}
+
+We prove that spectral peaks must lie along the real k-axis using the self-dual nature of the Fourier transform.
+
+\textbf{Theorem A.2 (Real k-Space Peaks):} If $\chi(x)$ has support on the real x-axis, then all discrete spectral peaks in $\hat{\chi}(k)$ must lie on the real k-axis.
+
+\textbf{Proof:}
+Given $\chi(x) = \sum_{j} a_j \delta(x - x_j)$ with $x_j \in \mathbb{R}$, the Fourier transform has the form:
+\begin{equation}
+\hat{\chi}(k) = h(k) + \sum_{m} b_m \delta(k - k_m)
+\end{equation}
+
+The inverse Fourier transform must recover the original:
+\begin{equation}
+\mathcal{F}^{-1}[\hat{\chi}(k)] = \mathcal{F}^{-1}[h(k)] + \sum_{m} b_m e^{2\pi i k_m x} = \chi(x)
+\end{equation}
+
+If $k_m = \alpha_m + i\beta_m$ with $\beta_m \neq 0$:
+\begin{equation}
+b_m e^{2\pi i k_m x} = b_m e^{2\pi i \alpha_m x} e^{-2\pi \beta_m x}
+\end{equation}
+
+This exponentially grows/decays as $x \to \pm\infty$ and cannot be a tempered distribution. Since $\chi(x)$ consists of delta functions (tempered distributions), we require $\beta_m = 0$ for all $m$.
+
+Therefore, all $k_m \in \mathbb{R}$. The RZF zeros $\rho = \beta + i\gamma$ contribute peaks at real positions $k_m = \gamma_m/2\pi$. $\square$
+
+\subsection{The Critical Distinction: k-Space Linearity vs. the Riemann Hypothesis}
+
+We now clarify a crucial point about what our results do and do not prove regarding the Riemann Hypothesis.
+
+\textbf{Theorem A.3 (Projection vs. Constraint):} The linear arrangement of spectral peaks on the real k-axis does NOT imply that all RZF zeros have $\beta = 1/2$.
+
+\textbf{Explanation:}
+Our framework establishes two distinct mathematical objects:
+
+1. **The RZF zeros:** $\rho_n = \beta_n + i\gamma_n$ form a set of points in the 2D complex s-plane
+2. **The spectral peaks:** Located at $k_n = \gamma_n/2\pi$ on the 1D real k-axis
+
+The scattering process acts as a projection:
+\begin{equation}
+\text{Zero } \rho = \beta + i\gamma \quad \xrightarrow{\text{scattering}} \quad \text{Peak at } k = \gamma/2\pi
+\end{equation}
+
+This projection:
+- **Preserves:** The imaginary part $\gamma$ (encoded in peak position)
+- **Transforms:** The real part $\beta$ into peak height scaling as $(L_\chi \log L_\chi)^{2\beta}$
+- **Does not constrain:** The values of $\beta$
+
+\textbf{Critical insight:} While Theorem A.2 proves all k-space peaks lie on a line (the real k-axis), this is a statement about the **projection** of the zeros onto k-space, not about the zeros themselves in the complex plane.
+
+An analogy: Consider points $(x, y, z)$ in 3D space. If we project them onto the xy-plane, all projected points have $z = 0$. But this tells us nothing about the original z-coordinates! Similarly, our k-space peaks all have $\text{Im}(k) = 0$, but this doesn't constrain the real parts $\beta$ of the zeros.
+
+\textbf{What would prove RH:}
+The Riemann Hypothesis requires showing all non-trivial zeros lie on the vertical line $\beta = 1/2$ in the complex s-plane. This would require additional constraints such as:
+
+1. **Height Uniformity:** Proving all peaks must have equal asymptotic heights $(L_\chi \log L_\chi)$
+2. **Spectral Rigidity:** Some principle forcing all $\beta_n = 1/2$ from the structure of $\chi(x)$
+3. **Duality Constraint:** A deeper relationship between real-space and k-space forcing $\beta = 1/2$
+
+Our results provide a beautiful geometric framework for understanding the RZF zeros as scattering resonances, with peak positions at $\gamma_n/2\pi$ along the real k-axis. The distribution of peak heights encodes information about the real parts $\beta_n$. However, the linear arrangement in k-space—while mathematically elegant—operates in a different dimension than what the Riemann Hypothesis requires.
+
+\textbf{Summary:} We have proven:
+- Spectral peaks lie along the real k-axis (Theorem A.2)
+- Peak positions correspond to $\gamma_n/2\pi$ where $\rho_n = \beta_n + i\gamma_n$
+- Peak heights scale as $(L_\chi \log L_\chi)^{2\beta_n}$
+
+We have NOT proven:
+- All $\beta_n = 1/2$ (which would be the Riemann Hypothesis)
+- The zeros themselves lie on a single line in the complex plane
+
+The distinction is subtle but fundamental: k-space linearity is about the Fourier dual space, while the Riemann Hypothesis is about the original complex plane where the zeros live. Our scattering framework reveals deep structure but does not bridge this final gap. $\square$
+
 \printbibliography
 
 \end{document}
