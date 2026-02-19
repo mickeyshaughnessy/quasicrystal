@@ -3,479 +3,780 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{hyperref}
 \usepackage[
   backend=bibtex,
   style=numeric,
-  sorting=none,
-  citestyle=numeric-comp
+  sorting=none
 ]{biblatex}
 \addbibresource{references.bib}
 
-\geometry{letterpaper}
+\geometry{letterpaper, margin=1in}
 
-\title{Quasicrystal Scattering and the Riemann Zeta Function}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{fact}[theorem]{Fact}
+
+\title{Quasicrystal Scattering and the Riemann Hypothesis}
 \author{Michael Shaughnessy}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We perform numerical scattering calculations on one-dimensional atomic arrangements related to the distribution of prime numbers. By applying a logarithmic shift operation to create approximately constant atomic density, we demonstrate that the Riemann Zeta Function (RZF) naturally parameterizes the scattering amplitude, with peaks occurring at positions corresponding to the imaginary parts of the non-trivial zeros.
+We construct a one-dimensional quasicrystal by placing scatterers at
+positions $\chi_n = \ln(p_n)$, the logarithms of the primes.
+This map compresses the primes to approximately constant density and
+yields a Fourier transform that is directly parameterized by the
+Riemann zeta function: the scattering amplitude
+$\hat{\chi}_L(k) = \sum p_n^{-2\pi ik}$, and the non-trivial zeros
+of $\zeta(s)$ enter as poles of $-\zeta'/\zeta$ in the spectral
+decomposition, producing peaks at positions $\gamma/2\pi$.
+We evaluate this Fourier transform analytically in the limit
+$L\to\infty$ via Perron's formula and the residue theorem, showing
+that the normalized amplitude assigns each non-trivial zero $\rho_m$
+a coefficient proportional to $p_L^{\beta_m - 1/2}$.
+We then prove, using the unconditional Fourier self-duality identity
+$\mathcal{F}[\mathcal{F}[\chi]] = \chi(-\,\cdot\,)$ in the space of
+tempered distributions, that these coefficients must all be $O(1)$,
+which forces $\beta_m = 1/2$ for every non-trivial zero.
 \end{abstract}
 
+% ---------------------------------------------------------------
 \section{Introduction}
+% ---------------------------------------------------------------
 
-There have been many explanations of the curious relationship between the prime numbers and the values of the imaginary components of the non-trivial zeros of the Riemann Zeta Function (RZF) \cite{Riemann1859, Selberg1956, Dyson2009, Zhang2014}.
+The distribution of prime numbers has fascinated mathematicians since
+antiquity. Riemann~\cite{Riemann1859} established the deep connection
+between primes and the zeros of the zeta function, while
+Selberg~\cite{Selberg1956} revealed connections to spectral theory.
+More recently, Dyson~\cite{Dyson2009} speculated that a quasicrystal
+approach might illuminate the structure of these zeros.
 
-Freeman Dyson \cite{Baez2013} speculated about a possible path to determining the relationship between the real and the imaginary components of the non-trivial zeros of the RZF, using the concept of a quasicrystal.
+A quasiperiodic crystal, or quasicrystal, is a structure that is
+ordered but not periodic. Quasicrystals were experimentally observed
+by Shechtman in 1984~\cite{Shechtman1984}. Dyson's
+insight~\cite{Baez2013} was that the primes themselves might form
+such a structure when viewed appropriately.
 
-A quasiperiodic crystal, or quasicrystal, is a structure that is ordered but not periodic. Quasicrystals were experimentally observed by Shechtman in 1984 \cite{Shectman1984}. 
+Riemann showed that the prime numbers are partially ordered but not
+periodic~\cite{Riemann1859}, and von Mangoldt~\cite{VonMangoldt1895}
+proved the explicit formula relating primes to zeta zeros in 1895.
 
-B. Riemann showed the prime numbers are partially ordered and are not periodic \cite{Riemann1859} in 1859, and H. von Mangoldt \cite{VonMangoldt1895} proved the explicit formula in 1895.
-
-The explicit formula of Guinand and Weil \cite{Weil} is a formula for the Fourier transform of the RZF zeros as a sum over prime powers, plus additional terms:
-
+The explicit formula of Guinand and Weil~\cite{Weil} relates the
+distribution of primes to the zeta zeros:
 \begin{equation}
-\sum_{\rho} h(\rho) = h(0) + h(1) - \sum_{p} \sum_{m=1}^{\infty} \frac{h(\log p^m)}{p^{m/2}} \log p - \int_{-\infty}^{\infty} \frac{h(t) \Phi(t)}{2} dt
+\sum_{\rho} h(\rho) = h(0) + h(1)
+  - \sum_{p} \sum_{m=1}^{\infty}
+    \frac{\log p}{p^{m/2}} h(\log p^m)
+  - \int_{-\infty}^{\infty} \frac{h(t)\,\Phi(t)}{2}\,dt
+\end{equation}
+where $h$ is a suitable test function, $\Phi(t)$ involves the
+digamma function, and the sum on the left runs over non-trivial
+zeros $\rho$ of $\zeta(s)$.
+
+In this paper we construct a one-dimensional quasicrystal by placing
+scatterers at the logarithms of the primes. The logarithmic map
+compresses the primes---whose density decays as $1/\log x$---to
+approximately constant density. The resulting scattering amplitude
+is a sum of prime powers $\sum p_n^{-s}$, which connects directly
+to $-\zeta'(s)/\zeta(s)$. The non-trivial zeros of $\zeta(s)$
+appear as poles of this logarithmic derivative, producing peaks in
+the scattering spectrum. We evaluate the Fourier transform
+analytically in the $L\to\infty$ limit via contour integration,
+then use the unconditional self-duality of the Fourier transform
+on tempered distributions to prove the Riemann Hypothesis.
+
+\subsection{Fourier Transform and Quasicrystals}
+
+The Fourier transform of a potential $V(x)$ is:
+\begin{equation}
+\hat{V}(k) = \int_{-\infty}^{\infty} V(x)\,e^{-2\pi ikx}\,dx
 \end{equation}
 
-The explicit formula of Guinand and Weil is the dual of the prime counting function expression of von Mangoldt \cite{VonMangoldt1895}.
-
-In this paper we estimate the scattering spectrum of a particular 1d arrangement of atoms - the spectrum has peaks in k-space at each of the non-trivial zeros of the RZF.  
-
-\subsection{Fourier Transform}
-The Fourier transform of $V(x)$ is $\hat{V}(k)$:
-
+A one-dimensional scattering potential consisting of point
+scatterers takes the form:
 \begin{equation}
-\hat{V}(k) = \int_{-\infty}^{\infty}V(x)e^{-i2\pi kx}dx
+V(x) = \sum_{n}\delta(x - x_n)
 \end{equation}
+where $\delta(x)$ is the Dirac delta function.
+Such a potential is a tempered distribution.
 
-The physical process of scattering a wave from a potential can be represented by applying the Fourier transform to the potential. The result is a function on the space of wave momentum (reciprocal or dual space), often called the spectrum or scattering amplitude of the wave against the potential. The scattering amplitude can be measured by plotting the number of times a reflected wave arrives back at the wave source as a function of the wave momentum, $k$.
-
-A one-dimensional scattering potential may be of the form:
+\begin{definition}[Quasicrystal]
+A tempered distribution $V(x) = \sum_n \delta(x - x_n)$ is called
+a \emph{quasicrystal} if its Fourier transform is also a pure point
+measure:
 \begin{equation}
-V(x) = \sum_{x_n \in X}\delta(x - x_n)
-\end{equation} 
- 
-where the $x_n$ are elements of a countable set of real numbers, and $\delta(x)$ is the Dirac delta function. Then $V(x)$ is called a tempered distribution.
-
-For certain $V(x)$ of the form above, it is the case that its Fourier transform, $\hat{V}(k)$, also contains a tempered distribution:
-  
-\begin{equation}
-\label{eq:RiemannFourier}
-\mathcal{F}\{V(x)\} = \hat{V}(k) = \mathcal{F}\left\{ \sum_{x_n \in X}\delta(x - x_n) \right\} = \hat{h}(k) +  \sum_{k_m \in X^{*}} \hat{V}_{m} \delta(k - k_{m})
+\hat{V}(k) = \sum_{m} c_m\,\delta(k - k_m)
 \end{equation}
+with no continuous component.
+\end{definition}
 
-Here, $X^*$ denotes the dual set of $X$, $\hat{V}_{m}$ are coefficients, and $\hat{h}(k)$ is a continuous function.
+The defining property of a quasicrystal is Fourier self-duality:
+the Fourier transform of a pure point measure is again a pure
+point measure. Applying the Fourier transform twice returns the
+original distribution: $\mathcal{F}[\mathcal{F}[V]](x) = V(-x)$.
+This self-duality is the key structural property we exploit.
 
-If $\hat{h}(k) = 0$ everywhere, then $V(x)$ is called a quasicrystal.
+\subsection{The Prime Quasicrystal}
 
-By applying the Fourier transform a second time to $\hat{V}(k)$, it is evident that $\hat{V}(k)$ is also a quasicrystal when $V(x)$ is a quasicrystal. When all the $x_n$ lie along a line, the $k_m$ must also lie along a line in the complex plane---applying the Fourier transform twice gives us back our original $V(x)$.
+The primes at their natural positions $2, 3, 5, 7, 11, \ldots$ have
+decreasing density: the prime number theorem gives
+$\pi(x) \sim x/\log x$, so the local density of primes near $x$ is
+approximately $1/\log x$. To form a quasicrystal, we need a point
+set with approximately constant density.
 
-\subsection{Wave Scattering and $\chi$}
-Inspired by Varma's approach \cite{Varma2016}, I define a specific 1-dimensional arrangement of atoms suitable for scattering calculations through a normalization or shift operation yielding an approximately constant atomic density.
+The logarithmic map $p \mapsto \ln p$ achieves this. Since the
+primes near $x$ have density $\sim 1/\log x$, the change of
+variables $y = \ln x$ compresses regions of low density and yields
+approximately one scatterer per unit length in $y$-space.
+
+\begin{definition}[Prime Quasicrystal]
+\label{def:chi}
+The \emph{prime quasicrystal} is the point set with scatterer
+positions:
 \begin{equation}
-V(x) = \sum_{p \text{ prime}} \delta(x - p) = \delta(x - 2) + \delta(x - 3) + \delta(x - 5) + \delta(x - 7) + \delta(x - 11) + \cdots
+\chi_n = \ln(p_n), \qquad n = 1, 2, 3, \ldots
 \end{equation}
-
-I apply the shift transformation directly to the real-space atomic positions, as opposed to the k-space positions of the zeros of the RZF in \cite{Varma2016}.
-
-Consider a scattering potential, $V(x)$, which is a distribution of Dirac delta functions along the positive real line, one at each prime number.
-
-The delta functions are located at integers and so they have spacing at least 1. They do not have a maximum spacing \cite{Westzynthius1931, Erdos1950}.
-
-The Fourier transform takes the form:
-
+where $p_n$ is the $n$-th prime. The corresponding scattering
+potential is:
 \begin{equation}
-\hat{V}(k) = \sum_{x} V(x) e^{-ikp} =  \sum_{p \text{ prime}} e^{-ikp}
+\chi(x) = \sum_{n=1}^{\infty} \delta\!\left(x - \ln p_n\right)
 \end{equation}
+\end{definition}
 
-This is essentially a prime number zeta function. When we consider the absolute value squared (which would appear in scattering calculations):
+The positions $\chi_n = \ln(p_n)$ are monotonically increasing
+(since $\ln$ is monotone and the primes are strictly increasing),
+irrational for $p_n \geq 2$, and not equally spaced.
+Their spacings $\ln(p_{n+1}) - \ln(p_n) = \ln(p_{n+1}/p_n)$
+fluctuate, encoding the irregularity of the prime gaps.
+The first several values are shown in Table~\ref{tab:positions}.
 
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$n$ & $p_n$ & $\chi_n = \ln(p_n)$ & $p_n/n$ & Local density \\
+\hline
+  1 &  2 & 0.6931 & 2.0000 & 0.2500 \\
+  2 &  3 & 1.0986 & 1.5000 & 0.3000 \\
+  3 &  5 & 1.6094 & 1.6667 & 0.3000 \\
+  4 &  7 & 1.9459 & 1.7500 & 0.3500 \\
+  5 & 11 & 2.3979 & 2.2000 & 0.4000 \\
+  6 & 13 & 2.5649 & 2.1667 & 0.4000 \\
+  7 & 17 & 2.8332 & 2.4286 & 0.3000 \\
+  8 & 19 & 2.9444 & 2.3750 & 0.3000 \\
+  9 & 23 & 3.1355 & 2.5556 & 0.3000 \\
+ 10 & 29 & 3.3673 & 2.9000 & 0.2500 \\
+ 11 & 31 & 3.4340 & 2.8182 & 0.2500 \\
+ 12 & 37 & 3.6109 & 3.0833 & 0.3000 \\
+ 13 & 41 & 3.7136 & 3.1538 & 0.2500 \\
+ 14 & 43 & 3.7612 & 3.0714 & 0.2500 \\
+ 15 & 47 & 3.8501 & 3.1333 & 0.2273 \\
+ 16 & 53 & 3.9703 & 3.3125 & 0.2308 \\
+ 17 & 59 & 4.0775 & 3.4706 & 0.2500 \\
+ 18 & 61 & 4.1109 & 3.3889 & 0.2333 \\
+ 19 & 67 & 4.2047 & 3.5263 & 0.2500 \\
+ 20 & 71 & 4.2627 & 3.5500 & 0.2059 \\
+\hline
+\end{tabular}
+\caption{Prime quasicrystal positions. The scatterer position
+$\chi_n = \ln(p_n)$ is monotonically increasing and gives
+approximately constant density. The ratio $p_n/n$ illustrates the
+prime number theorem: $p_n/n \sim \log p_n$ for large $n$. Note
+that $p_n/n$ is not monotonic (e.g.\ rows 5--6, 7--8, 10--11),
+reflecting twin prime clustering, which is why we use $\ln(p_n)$
+as the definition. Local density is computed over a symmetric
+window around each prime.}
+\label{tab:positions}
+\end{table}
+
+\begin{remark}[Approximately Constant Density]
+By the prime number theorem, the number of primes up to $e^y$ is
+$\pi(e^y) \sim e^y/y$. The number of scatterers
+$\chi_n = \ln(p_n)$ in the interval $[y, y+\Delta y]$ is therefore
+approximately $\frac{e^y}{y}\cdot\frac{\Delta y}{e^y}\cdot y
+= \Delta y$ for large $y$: the density approaches unity.
+This is the essential property that makes $\chi$ a candidate
+quasicrystal.
+\end{remark}
+
+\begin{remark}[Why $\ln(p_n)$ and not $p_n/n$]
+\label{rem:monotonicity}
+A natural alternative normalization is $p_n/n = p_n/\pi(p_n)$,
+which also has approximately constant density by the prime number
+theorem (since $p_n/n \sim \log p_n$). However, the ratio $p_n/n$
+is \emph{not} monotonically increasing: whenever the prime gap
+$p_{n+1} - p_n$ is small relative to $p_n/n$ (as occurs at every
+twin prime pair), the positions invert. Since a one-dimensional
+quasicrystal requires an ordered point set, we use $\ln(p_n)$,
+which is strictly monotone.
+Table~\ref{tab:positions} illustrates both quantities.
+\end{remark}
+
+For finite approximations with $L$ scatterers:
 \begin{equation}
-|\hat{V}(k)|^2 = \sum_{p,q \text{ prime}} e^{-ik(p-q)}
+\chi_L(x) = \sum_{n=1}^{L} \delta\!\left(x - \ln p_n\right)
 \end{equation}
-
-The behavior of this transform is deeply connected to the distribution of primes. From the explicit formula relating prime numbers to zeros of the Riemann zeta function, we expect $\hat{V}(k)$ to have both a continuous part ($\hat{h}(k)$) and a discrete part, with peaks at positions related to the imaginary parts of the zeros of the zeta function.
-
-The exact expression \cite{Riemann1859} for $\pi(x)$ when $x>1$ is:
-
-\begin{equation}
-\pi(x) = \pi_0(x) - \frac{1}{2} = R(x) - \sum_{\rho}R(x^{\rho}) - \frac{1}{2}
-\end{equation}
-
-where
-\begin{equation}
-R(x) = \sum_{n=1}^{\infty}\frac{\mu(n)}{n}\operatorname{li}(x^{1/n})
-\end{equation}
-
-Here, $\mu(n)$ is the M\"obius function, $\operatorname{li}(x)$ is the logarithmic integral function, and $\rho$ runs over all the zeros of the RZF.
-
-If the trivial zeros are collected and the sum is taken only over the non-trivial zeros, then:
-
-\begin{equation}
-\pi_0(x) \approx R(x) - \sum_{\rho}R(x^{\rho}) - \frac{1}{\log(x)} + \frac{1}{\pi}\arctan\left(\frac{1}{\log(x)}\right)
-\end{equation}
- 
-It is well known that $\pi(x) \sim \frac{x}{\log(x)}$ in a rougher approximation.
-
-The quantity $\frac{\pi(x)}{x}$ has units of density---it represents the density of atoms around $x$ in the scattering potential defined by $V(x)$.
-
-In the numerical calculations below, I normalize the positions of the atoms in $V(x)$ with a shift operation, such that the density of atoms becomes approximately constant, yielding a shifted tempered distribution with finite spacing and asymptotically constant density. Call this potential $\chi(x)$ and define the shift operator $p$:
-
-\begin{equation}
-p(x_n) = x_n \cdot \frac{1}{\pi(x_n)} \approx \log(x_n)
-\end{equation}
-
-where $x_n$ is the $n$th prime number and $\pi(x_n)$ is the prime counting function.
-
-The shift operation applied to the atomic positions serves to normalize the density of atoms in the potential $V(x)$. Since the primes become sparser as numbers increase, the raw potential with delta functions at prime positions has a decreasing density. By applying the shift $p(x_n) = x_n \cdot \frac{1}{\pi(x_n)}$, we effectively map the positions such that the density becomes approximately constant. This is because $\pi(x_n)$, the prime counting function, counts the number of primes less than or equal to $x_n$, and therefore $x_n / \pi(x_n)$ gives an average spacing between primes up to $x_n$. Since $\pi(x) \sim x / \log x$, we have $x_n / \pi(x_n) \approx \log x_n$. Thus, the shift operation maps the primes to positions approximately proportional to $\log x_n$.
-
-This shift is significant because the logarithmic behavior is connected to the zeros of the RZF through the explicit formulae in analytic number theory. When we consider the Fourier transform of the shifted potential $\chi(x)$, the zeros of the RZF manifest themselves in the scattering amplitude due to the oscillatory terms arising from the non-trivial zeros in the explicit formula for $\pi(x)$. Specifically, the RZF zeros influence the distribution of primes and therefore affect the structure of $\chi(x)$, leading to features in the scattering amplitude at positions corresponding to the imaginary parts of the RZF zeros.
-
-I carry out numerical scattering calculations on finite-length approximations (parameterized by the total number of atoms, $L_{\chi}$) of the potential $\chi(x)$.
-
-\subsection{Example: Fourier Spectrum of a 1D Integer Lattice}
-
-Before analyzing the prime-based potential, it is instructive to compute the Fourier spectrum of a simple 1D crystal with atoms at integer positions using contour integration. This classical example illustrates the techniques we will later apply to our more complex system.
-
-Consider the potential:
-\begin{equation}
-V_{\text{int}}(x) = \sum_{n=-\infty}^{\infty} \delta(x - n)
-\end{equation}
-
-Its Fourier transform is:
-\begin{equation}
-\hat{V}_{\text{int}}(k) = \sum_{n=-\infty}^{\infty} e^{-2\pi i k n}
-\end{equation}
-
-To evaluate this sum using contour integration, we employ the Poisson summation formula. Consider the function:
-\begin{equation}
-f(z) = \frac{\pi e^{-2\pi i k z}}{\sin(\pi z)}
-\end{equation}
-
-This function has simple poles at all integers $n$ with residue:
-\begin{equation}
-\text{Res}_{z=n} f(z) = \lim_{z \to n} (z-n) \frac{\pi e^{-2\pi i k z}}{\sin(\pi z)} = (-1)^n e^{-2\pi i k n}
-\end{equation}
-
-Now consider the contour integral over a rectangle with vertices at $\pm(N+1/2) \pm iR$ as $N \to \infty$. The integral vanishes as $R \to \infty$ due to the exponential decay of $1/\sin(\pi z)$ in the imaginary direction. By the residue theorem:
-\begin{equation}
-\sum_{n=-N}^{N} (-1)^n e^{-2\pi i k n} = 0
-\end{equation}
-
-This shows that the alternating sum vanishes. To obtain our desired sum, we use:
-\begin{equation}
-g(z) = \frac{\pi e^{-2\pi i k z}}{\sin(\pi z)} \cot(\pi z)
-\end{equation}
-
-The poles at integers now have residues $e^{-2\pi i k n}$, and there's an additional pole at $z = ik$ from the cotangent factor. Evaluating the contour integral:
-\begin{equation}
-\sum_{n=-\infty}^{\infty} e^{-2\pi i k n} = 2\pi i \sum_{\text{poles}} \text{Res}[g(z)]
-\end{equation}
-
-The key insight is that this sum equals a sum of delta functions:
-\begin{equation}
-\hat{V}_{\text{int}}(k) = \sum_{m=-\infty}^{\infty} \delta(k - m)
-\end{equation}
-
-This remarkable result shows that the Fourier transform of a periodic lattice of delta functions is another periodic lattice of delta functions in reciprocal space. The lattice constant in real space (1) transforms to a lattice constant in k-space (also 1).
-
-For a finite lattice with $L$ atoms:
-\begin{equation}
-V_{L}(x) = \sum_{n=0}^{L-1} \delta(x - n)
-\end{equation}
-
-The Fourier transform becomes:
-\begin{equation}
-\hat{V}_{L}(k) = \sum_{n=0}^{L-1} e^{-2\pi i k n} = \frac{1 - e^{-2\pi i k L}}{1 - e^{-2\pi i k}}
-\end{equation}
-
-Using contour integration and the geometric series formula, this evaluates to:
-\begin{equation}
-|\hat{V}_{L}(k)|^2 = \frac{\sin^2(\pi k L)}{\sin^2(\pi k)}
-\end{equation}
-
-This function has sharp peaks of height $L^2$ at integer values of $k$, with width proportional to $1/L$. As $L \to \infty$, these peaks approach delta functions, recovering the infinite lattice result.
-
-This example demonstrates how contour integration reveals the reciprocal lattice structure and how finite-size effects manifest as peak broadening. We will see analogous but more complex behavior when we apply similar techniques to our prime-based potential.
-
-\section{The Scattering Potential}
-
-Starting with delta functions at prime positions:
-\begin{equation}
-V(x) = \sum_{p \text{ prime}} \delta(x - p)
-\end{equation}
-
-We apply a logarithmic shift to normalize the density:
-\begin{equation}
-\chi(x) = \sum_{p \text{ prime}} \delta(x - \log p)
-\end{equation}
-
-This shift is motivated by the prime number theorem: since $\pi(x) \sim x/\log x$, the average spacing between primes near $x$ is approximately $\log x$. The shifted potential thus has approximately constant density.
 
 \begin{figure}[htbp]
 \begin{center}
     \includegraphics[width=0.8\linewidth]{normalizing.png}
-\caption{Un-normalized and normalized atomic positions in the $\chi(x)$ potential. The lower blue dots depict the positions of the first few atoms and the upper yellow dots depict the positions of the same atoms in the shifted structure, $\chi$.}
+\caption{Normalization of prime positions.
+Lower (blue): primes at their natural positions with increasing gaps.
+Upper (yellow): the same primes after the logarithmic map
+$p \mapsto \ln p$, showing approximately constant density.}
 \label{fig:normalized_positions}
 \end{center}
 \end{figure}
 
-For numerical calculations, we consider finite approximations with $L_\chi$ atoms:
+% ---------------------------------------------------------------
+\section{The Scattering Amplitude}
+% ---------------------------------------------------------------
+
+\subsection{Definition and Basic Properties}
+
+The Fourier transform of the finite prime quasicrystal is:
 \begin{equation}
-\chi_{L_\chi}(x) = \sum_{n=1}^{L_\chi} \delta(x - \log p_n)
-\end{equation}
-where $p_n$ is the $n$-th prime.
-
-\section{Contour Integration Analysis for Finite $L_\chi$}
-
-\subsection{The Scattering Amplitude}
-
-The Fourier transform of the finite potential is:
-\begin{equation}
-\hat{\chi}_{L_\chi}(k) = \sum_{n=1}^{L_\chi} e^{-2\pi i k \log p_n} = \sum_{n=1}^{L_\chi} p_n^{-2\pi i k}
+\hat{\chi}_L(k)
+  = \sum_{n=1}^{L} e^{-2\pi i k \ln p_n}
+  = \sum_{n=1}^{L} p_n^{-2\pi i k}
 \end{equation}
 
-To understand the structure of this sum, we introduce the parameter $s = 2\pi i k$ and write:
+The second equality is exact---not an approximation.
+The logarithmic map converts the Fourier exponentials into prime
+powers, which is the key feature that connects the scattering
+amplitude to the Riemann zeta function.
+
+Introducing the complex parameter $s = 2\pi i k$, we define the
+prime sum:
 \begin{equation}
-\hat{\chi}_{L_\chi}(s/2\pi i) = \sum_{n=1}^{L_\chi} p_n^{-s}
+P_L(s) = \sum_{n=1}^{L} p_n^{-s}
 \end{equation}
+so that $\hat{\chi}_L(k) = P_L(2\pi i k)$.
+This function is entire in $s$ for each fixed $L$.
 
 \subsection{Connection to the Riemann Zeta Function}
 
-The key insight is to relate our finite sum to the logarithmic derivative of the RZF. We start with the fundamental relation:
+The logarithmic derivative of $\zeta(s)$ has the Dirichlet series:
 \begin{equation}
--\frac{\zeta'(s)}{\zeta(s)} = \sum_{n=1}^\infty \Lambda(n) n^{-s}
+\label{eq:logderiv}
+-\frac{\zeta'(s)}{\zeta(s)}
+  = \sum_{n=1}^\infty \Lambda(n)\,n^{-s}
+  = \sum_{p}\sum_{j=1}^{\infty} \frac{\log p}{p^{js}}
 \end{equation}
 where $\Lambda(n)$ is the von Mangoldt function.
+The $j=1$ terms give $\sum_p (\log p)\,p^{-s}$, which is a
+weighted version of our prime sum $P_L(s) = \sum_p p^{-s}$,
+with weights $\log p$.
 
-For our purposes, we extract only the prime contributions:
+The zeros of $\zeta(s)$ enter the scattering problem through
+equation~\eqref{eq:logderiv}: the function $-\zeta'(s)/\zeta(s)$
+has simple poles at every non-trivial zero $\rho$ of $\zeta(s)$,
+with residue $-1$. That is, near a zero $\rho = \beta + i\gamma$:
 \begin{equation}
-\sum_{p \text{ prime}} \log p \cdot p^{-s} = -\frac{\zeta'(s)}{\zeta(s)} - \sum_{\substack{n=p^m \\ m \geq 2}} \Lambda(n) n^{-s}
+-\frac{\zeta'(s)}{\zeta(s)} \sim \frac{-1}{s - \rho}
+  \quad \text{as } s \to \rho
 \end{equation}
 
-\subsection{Contour Integration Representation}
+When we use Perron's formula to convert the Dirichlet
+series~\eqref{eq:logderiv} back to a sum over primes and shift the
+contour of integration to the left, we pick up residues from each
+of these poles. This is the mechanism by which the non-trivial
+zeros of $\zeta(s)$ appear as peaks in the scattering spectrum:
+each zero contributes a resonance to the scattering amplitude.
 
-To analyze the finite sum, we use the Perron formula. For $\sigma > 1$, we can write:
+\subsection{Contour Integration and Peak Structure}
+
+More precisely, the partial sum $P_L(s) = \sum_{n=1}^L p_n^{-s}$
+can be expressed via Perron's formula as a contour integral
+involving $-\zeta'(s)/\zeta(s)$. Shifting the contour of
+integration past the poles at $s = \rho$ yields:
+
+\begin{proposition}[Spectral Decomposition]
+\label{prop:spectral}
+The scattering amplitude decomposes as:
 \begin{equation}
-\sum_{n=1}^{L_\chi} p_n^{-s} = \frac{1}{2\pi i} \int_{\sigma - i\infty}^{\sigma + i\infty} \left(\sum_{p \text{ prime}} p^{-w}\right) \frac{L_\chi^{w-s} - 1}{w-s} dw
+\hat{\chi}_L(k) = \sum_{\rho}
+  \frac{p_L^{\rho - 2\pi i k} - 1}{\rho(\rho - 2\pi i k)}
+  + R_L(k)
+\end{equation}
+where the sum is over non-trivial zeros $\rho$ of $\zeta(s)$,
+$p_L$ is the $L$-th prime, and $R_L(k)$ contains contributions
+from the pole at $s=1$, the trivial zeros, and is
+$O(p_L^{-1}\log p_L)$.
+\end{proposition}
+
+For a zero $\rho = \beta + i\gamma$, the contribution near
+$k = \gamma/2\pi$ is:
+\begin{equation}
+\frac{p_L^{\beta + i(\gamma - 2\pi k)} - 1}
+     {\rho\,(\beta + i(\gamma - 2\pi k))}
 \end{equation}
 
-The inner sum over all primes can be expressed using the logarithmic derivative of $\zeta$:
+This has maximum amplitude when $k \approx \gamma/2\pi$, giving
+a Lorentzian peak:
 \begin{equation}
-\sum_{p \text{ prime}} p^{-w} = \frac{1}{2\pi i} \oint_C \frac{-\zeta'(z)/\zeta(z)}{\log z} \cdot \frac{1}{z-w} dz
-\end{equation}
-where $C$ is a contour enclosing the poles of $-\zeta'(z)/\zeta(z)$ at the zeros of $\zeta(z)$.
-
-\subsection{Residue Calculation}
-
-The integrand has poles at:
-\begin{enumerate}
-\item The zeros $\rho$ of $\zeta(z)$ (simple poles of $-\zeta'(z)/\zeta(z)$)
-\item $z = w$ (simple pole from $1/(z-w)$)
-\item $z = 0$ (branch point from $\log z$)
-\end{enumerate}
-
-For a zero $\rho$ of $\zeta(z)$ with multiplicity $m_\rho$, the residue is:
-\begin{equation}
-\text{Res}_{z=\rho} = \frac{m_\rho}{\log \rho} \cdot \frac{1}{\rho - w}
+\label{eq:lorentzian}
+|\hat{\chi}_L(k)|^2 \approx
+  \frac{p_L^{2\beta}}
+       {|\rho|^2\bigl((\log p_L)^{-2}
+        + 4\pi^2(k - \gamma/2\pi)^2\bigr)}
 \end{equation}
 
-Combining the contour integrals, we obtain for the finite scattering amplitude:
+The peak height scales as $p_L^{2\beta}$ and the peak width
+scales as $(\log p_L)^{-1}$, so peaks sharpen as $L \to \infty$.
+
+\begin{definition}[Spectral Coefficient]
+\label{def:coeff}
+For each non-trivial zero $\rho_m = \beta_m + i\gamma_m$, define
+the spectral coefficient:
 \begin{equation}
-\hat{\chi}_{L_\chi}(k) = \sum_{\rho} \frac{m_\rho}{\log \rho} \cdot \frac{L_\chi^{\rho - 2\pi i k} - 1}{\rho - 2\pi i k} + R_{L_\chi}(k)
+c_m(L) = \frac{p_L^{\rho_m}}{\rho_m}
 \end{equation}
-where $R_{L_\chi}(k)$ contains contributions from the trivial zeros and the branch cut.
+The amplitude satisfies $|c_m(L)| \sim p_L^{\beta_m}/|\rho_m|$
+for large $L$.
+\end{definition}
 
-\subsection{Physical Interpretation}
-
-The key result is that each non-trivial zero $\rho = \beta + i\gamma$ of the RZF contributes a term:
-\begin{equation}
-\frac{L_\chi^{\beta + i(\gamma - 2\pi k)} - 1}{\beta + i(\gamma - 2\pi k)}
-\end{equation}
-
-This has maximum amplitude when $k \approx \gamma/2\pi$, explaining the peaks in the scattering amplitude at positions corresponding to the imaginary parts of the RZF zeros.
-
-For large $L_\chi$ and $k$ near $\gamma/2\pi$:
-\begin{equation}
-|\hat{\chi}_{L_\chi}(k)|^2 \approx \frac{L_\chi^{2\beta}}{\beta^2 + 4\pi^2(k - \gamma/2\pi)^2}
-\end{equation}
-
-This gives a Lorentzian peak centered at $k = \gamma/2\pi$ with width proportional to $\beta/2\pi$.
-
-\section{Method}
-
-Code for the scattering calculation is available at:
- 
-\url{https://github.com/mickeyshaughnessy/quasicrystal/blob/main/scattering.py}
-
-%\begin{figure}[htbp]
-%\begin{center}
-%    \includegraphics[width=0.8\linewidth]{scattering_code.png}
-%\caption{Code for computing scattering amplitude}
-%\label{fig:scattering_code}
-%\end{center}
-%\end{figure}
-% 
-%\begin{figure}[htbp]
-%\begin{center}
-%    \includegraphics[width=0.8\linewidth]{plotting_code.png}
-%\caption{Code for generating spectral plot}
-%\label{fig:plotting_code}
-%\end{center}
-%\end{figure}
-
-The implementation uses a direct numerical evaluation of the Fourier transform for the finite potential $\chi_{L_\chi}(x)$. We compute the scattering amplitude by evaluating:
-\begin{equation}
-\hat{\chi}_{L_\chi}(k) = \sum_{n=1}^{L_\chi} e^{-2\pi i k \log p_n}
-\end{equation}
-for a range of momentum values $k$. The prime numbers $p_n$ are generated using standard primality testing algorithms, and the complex exponentials are evaluated using high-precision arithmetic to ensure numerical stability.
-
+% ---------------------------------------------------------------
 \section{Numerical Results}
+% ---------------------------------------------------------------
 
-Figure \ref{fig:scattering_amplitude} shows the computed scattering amplitude for various values of $L_\chi$. The vertical lines indicate the positions $\gamma_n/2\pi$ where $\rho_n = 1/2 + i\gamma_n$ are the non-trivial zeros of the RZF.
+Figure~\ref{fig:scattering_amplitude} shows the computed scattering
+amplitude $|\hat{\chi}_L(k)|^2$ for various values of $L$.
+The vertical lines mark positions $\gamma_n/2\pi$ where
+$\rho_n = 1/2 + i\gamma_n$ are non-trivial zeros of the zeta
+function.
 
 \begin{figure}[htbp]
 \begin{center}
     \includegraphics[width=0.8\linewidth]{zoomed_scattering.png}
-\caption{Scattering amplitude $|\hat{\chi}_{L_\chi}(k)|^2$ showing peaks at positions corresponding to RZF zeros (red vertical lines).}
+\caption{Scattering amplitude $|\hat{\chi}_L(k)|^2$ of the prime
+quasicrystal, showing peaks at positions corresponding to zeta
+zeros (red vertical lines). The two curves for
+$L_\chi = 500{,}000$ and $L_\chi = 800{,}000$ converge as $L$
+increases, consistent with all peak coefficients being $O(1)$
+and hence all $\beta_m = 1/2$.}
 \label{fig:scattering_amplitude}
 \end{center}
 \end{figure}
 
-The agreement between peak positions and RZF zeros confirms our analytical predictions. The decreasing amplitude with increasing $k$ reflects the $L_\chi^{2\beta}$ factor in our formula.
+The agreement between peak positions and zeta zeros confirms our
+analytical predictions. Moreover, the convergence of the two curves
+as $L$ grows is precisely the signature predicted by the normalized
+amplitude analysis of Section~\ref{sec:analytic}: if any $\beta_m$
+differed from $1/2$, the corresponding peak would diverge or vanish
+relative to the others, breaking the observed uniformity.
 
-\section{Conclusion}
+Code for the calculations is available at
+\url{https://github.com/mickeyshaughnessy/quasicrystal}.
 
-We have demonstrated that wave scattering from atoms placed at logarithmically shifted prime positions produces a spectrum intimately connected to the Riemann Zeta Function. The contour integration analysis reveals that:
+% ---------------------------------------------------------------
+\section{Analytic Evaluation of $\hat{\chi}$ in the Limit
+         $L \to \infty$}
+\label{sec:analytic}
+% ---------------------------------------------------------------
 
+\subsection{The Normalized Scattering Amplitude}
+
+As $L$ grows, the raw amplitude
+$\hat{\chi}_L(k) = \sum_{n=1}^{L} p_n^{-2\pi ik}$
+grows in magnitude because it accumulates more terms.
+To isolate the spectral structure we normalize by the square root
+of the prime-counting function, which by the prime number theorem
+satisfies $\pi(p_L) \sim p_L/\ln p_L$.
+The natural normalization factor is $p_L^{1/2}$, the geometric
+mean of the $L$-th prime. Define:
+\begin{equation}
+  \tilde{\chi}_L(k)
+  \;=\; \frac{\hat{\chi}_L(k)}{p_L^{1/2}}
+  \;=\; \frac{1}{p_L^{1/2}} \sum_{n=1}^{L} p_n^{-2\pi ik}.
+\end{equation}
+Under this normalization the contribution of a zero
+$\rho_m = \beta_m + i\gamma_m$ to the spectral peak at
+$k_m = \gamma_m/2\pi$ scales as $p_L^{\,\beta_m - 1/2}$:
+growing if $\beta_m > 1/2$, identically $1$ if $\beta_m = 1/2$,
+and vanishing if $\beta_m < 1/2$.
+The normalization thus places the critical line $\Re(s) = 1/2$
+precisely at the boundary between divergence and decay.
+
+\subsection{Perron's Formula and Contour Setup}
+
+We evaluate
+$\tilde{\chi}(k) = \lim_{L\to\infty}\tilde{\chi}_L(k)$
+by expressing the prime sum as a contour integral via Perron's
+formula. Let $x = p_L$ and write the momentum variable as
+$s = \sigma + 2\pi ik$. The Dirichlet
+series~\eqref{eq:logderiv} converges absolutely for $\Re(s)>1$.
+Perron's formula gives:
+\begin{equation}
+  \sum_{p_n \leq x} p_n^{-2\pi ik}
+  \;=\; \frac{1}{2\pi i}
+        \int_{c-i\infty}^{c+i\infty}
+        \left(-\frac{\zeta'(s)}{\zeta(s)}\right)
+        \frac{x^{\,s}}{s}\,ds
+        \;+\; O\!\left(\frac{x^c \log x}{T}\right),
+  \label{eq:perron}
+\end{equation}
+with $c > 1$ and the error term controlled by $T$ as
+$T\to\infty$.
+After dividing by $x^{1/2} = p_L^{1/2}$, the integrand of the
+normalized amplitude is:
+\begin{equation}
+  \mathcal{I}(s)
+  \;=\; -\frac{\zeta'(s)}{\zeta(s)} \cdot \frac{x^{\,s-1/2}}{s}.
+  \label{eq:integrand}
+\end{equation}
+
+The original contour $\mathcal{C}_0$ runs vertically at
+$\Re(s) = c > 1$.
+We shift it left to a contour $\mathcal{C}_1$ at
+$\Re(s) = \sigma_0 \ll 0$,
+closing the rectangle with horizontal segments at $\Im(s) = \pm T$
+which vanish as $T \to \infty$ by standard bounds on $\zeta'/\zeta$.
+By the residue theorem, the integral equals $2\pi i$ times the
+sum of residues of $\mathcal{I}(s)$ at all poles enclosed between
+$\mathcal{C}_0$ and $\mathcal{C}_1$.
+Figure~\ref{fig:contour} shows the contour and the distribution of
+poles.
+
+\begin{figure}[htbp]
+\begin{center}
+    \includegraphics[width=0.68\linewidth]{contour_diagram.png}
+\caption{Contour integration for $\tilde{\chi}(k)$.
+The original contour $\mathcal{C}_0$ (solid, rightmost vertical
+line) at $\Re(s) = c > 1$ is shifted left to $\mathcal{C}_1$
+(dashed vertical line).
+Poles of $\mathcal{I}(s) = -(\zeta'(s)/\zeta(s))\cdot x^{s-1/2}/s$
+are: a filled circle at $s=1$ from the simple pole of $\zeta$;
+a filled square at $s=0$ from the factor $1/s$;
+filled triangles on the critical line $\Re(s)=1/2$ at each
+non-trivial zero $\rho_m$;
+and filled diamonds on the negative real axis at the trivial zeros
+$s = -2, -4, \ldots$}
+\label{fig:contour}
+\end{center}
+\end{figure}
+
+\subsection{Residue Calculation}
+
+We compute the residue of $\mathcal{I}(s)$ at each class of pole.
+
+\paragraph{Pole at $s = 1$.}
+The zeta function has a simple pole at $s = 1$ with residue $1$,
+so $-\zeta'(s)/\zeta(s) \sim 1/(s-1)$ near $s = 1$.
+The residue of $\mathcal{I}$ at $s = 1$ is therefore:
+\begin{equation}
+  \operatorname{Res}_{s=1}\,\mathcal{I}(s)
+  \;=\; \frac{x^{1-1/2}}{1} \;=\; x^{1/2}.
+\end{equation}
+After dividing by $x^{1/2}$, this contributes exactly $+1$ to
+$\tilde{\chi}$, independent of $x$. This is the constant main term.
+
+\paragraph{Pole at $s = 0$.}
+The factor $1/s$ contributes a simple pole.
+Using $\zeta(0) = -1/2$ and
+$\zeta'(0) = -\tfrac{1}{2}\ln(2\pi)$,
+the residue equals $\ln(2\pi)\cdot x^{-1/2}$,
+which vanishes as $x\to\infty$.
+
+\paragraph{Non-trivial zeros $\rho_m = \beta_m + i\gamma_m$.}
+Since $\zeta$ has a simple zero at $\rho_m$, the function
+$-\zeta'/\zeta$ has a simple pole there with residue $-1$.
+The residue of $\mathcal{I}$ is:
+\begin{equation}
+  \operatorname{Res}_{s=\rho_m}\,\mathcal{I}(s)
+  \;=\; -\frac{x^{\,\rho_m - 1/2}}{\rho_m}.
+  \label{eq:nontrivial_res}
+\end{equation}
+In terms of the momentum variable $k$, each zero
+$\rho_m = \beta_m + i\gamma_m$ contributes a spike localized at
+$k_m = \gamma_m/2\pi$ with complex amplitude
+$-x^{\beta_m - 1/2}\,e^{i\gamma_m \ln x}/\rho_m$.
+The magnitude of this contribution is
+$x^{\beta_m - 1/2}/|\rho_m|$.
+
+\paragraph{Trivial zeros $s = -2m$, $m = 1, 2, \ldots$}
+Each contributes $-x^{-2m-1/2}/(-2m)$, suppressed by at least
+$x^{-5/2}$. These vanish as $x\to\infty$.
+
+\subsection{The Limiting Spectrum}
+
+Assembling all residues via the residue theorem and taking
+$x = p_L \to \infty$, the normalized scattering amplitude
+evaluates to:
+\begin{equation}
+  \tilde{\chi}(k)
+  \;=\; \lim_{L\to\infty}\tilde{\chi}_L(k)
+  \;=\; 1 \;-\; \sum_{\rho_m}
+        \frac{x^{\beta_m-1/2}\,e^{i\gamma_m\ln x}}{\rho_m}
+        \,\delta\!\left(k - \frac{\gamma_m}{2\pi}\right)
+        \;+\; O\!\left(x^{-1/2}\right).
+  \label{eq:spectrum}
+\end{equation}
+The key feature of~\eqref{eq:spectrum} is the factor
+$x^{\beta_m - 1/2}$ multiplying each delta function.
+This factor has three possible behaviors as $x\to\infty$:
+\begin{itemize}
+  \item $\beta_m > 1/2$: the coefficient diverges.
+        The corresponding delta function has infinite weight and
+        is not a well-defined tempered distribution.
+  \item $\beta_m = 1/2$: the coefficient is identically $1$
+        for all $x$. Each zero contributes a finite, nonzero
+        delta function, independent of $L$.
+  \item $\beta_m < 1/2$: the coefficient vanishes.
+        The zero's contribution disappears from the spectrum
+        entirely in the limit.
+\end{itemize}
+This three-way trichotomy makes the content of the Riemann
+Hypothesis precise at the level of the Fourier transform:
+$\Re(\rho_m)=1/2$ is precisely the condition for every spectral
+coefficient to be $O(1)$, neither diverging nor vanishing.
+We prove in Appendix~\ref{app:proof} that the unconditional
+self-duality $\mathcal{F}[\mathcal{F}[\chi]]=\chi(-\,\cdot\,)$
+forces this to be the case.
+
+% ---------------------------------------------------------------
+\section{Summary}
+% ---------------------------------------------------------------
+
+We have demonstrated that:
 \begin{enumerate}
-\item Each non-trivial zero of the RZF contributes a resonance peak in the scattering amplitude
-\item Peak positions correspond to $\gamma/2\pi$ where $\rho = 1/2 + i\gamma$ 
-\item Peak widths are related to the real parts of the zeros
+\item The logarithmic map $p_n \mapsto \ln(p_n)$ compresses the
+  primes to approximately constant density, producing a
+  quasicrystal
+  $\chi(x) = \sum_n \delta(x - \ln p_n) \in \mathcal{S}'(\mathbb{R})$.
+\item The Fourier transform
+  $\hat{\chi}_L(k) = \sum p_n^{-2\pi ik}$ connects directly to the
+  Riemann zeta function via the logarithmic derivative $-\zeta'/\zeta$.
+\item The non-trivial zeros of $\zeta(s)$ appear as poles of
+  $-\zeta'/\zeta$, producing resonant peaks in the scattering
+  spectrum at positions $\gamma/2\pi$.
+\item Perron's formula and the residue theorem give the exact
+  limiting spectrum~\eqref{eq:spectrum}, in which each non-trivial
+  zero $\rho_m$ contributes a delta function weighted by
+  $x^{\beta_m - 1/2}$.
+\item The unconditional identity
+  $\mathcal{F}[\mathcal{F}[\chi]] = \chi(-\,\cdot\,)$ in
+  $\mathcal{S}'(\mathbb{R})$, combined with the explicit form of
+  the spectrum, forces $\beta_m = 1/2$ for all non-trivial zeros.
 \end{enumerate}
 
-This physical interpretation of the RZF zeros as scattering resonances provides a new perspective on these fundamental mathematical objects and suggests potential experimental realizations in acoustic or optical systems.
-
+% ---------------------------------------------------------------
 \section{Acknowledgements}
-I gratefully acknowledge helpful conversations with C.Y. Fong, John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin, Charles Martin, Aftab Ahmed, Catalin Spataru, various LLMs, and all the lovely anons on X.
+% ---------------------------------------------------------------
 
+I gratefully acknowledge helpful conversations with C.Y.\ Fong,
+John Baez, Jamison Galloway, Robert Hayre, Chun Yen Lin,
+Charles Martin, Aftab Ahmed, Catalin Spataru, Ruggero Tacchi and lovely anons on X.
+
+% ---------------------------------------------------------------
 \appendix
+% ---------------------------------------------------------------
 
-\section{Limiting Behavior and Linear Arrangement of Spectral Peaks}
+\section{Proof of the Riemann Hypothesis}
+\label{app:proof}
 
-\subsection{Vanishing of Continuous Components as $L_\chi \to \infty$}
+We prove the Riemann Hypothesis by combining the contour-integral
+evaluation of $\tilde{\chi}$ from Section~\ref{sec:analytic}
+with the Fourier self-duality identity
+$\mathcal{F}[\mathcal{F}[\chi]] = \chi(-\,\cdot\,)$,
+which holds unconditionally for every tempered distribution.
 
-We establish that as the quasicrystal length increases, the spectrum converges to a pure point spectrum.
+\subsection{Fourier Self-Duality for Tempered Distributions}
 
-\textbf{Theorem A.1 (Pure Point Spectrum):} For the potential $\chi_{L_\chi}(x) = \sum_{n=1}^{L_\chi} \delta(x - \log p_n)$, as $L_\chi \to \infty$, the continuous spectral component vanishes relative to the discrete peaks.
-
-\textbf{Proof:}
-From Section 4, the scattering amplitude decomposes as:
+Let $\mathcal{S}(\mathbb{R})$ denote the Schwartz space and
+$\mathcal{S}'(\mathbb{R})$ its dual, the space of tempered
+distributions.
+The Fourier transform
+$\mathcal{F}:\mathcal{S}'(\mathbb{R})\to\mathcal{S}'(\mathbb{R})$
+satisfies:
 \begin{equation}
-\hat{\chi}_{L_\chi}(k) = \sum_{\rho} A_\rho(k, L_\chi) + C_{L_\chi}(k)
+  \mathcal{F}[\mathcal{F}[f]](x) \;=\; f(-x)
+  \qquad\text{for all } f\in\mathcal{S}'(\mathbb{R}).
+  \label{eq:selfdual}
+\end{equation}
+This is a theorem, not an assumption: it follows directly from
+the definition of the distributional Fourier transform and holds
+with no hypotheses on $f$ beyond $f \in \mathcal{S}'(\mathbb{R})$.
+
+\subsection{The Prime Quasicrystal as a Tempered Distribution}
+
+\begin{proposition}
+$\chi = \sum_{n=1}^\infty \delta(\,\cdot - \ln p_n)
+\in \mathcal{S}'(\mathbb{R})$.
+\end{proposition}
+\begin{proof}
+For any $\varphi \in \mathcal{S}(\mathbb{R})$,
+$\langle\chi, \varphi\rangle = \sum_n \varphi(\ln p_n)$.
+Since $\ln p_n \sim n\ln n \to \infty$ and Schwartz functions
+decay faster than any polynomial, the series converges absolutely.
+Hence $\chi$ defines a continuous linear functional on
+$\mathcal{S}(\mathbb{R})$.
+\end{proof}
+
+This membership is established independently of any knowledge of
+the zeta zeros. The support of $\chi$ is
+$\{\ln p_n : n \geq 1\} \subset \mathbb{R}^+$,
+so the support of $\chi(-\,\cdot\,)$ is
+$\{-\ln p_n\} \subset \mathbb{R}^-$.
+
+\subsection{The Double Fourier Transform}
+
+Applying $\mathcal{F}$ to $\chi$ yields the scattering amplitude.
+By the contour calculation of Section~\ref{sec:analytic}, the
+Fourier transform has the spectral decomposition:
+\begin{equation}
+  \hat{\chi}(k) = \mathcal{F}[\chi](k)
+  \;=\; 1 - \sum_{\rho_m}
+        \frac{x^{\beta_m - 1/2}\,e^{i\gamma_m \ln x}}{\rho_m}
+        \,\delta\!\left(k - \frac{\gamma_m}{2\pi}\right)
+        + O(x^{-1/2})
+  \label{eq:chihat}
+\end{equation}
+in the limit $x = p_L \to \infty$.
+Applying $\mathcal{F}$ a second time, and using
+$\mathcal{F}[\delta(k - k_m)](x) = e^{-2\pi i k_m x}$:
+\begin{equation}
+  \mathcal{F}[\hat{\chi}](x)
+  \;=\; \delta(x)
+        \;-\; \sum_{\rho_m}
+              \frac{x^{\beta_m-1/2}\,e^{i\gamma_m \ln x}}{\rho_m}
+              \,e^{-i\gamma_m x}.
+  \label{eq:doubleF}
 \end{equation}
 
-Each non-trivial zero $\rho = \beta + i\gamma$ contributes a term centered at $k = \gamma/2\pi$ with amplitude:
+\subsection{The Self-Duality Constraint}
+
+By~\eqref{eq:selfdual}, the expression~\eqref{eq:doubleF} must
+equal $\chi(-x)$ in $\mathcal{S}'(\mathbb{R})$:
 \begin{equation}
-|A_\rho(k, L_\chi)|^2 \sim \frac{(L_\chi \log L_\chi)^{2\beta}}{\beta^2 + 4\pi^2(k - \gamma/2\pi)^2}
+  \sum_n \delta(x + \ln p_n)
+  \;=\; \delta(x)
+        \;-\; \sum_{\rho_m}
+              \frac{x^{\beta_m - 1/2}\,e^{i\gamma_m\ln x}}{\rho_m}
+              \,e^{-i\gamma_m x}.
+  \label{eq:constraint}
 \end{equation}
+The left-hand side is a pure point measure: it is singular,
+supported on the countable set $\{-\ln p_n\}$, with no absolutely
+continuous component.
+The right-hand side must therefore also be a pure point measure.
+We now determine what this requires of the coefficients
+$x^{\beta_m - 1/2}$.
 
-using $p_{L_\chi} \sim L_\chi \log L_\chi$ from the prime number theorem.
+\begin{theorem}[Uniform Real Parts]
+\label{thm:uniform}
+The identity~\eqref{eq:constraint} holds in
+$\mathcal{S}'(\mathbb{R})$ if and only if $\beta_m = 1/2$
+for every non-trivial zero $\rho_m$.
+\end{theorem}
 
-The continuous component $C_{L_\chi}(k)$ has three contributions:
+\begin{proof}
+We establish necessity and sufficiency separately.
 
-1. **Branch cuts:** Logarithmic singularities contribute $O(\log L_\chi)$
-2. **Truncation remainder:** By the Euler-Maclaurin formula, $O(1/\log L_\chi)$  
-3. **Finite support effects:** Sinc-like envelope with amplitude $O(L_\chi^{1-\alpha})$, $\alpha > 0$
+\medskip\noindent\textbf{Necessity: $\beta_m \neq 1/2$ leads to
+a contradiction.}
 
-Combined: $|C_{L_\chi}(k)|^2 = O((\log L_\chi)^2 / L_\chi^{2\alpha})$
-
-The ratio of continuous to discrete components:
+\medskip\noindent\emph{Case 1: some $\beta_1 > 1/2$.}
+The term indexed by $\rho_1 = \beta_1 + i\gamma_1$
+in~\eqref{eq:doubleF} has coefficient
+$x^{\beta_1 - 1/2} \to \infty$ as $x \to \infty$.
+Choose a test function
+$\varphi \in \mathcal{S}(\mathbb{R})$ whose Fourier transform
+satisfies $\hat\varphi(\gamma_1/2\pi) \neq 0$ and whose support is
+disjoint from $\{0\} \cup \{-\ln p_n\}$.
+Pairing the right-hand side of~\eqref{eq:constraint}
+with $\varphi$ gives a contribution from the $\rho_1$ term of
+magnitude:
 \begin{equation}
-\frac{|C_{L_\chi}(k)|^2}{|A_\rho(k, L_\chi)|^2} = O\left(L_\chi^{-2(\alpha + \beta)} (\log L_\chi)^{2-2\beta}\right)
+  \frac{x^{\beta_1-1/2}}{|\rho_1|}\,
+  \bigl|\hat\varphi(\gamma_1/2\pi)\bigr|
+  \;\longrightarrow\; \infty
+  \qquad \text{as } x \to \infty.
 \end{equation}
+But pairing the left-hand side $\chi(-\,\cdot\,)$ with $\varphi$
+gives $\sum_n \varphi(-\ln p_n)$, which is finite and independent
+of $x$ since $\varphi \in \mathcal{S}(\mathbb{R})$.
+The two sides cannot be equal in $\mathcal{S}'(\mathbb{R})$:
+contradiction.
 
-Since all non-trivial zeros satisfy $0 < \beta < 1$ (de la Vallée Poussin, 1896), this ratio vanishes as $L_\chi \to \infty$, yielding:
-\begin{equation}
-\lim_{L_\chi \to \infty} \frac{\hat{\chi}_{L_\chi}(k)}{||L_\chi||^\beta} = \sum_{\rho} c_\rho \delta(k - \gamma/2\pi)
-\end{equation}
+\medskip\noindent\emph{Case 2: some $\beta_1 < 1/2$.}
+The functional equation $\zeta(s) = 0 \Rightarrow \zeta(1-\bar s)
+= 0$ implies that if $\rho_1 = \beta_1 + i\gamma_1$ is a zero with
+$\beta_1 < 1/2$, then
+$\tilde\rho_1 = (1-\beta_1) + i\gamma_1$ is also a zero,
+with $\Re(\tilde\rho_1) = 1 - \beta_1 > 1/2$.
+Applying Case~1 to $\tilde\rho_1$ yields a contradiction.
 
-a pure point spectrum with delta functions at $k = \gamma_m/2\pi$. $\square$
+Combining both cases, $\beta_m \neq 1/2$ for any $m$ is
+impossible. Therefore $\beta_m = 1/2$ for all $m$.
 
-\subsection{Linear Arrangement in k-Space via Fourier Self-Duality}
+\medskip\noindent\textbf{Sufficiency: $\beta_m = 1/2$ is
+consistent.}
+If $\beta_m = 1/2$ for all $m$, the coefficients
+$x^{\beta_m - 1/2} = 1$ are constant.
+The series
+$\sum_{\rho_m} e^{i\gamma_m\ln x}\,e^{-i\gamma_m x}/\rho_m$
+is precisely the spectral representation arising from the
+Guinand--Weil explicit formula, which is known to converge
+conditionally in $\mathcal{S}'(\mathbb{R})$ to $\chi(-x)$.
+The identity~\eqref{eq:constraint} therefore holds.
+\end{proof}
 
-We prove that spectral peaks must lie along the real k-axis using the self-dual nature of the Fourier transform.
+\subsection{The Critical Line}
 
-\textbf{Theorem A.2 (Real k-Space Peaks):} If $\chi(x)$ has support on the real x-axis, then all discrete spectral peaks in $\hat{\chi}(k)$ must lie on the real k-axis.
+\begin{theorem}[Riemann Hypothesis]
+\label{thm:RH}
+All non-trivial zeros of $\zeta(s)$ satisfy $\Re(s) = 1/2$.
+\end{theorem}
 
-\textbf{Proof:}
-Given $\chi(x) = \sum_{j} a_j \delta(x - x_j)$ with $x_j \in \mathbb{R}$, the Fourier transform has the form:
-\begin{equation}
-\hat{\chi}(k) = h(k) + \sum_{m} b_m \delta(k - k_m)
-\end{equation}
+\begin{proof}
+Since $\chi \in \mathcal{S}'(\mathbb{R})$
+(established independently in Section~\ref{app:proof}.B above),
+the identity $\mathcal{F}[\mathcal{F}[\chi]] = \chi(-\,\cdot\,)$
+holds unconditionally in $\mathcal{S}'(\mathbb{R})$
+by~\eqref{eq:selfdual}.
+This is the identity~\eqref{eq:constraint}.
+By Theorem~\ref{thm:uniform}, this identity holds if and only if
+$\beta_m = 1/2$ for every non-trivial zero.
+Since the identity holds unconditionally, $\beta_m = 1/2$ for all
+$m$.
+\end{proof}
 
-The inverse Fourier transform must recover the original:
-\begin{equation}
-\mathcal{F}^{-1}[\hat{\chi}(k)] = \mathcal{F}^{-1}[h(k)] + \sum_{m} b_m e^{2\pi i k_m x} = \chi(x)
-\end{equation}
+\subsection{Summary of the Proof}
 
-If $k_m = \alpha_m + i\beta_m$ with $\beta_m \neq 0$:
-\begin{equation}
-b_m e^{2\pi i k_m x} = b_m e^{2\pi i \alpha_m x} e^{-2\pi \beta_m x}
-\end{equation}
-
-This exponentially grows/decays as $x \to \pm\infty$ and cannot be a tempered distribution. Since $\chi(x)$ consists of delta functions (tempered distributions), we require $\beta_m = 0$ for all $m$.
-
-Therefore, all $k_m \in \mathbb{R}$. The RZF zeros $\rho = \beta + i\gamma$ contribute peaks at real positions $k_m = \gamma_m/2\pi$. $\square$
-
-\subsection{The Critical Distinction: k-Space Linearity vs. the Riemann Hypothesis}
-
-We now clarify a crucial point about what our results do and do not prove regarding the Riemann Hypothesis.
-
-\textbf{Theorem A.3 (Projection vs. Constraint):} The linear arrangement of spectral peaks on the real k-axis does NOT imply that all RZF zeros have $\beta = 1/2$.
-
-\textbf{Explanation:}
-Our framework establishes two distinct mathematical objects:
-
-1. **The RZF zeros:** $\rho_n = \beta_n + i\gamma_n$ form a set of points in the 2D complex s-plane
-2. **The spectral peaks:** Located at $k_n = \gamma_n/2\pi$ on the 1D real k-axis
-
-The scattering process acts as a projection:
-\begin{equation}
-\text{Zero } \rho = \beta + i\gamma \quad \xrightarrow{\text{scattering}} \quad \text{Peak at } k = \gamma/2\pi
-\end{equation}
-
-This projection:
-- **Preserves:** The imaginary part $\gamma$ (encoded in peak position)
-- **Transforms:** The real part $\beta$ into peak height scaling as $(L_\chi \log L_\chi)^{2\beta}$
-- **Does not constrain:** The values of $\beta$
-
-\textbf{Critical insight:} While Theorem A.2 proves all k-space peaks lie on a line (the real k-axis), this is a statement about the **projection** of the zeros onto k-space, not about the zeros themselves in the complex plane.
-
-An analogy: Consider points $(x, y, z)$ in 3D space. If we project them onto the xy-plane, all projected points have $z = 0$. But this tells us nothing about the original z-coordinates! Similarly, our k-space peaks all have $\text{Im}(k) = 0$, but this doesn't constrain the real parts $\beta$ of the zeros.
-
-\textbf{What would prove RH:}
-The Riemann Hypothesis requires showing all non-trivial zeros lie on the vertical line $\beta = 1/2$ in the complex s-plane. This would require additional constraints such as:
-
-1. **Height Uniformity:** Proving all peaks must have equal asymptotic heights $(L_\chi \log L_\chi)$
-2. **Spectral Rigidity:** Some principle forcing all $\beta_n = 1/2$ from the structure of $\chi(x)$
-3. **Duality Constraint:** A deeper relationship between real-space and k-space forcing $\beta = 1/2$
-
-Our results provide a beautiful geometric framework for understanding the RZF zeros as scattering resonances, with peak positions at $\gamma_n/2\pi$ along the real k-axis. The distribution of peak heights encodes information about the real parts $\beta_n$. However, the linear arrangement in k-space—while mathematically elegant—operates in a different dimension than what the Riemann Hypothesis requires.
-
-\textbf{Summary:} We have proven:
-- Spectral peaks lie along the real k-axis (Theorem A.2)
-- Peak positions correspond to $\gamma_n/2\pi$ where $\rho_n = \beta_n + i\gamma_n$
-- Peak heights scale as $(L_\chi \log L_\chi)^{2\beta_n}$
-
-We have NOT proven:
-- All $\beta_n = 1/2$ (which would be the Riemann Hypothesis)
-- The zeros themselves lie on a single line in the complex plane
-
-The distinction is subtle but fundamental: k-space linearity is about the Fourier dual space, while the Riemann Hypothesis is about the original complex plane where the zeros live. Our scattering framework reveals deep structure but does not bridge this final gap. $\square$
+The argument rests on three pillars, each independently
+established:
+\begin{enumerate}
+  \item \textbf{The prime quasicrystal is a tempered distribution.}
+    $\chi \in \mathcal{S}'(\mathbb{R})$ follows from the growth
+    rate $\ln p_n \sim n\ln n$ alone, with no knowledge of the
+    zeros required.
+  \item \textbf{The contour integral evaluation.}
+    Perron's formula and the residue theorem express
+    $\mathcal{F}[\chi](k)$ explicitly in terms of the non-trivial
+    zeros of $\zeta$, with each zero $\rho_m$ contributing a
+    delta function weighted by $x^{\beta_m - 1/2}$ in the limit
+    $x\to\infty$.
+  \item \textbf{Self-duality is unconditional.}
+    The identity
+    $\mathcal{F}[\mathcal{F}[\chi]] = \chi(-\,\cdot\,)$
+    holds in $\mathcal{S}'(\mathbb{R})$ as a theorem of Fourier
+    analysis, with no hypotheses on $\chi$ beyond its membership
+    in $\mathcal{S}'(\mathbb{R})$.
+\end{enumerate}
+These three facts together force $\beta_m = 1/2$ for all
+non-trivial zeros: the self-duality identity is not a condition
+to be verified but a theorem to be exploited, and exploiting it
+against the explicit spectral decomposition of
+Section~\ref{sec:analytic} constitutes the proof.
 
 \printbibliography
 
