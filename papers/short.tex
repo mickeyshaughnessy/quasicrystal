@@ -106,7 +106,11 @@ scatterers takes the form:
 V(x) = \sum_{n}\delta(x - x_n)
 \end{equation}
 where $\delta(x)$ is the Dirac delta function.
-Such a potential is a tempered distribution.
+Such a potential is a tempered distribution: for any
+$\varphi \in \mathcal{S}(\mathbb{R})$, pairing $V$ with $\varphi$
+gives $\sum_n \varphi(x_n)$, which converges absolutely whenever
+the point set $\{x_n\}$ grows at most polynomially---Schwartz
+functions decay faster than any polynomial, dominating the sum.
 
 \begin{definition}[Quasicrystal]
 A tempered distribution $V(x) = \sum_n \delta(x - x_n)$ is called
@@ -123,6 +127,15 @@ the Fourier transform of a pure point measure is again a pure
 point measure. Applying the Fourier transform twice returns the
 original distribution: $\mathcal{F}[\mathcal{F}[V]](x) = V(-x)$.
 This self-duality is the key structural property we exploit.
+To see why the double transform reflects rather than returns the
+original, note that applying $\mathcal{F}$ twice gives
+$\mathcal{F}[\mathcal{F}[f]](x)
+= \int \hat{f}(k)\,e^{-2\pi ikx}\,dk$;
+substituting the definition of $\hat{f}$ and exchanging
+integration order yields
+$\int f(y)\left(\int e^{-2\pi ik(x+y)}\,dk\right)dy = f(-x)$,
+since $\int e^{-2\pi ik(x+y)}\,dk = \delta(x+y)$,
+which picks out $y = -x$.
 
 \subsection{The Prime Quasicrystal}
 
@@ -156,6 +169,42 @@ The positions $\chi_n = \ln(p_n)$ are monotonically increasing
 irrational for $p_n \geq 2$, and not equally spaced.
 Their spacings $\ln(p_{n+1}) - \ln(p_n) = \ln(p_{n+1}/p_n)$
 fluctuate, encoding the irregularity of the prime gaps.
+
+\begin{remark}[Approximately Constant Density]
+By the prime number theorem, the number of primes up to $e^y$ is
+$\pi(e^y) \sim e^y/y$. The number of scatterers
+$\chi_n = \ln(p_n)$ in the interval $[y, y+\Delta y]$ is therefore
+approximately $\frac{e^y}{y}\cdot\frac{\Delta y}{e^y}\cdot y
+= \Delta y$ for large $y$: the density approaches unity.
+This is the essential property that makes $\chi$ a candidate
+quasicrystal.
+\end{remark}
+
+\begin{remark}[Why $\ln(p_n)$ and not $p_n/n$]
+\label{rem:monotonicity}
+A natural alternative normalization is $p_n/n = p_n/\pi(p_n)$,
+which uses the exact prime-counting function and also has
+approximately constant density by the prime number theorem
+(since $p_n/n \sim \log p_n$). However, the ratio $p_n/n$
+is \emph{not} monotonically increasing: whenever the prime gap
+$p_{n+1} - p_n$ is small relative to $p_n/n$ (as occurs at every
+twin prime pair), consecutive positions invert, breaking the
+ordering required of a one-dimensional quasicrystal.
+By contrast, $\ln(p_n)$ is strictly monotone since $\ln$ is
+monotone and the primes are strictly increasing.
+
+In the analytical calculation the normalization factor
+$p_L^{1/2}$ arises from dividing by $x^{1/2}$ in the
+integrand~\eqref{eq:integrand}; by the prime number theorem
+$\ln(p_L) \sim p_L/\pi(p_L)$, so in the limit $L\to\infty$
+the two normalizations agree and the residue
+calculation is unaffected by the choice between them.
+We therefore use $\ln(p_n)$ throughout as the unique
+normalization that is both exactly monotone and asymptotically
+equivalent to the exact density $p_n/\pi(p_n)$.
+Table~\ref{tab:positions} illustrates both quantities.
+\end{remark}
+
 The first several values are shown in Table~\ref{tab:positions}.
 
 \begin{table}[htbp]
@@ -196,29 +245,6 @@ as the definition. Local density is computed over a symmetric
 window around each prime.}
 \label{tab:positions}
 \end{table}
-
-\begin{remark}[Approximately Constant Density]
-By the prime number theorem, the number of primes up to $e^y$ is
-$\pi(e^y) \sim e^y/y$. The number of scatterers
-$\chi_n = \ln(p_n)$ in the interval $[y, y+\Delta y]$ is therefore
-approximately $\frac{e^y}{y}\cdot\frac{\Delta y}{e^y}\cdot y
-= \Delta y$ for large $y$: the density approaches unity.
-This is the essential property that makes $\chi$ a candidate
-quasicrystal.
-\end{remark}
-
-\begin{remark}[Why $\ln(p_n)$ and not $p_n/n$]
-\label{rem:monotonicity}
-A natural alternative normalization is $p_n/n = p_n/\pi(p_n)$,
-which also has approximately constant density by the prime number
-theorem (since $p_n/n \sim \log p_n$). However, the ratio $p_n/n$
-is \emph{not} monotonically increasing: whenever the prime gap
-$p_{n+1} - p_n$ is small relative to $p_n/n$ (as occurs at every
-twin prime pair), the positions invert. Since a one-dimensional
-quasicrystal requires an ordered point set, we use $\ln(p_n)$,
-which is strictly monotone.
-Table~\ref{tab:positions} illustrates both quantities.
-\end{remark}
 
 For finite approximations with $L$ scatterers:
 \begin{equation}
