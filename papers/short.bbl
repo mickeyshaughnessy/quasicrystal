@@ -1,0 +1,240 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Riemann1859}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bda6bb5b38f7bd5e17c19c5121715453}{%
+           family={Riemann},
+           familyi={R\bibinitperiod},
+           given={Bernhard},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{bda6bb5b38f7bd5e17c19c5121715453}
+      \strng{fullhash}{bda6bb5b38f7bd5e17c19c5121715453}
+      \strng{bibnamehash}{bda6bb5b38f7bd5e17c19c5121715453}
+      \strng{authorbibnamehash}{bda6bb5b38f7bd5e17c19c5121715453}
+      \strng{authornamehash}{bda6bb5b38f7bd5e17c19c5121715453}
+      \strng{authorfullhash}{bda6bb5b38f7bd5e17c19c5121715453}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Monatsberichte der Berliner Akademie}
+      \field{title}{Ueber die Anzahl der Primzahlen unter einer gegebenen Grösse}
+      \field{year}{1859}
+      \field{pages}{671\bibrangedash 680}
+      \range{pages}{10}
+    \endentry
+    \entry{Selberg1956}{article}{}
+      \name{author}{1}{}{%
+        {{hash=82a601e1ee96d337cfcc2353681d7bbd}{%
+           family={Selberg},
+           familyi={S\bibinitperiod},
+           given={Atle},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{82a601e1ee96d337cfcc2353681d7bbd}
+      \strng{fullhash}{82a601e1ee96d337cfcc2353681d7bbd}
+      \strng{bibnamehash}{82a601e1ee96d337cfcc2353681d7bbd}
+      \strng{authorbibnamehash}{82a601e1ee96d337cfcc2353681d7bbd}
+      \strng{authornamehash}{82a601e1ee96d337cfcc2353681d7bbd}
+      \strng{authorfullhash}{82a601e1ee96d337cfcc2353681d7bbd}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Indian Mathematical Society}
+      \field{title}{Harmonic analysis and discontinuous groups in weakly symmetric {Riemannian} spaces with applications to {Dirichlet} series}
+      \field{volume}{20}
+      \field{year}{1956}
+      \field{pages}{47\bibrangedash 87}
+      \range{pages}{41}
+    \endentry
+    \entry{Dyson2009}{article}{}
+      \name{author}{1}{}{%
+        {{hash=32dc8aa6e854c46b5f7adb3f484c1b0a}{%
+           family={Dyson},
+           familyi={D\bibinitperiod},
+           given={Freeman},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Mathematical Society}%
+      }
+      \strng{namehash}{32dc8aa6e854c46b5f7adb3f484c1b0a}
+      \strng{fullhash}{32dc8aa6e854c46b5f7adb3f484c1b0a}
+      \strng{bibnamehash}{32dc8aa6e854c46b5f7adb3f484c1b0a}
+      \strng{authorbibnamehash}{32dc8aa6e854c46b5f7adb3f484c1b0a}
+      \strng{authornamehash}{32dc8aa6e854c46b5f7adb3f484c1b0a}
+      \strng{authorfullhash}{32dc8aa6e854c46b5f7adb3f484c1b0a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Notices of the AMS}
+      \field{number}{2}
+      \field{title}{Birds and Frogs}
+      \field{volume}{56}
+      \field{year}{2009}
+      \field{pages}{212\bibrangedash 223}
+      \range{pages}{12}
+    \endentry
+    \entry{Shechtman1984}{article}{}
+      \name{author}{4}{}{%
+        {{hash=fa2bd005d2ae0da5d55dfca423ba442b}{%
+           family={Shechtman},
+           familyi={S\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ae496055cf450b9bc4a87c2674721750}{%
+           family={Blech},
+           familyi={B\bibinitperiod},
+           given={I.},
+           giveni={I\bibinitperiod}}}%
+        {{hash=8ff70c4f182794c2aebc127ce1403fd1}{%
+           family={Gratias},
+           familyi={G\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+        {{hash=b6f7fb0cbeffc7712dc66af2caeef79e}{%
+           family={Cahn},
+           familyi={C\bibinitperiod},
+           given={J.\bibnamedelimi W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{b4f2c8745ed3a9c0643a0ca2f3cc7b4b}
+      \strng{fullhash}{5f88461f2575b4918db681ae00d31585}
+      \strng{bibnamehash}{b4f2c8745ed3a9c0643a0ca2f3cc7b4b}
+      \strng{authorbibnamehash}{b4f2c8745ed3a9c0643a0ca2f3cc7b4b}
+      \strng{authornamehash}{b4f2c8745ed3a9c0643a0ca2f3cc7b4b}
+      \strng{authorfullhash}{5f88461f2575b4918db681ae00d31585}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{20}
+      \field{journaltitle}{Phys. Rev. Lett.}
+      \field{month}{11}
+      \field{title}{Metallic Phase with Long-Range Orientational Order and No Translational Symmetry}
+      \field{volume}{53}
+      \field{year}{1984}
+      \field{pages}{1951\bibrangedash 1953}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.53.1951
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevLett.53.1951
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevLett.53.1951
+      \endverb
+    \endentry
+    \entry{Baez2013}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=329807354727630303631f4116854467}{%
+           family={Baez},
+           familyi={B\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{329807354727630303631f4116854467}
+      \strng{fullhash}{329807354727630303631f4116854467}
+      \strng{bibnamehash}{329807354727630303631f4116854467}
+      \strng{authorbibnamehash}{329807354727630303631f4116854467}
+      \strng{authornamehash}{329807354727630303631f4116854467}
+      \strng{authorfullhash}{329807354727630303631f4116854467}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Quasicrystals and the {Riemann} Hypothesis}
+      \field{year}{2013}
+      \verb{urlraw}
+      \verb https://golem.ph.utexas.edu/category/2013/06/quasicrystals_and_the_riemann.html
+      \endverb
+      \verb{url}
+      \verb https://golem.ph.utexas.edu/category/2013/06/quasicrystals_and_the_riemann.html
+      \endverb
+    \endentry
+    \entry{VonMangoldt1895}{article}{}
+      \name{author}{1}{}{%
+        {{hash=869f89e0b7ee7d695e10f806e06abc6d}{%
+           family={Mangoldt},
+           familyi={M\bibinitperiod},
+           given={Hans},
+           giveni={H\bibinitperiod},
+           prefix={von},
+           prefixi={v\bibinitperiod}}}%
+      }
+      \strng{namehash}{869f89e0b7ee7d695e10f806e06abc6d}
+      \strng{fullhash}{869f89e0b7ee7d695e10f806e06abc6d}
+      \strng{bibnamehash}{869f89e0b7ee7d695e10f806e06abc6d}
+      \strng{authorbibnamehash}{869f89e0b7ee7d695e10f806e06abc6d}
+      \strng{authornamehash}{869f89e0b7ee7d695e10f806e06abc6d}
+      \strng{authorfullhash}{869f89e0b7ee7d695e10f806e06abc6d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal für die reine und angewandte Mathematik}
+      \field{title}{{Zu Riemanns Abhandlung "Ueber die Anzahl der Primzahlen unter einer gegebenen Grösse"}}
+      \field{volume}{114}
+      \field{year}{1895}
+      \field{pages}{255\bibrangedash 305}
+      \range{pages}{51}
+    \endentry
+    \entry{Weil}{article}{}
+      \name{author}{1}{}{%
+        {{hash=f5987f3b70bd698e3c1139b23bb8026b}{%
+           family={Weil},
+           familyi={W\bibinitperiod},
+           given={André},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{fullhash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{bibnamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authorbibnamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authornamehash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \strng{authorfullhash}{f5987f3b70bd698e3c1139b23bb8026b}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Communications on Pure and Applied Mathematics}
+      \field{number}{3}
+      \field{title}{Sur les "formules explicites" de la théorie des nombres premiers}
+      \field{volume}{3}
+      \field{year}{1950}
+      \field{pages}{243\bibrangedash 297}
+      \range{pages}{55}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

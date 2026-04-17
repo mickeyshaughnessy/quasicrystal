@@ -1,0 +1,17 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'short.blg'
+[33] biber-darwin:340> INFO - === Mon Feb 23, 2026, 14:47:54
+[41] Biber.pm:419> INFO - Reading 'short.bcf'
+[75] Biber.pm:979> INFO - Found 7 citekeys in bib section 0
+[82] Biber.pm:4419> INFO - Processing section 0
+[87] Biber.pm:4610> INFO - Looking for bibtex file 'references.bib' for section 0
+[88] bibtex.pm:1713> INFO - LaTeX decoding ...
+[95] bibtex.pm:1519> INFO - Found BibTeX data source 'references.bib'
+[123] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[123] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[123] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[123] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[127] bbl.pm:660> INFO - Writing 'short.bbl' with encoding 'UTF-8'
+[129] bbl.pm:763> INFO - Output to short.bbl
+[129] Biber.pm:131> WARN - legacy month field 'Nov' in entry 'Shechtman1984' is not an integer - this will probably not sort properly.
+[129] Biber.pm:133> INFO - WARNINGS: 1
